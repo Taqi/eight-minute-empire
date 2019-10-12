@@ -1,81 +1,91 @@
-// As1Main.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// MapDriver.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
 #include "Map.h"
-#include <vector>
 using namespace std;
+
 
 int main()
 {
-	//To use methods defined in the Graph class of Map.h
-	Graph graph;
+	//Create graph object
+	Graph *graph;
 
-	const int totalNodes = 7; //totalNodes = total number of countries/regions
+	const int totalCountries = 4; //=total number of nodes
 
+	//Graph is created in Map.cpp, which is pointed to by our *graph pointer.
+	graph = createGraph(totalCountries);
 
 	//Test creation of map1-----------------------------------------------------------------------------------------------
 	cout << "TEST CREATION OF MAP1-----------------------------------------------------------------------\n";
 
-	//Vector store adjacency lists of all nodes
-	//Vector of size "totalNodes' (has to be a constant value); Note: Its a vector [][][][], and in each of those brackets "[]" there is an array. Each of those [] will represent a node, and in its array will be all the adjacent nodes.
-	vector <int> adj[totalNodes];
+	//connect edges
+	addEdge(graph, 0, 1);
+	addEdge(graph, 2, 1);
+	addEdge(graph, 0, 2);
+	addEdge(graph, 1, 3);
 
-	//Each country is associated with a number (ex: Country Japan is node 0, Canada is node 1)
-	graph.addEdge(adj, 0, 1);
-	graph.addEdge(adj, 0, 2);
-	graph.addEdge(adj, 1, 3);
-	graph.addEdge(adj, 1, 2);
-	graph.addEdge(adj, 2, 3);
-	graph.addEdge(adj, 5, 2);
-	graph.addEdge(adj, 6, 4);
-	graph.addEdge(adj, 6, 0);
+	//print the adjacency list representation of graph
+	printGraph(graph);
 
-	//Print the graph
-	graph.printGraph(adj, totalNodes);
-
-	//Check Connectivity
-	graph.checkConnectivity(adj, totalNodes);
-
+	//Check if graph is connected
+	checkConnectivity(graph, totalCountries);
 
 
 	//Test creation of map2-----------------------------------------------------------------------------------------------
 	cout << "\nTEST CREATION OF MAP2-------------------------------------------------------------------------\n";
-	vector <int> adj2[7];
+	
+	//Create graph object
+	Graph *graph2;
 
+	const int totalCountries2 = 8;
+
+	graph2 = createGraph(totalCountries2);
 	//Each country is associated with a number (ex: Country Japan is node 0, Canada is node 1)
-	graph.addEdge(adj2, 0, 1);
-	graph.addEdge(adj2, 0, 2);
-	graph.addEdge(adj2, 1, 3);
-	graph.addEdge(adj2, 1, 2);
-	graph.addEdge(adj2, 2, 3);
-	graph.addEdge(adj2, 5, 2);
-	graph.addEdge(adj2, 6, 4);
+	addEdge(graph2, 4, 5);
+	addEdge(graph2, 6, 5);
+	addEdge(graph2, 6, 7);
+	//addEdge(graph2, 1, 7);	//Add to make the map invalid (country found in more than 1 continent)
 
 	//Print the graph
-	graph.printGraph(adj2, 7);
+	printGraph(graph2);
 
 	//Check Connectivity
-	graph.checkConnectivity(adj2, 7);
+	checkConnectivity(graph2, totalCountries2);
 
 
-
-
+	
 	//Test creation of map3-----------------------------------------------------------------------------------------------
 	cout << "\nTEST CREATION OF MAP3-------------------------------------------------------------------------\n";
-	vector <int> adj3[4];
 
-	//Each country is associated with a number (ex: Country Japan is node 0, Canada is node 1)
-	graph.addEdge(adj3, 0, 1);
-	graph.addEdge(adj3, 0, 2);
-	graph.addEdge(adj3, 1, 3);
+	//Create graph object
+	Graph* graph3;
+
+	const int totalCountries3 = 13;
+
+	graph3 = createGraph(totalCountries3);
+
+	addEdge(graph3, 8, 10);
+	addEdge(graph3, 9, 11);//Remove to make graph not connected
+	addEdge(graph3, 10, 9);
+	addEdge(graph3, 11, 12);
+
 
 	//Print the graph
-	graph.printGraph(adj3, 4);
+	printGraph(graph3);
 
 	//Check Connectivity
-	graph.checkConnectivity(adj3, 4);
+	checkConnectivity(graph3, totalCountries3);
 
-	return 0;
+
+	//Check if map is valid (cannot have same country (node number) in more than 1 graph
+	//Map is made up of several graphs, so create an array of graph objects
+	//Max of 3 graphs for memory
+	const int totalNumberGraph = 3;
+	Graph* map[totalNumberGraph];
+	map[0] = graph;
+	map[1] = graph2;
+	map[2] = graph3;
+
+	mapValidation(map, totalNumberGraph);
+	return 0; 
 }
-
