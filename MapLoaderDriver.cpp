@@ -7,8 +7,7 @@ int main () {
 
     // Create Loader instance with invalid file name
 
-    //    string files[]= {"no_file.map","not_a_map.txt","example.map", "daph.map"};
-    string files[]= {"daph.map"};
+    string files[]= {"example.map"};
     int files_nb = sizeof(files);
 
     Loader my_map("");
