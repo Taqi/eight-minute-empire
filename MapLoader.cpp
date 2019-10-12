@@ -22,18 +22,22 @@ int Loader::readFile()
   
   if (myfile.is_open())
   {
-    int totalNodes;
-    int country[totalNodes];
+    cout << endl << "*** File " << map_file << " is open" <<endl;
+    
     Graph graph;
+    int totalNodes = 0;
+    vector<int> country;
 
-    totalNodes = 0;
-    while ( getline (myfile,line) )
+    while ( getline(myfile,line) )
     {
+      cout << "line: "<< line <<endl;
+
       // Remove comments from line
       int com = line.find("//");
       line = line.substr(0,com);
 
-      // Split line on whitespaces to extract country and adjancent ones
+      cout << "Split line on whitespaces" << endl;
+      // Split line on whitespaces to extract country and adjacent ones
       int pos0 = 0;
       int pos = 0;
       int localNodes;
@@ -46,17 +50,22 @@ int Loader::readFile()
         adjacentCountries[localNodes++] = std::stoi(line.substr(pos0, pos));
         pos0 = pos;
       }
-
-      country[totalNodes++] = adjacentCountries[0];
-      cout << "Found country: " << country[totalNodes-1] << " with " << localNodes-1 << " adjacent countries"<<endl;
+      country.push_back(adjacentCountries[0]);
+      totalNodes++;
+      cout << "Found country: " << country.back() << " with " << localNodes-1 << " adjacent countries" <<endl;
       for(int i=1;i<localNodes;i++){
-        cout << " adjacent: " << adjacentCountries[i];
+        cout << " => adjacent: " << adjacentCountries[i] <<endl;
       }
       cout <<endl;
-      // Read adjacent countries
-//    	graph.addEdge(adj, 0, 1);
     }
-  	//Print the graph
+    cout << "I found " << totalNodes << " countries in this Map" << endl;
+    
+    // Creation of Map Graph begins
+    vector <int> adj[totalNodes];
+
+    // Read adjacent countries
+//    	graph.addEdge(adj, 0, 1);
+  	// Print the graph
 //	  graph.printGraph(adj, totalNodes);
 
   	//Check Connectivity
