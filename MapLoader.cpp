@@ -18,7 +18,7 @@ int Loader::readFile()
 {
   string line;
   ifstream myfile (map_file);
-  
+
   if (myfile.is_open())
   {
 
@@ -28,7 +28,12 @@ int Loader::readFile()
       int com = line.find("//");
       line = line.substr(0,com);
 
+    // Find the countries of the map file
+    int country = std::stoi(line.substr(0,1));
+    cout << "Countries: " << country << endl;
 
+    // Understand the connections between the countries
+    
 
       cout << line << endl;
     }
