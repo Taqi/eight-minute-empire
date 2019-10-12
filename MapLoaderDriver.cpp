@@ -7,10 +7,12 @@ int main () {
 
     // Create Loader instance with invalid file name
 
-    string files[]= {"no_file.map","not_a_map.txt","example.map"};
+    //    string files[]= {"no_file.map","not_a_map.txt","example.map", "daph.map"};
+    string files[]= {"daph.map"};
+    int files_nb = sizeof(files);
 
     Loader my_map("");
-    for(int i = 0;i<3;i++){
+    for(int i = 0;i<1;i++){
       my_map.setFileName(files[i]); 
       cout << "\nAbout to read file: "  << files[i] << endl;
       switch(my_map.readFile())
