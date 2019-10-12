@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include "MapLoader.h"
+#include "Map.h"
 using namespace std;
 
 Loader::Loader(string file)
@@ -33,9 +34,9 @@ int Loader::readFile()
     cout << "Countries: " << country << endl;
 
     // Understand the connections between the countries
-    
 
-      cout << line << endl;
+
+      
     }
     myfile.close();
     return 1;
