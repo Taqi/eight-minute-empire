@@ -14,19 +14,27 @@ void Loader::setFileName(string file)
   map_file = file;
 }
 
-void Loader::readFile()
+int Loader::readFile()
 {
-  cout << "\nAbout to read file: "  << map_file << endl;;
   string line;
   ifstream myfile (map_file);
+  
   if (myfile.is_open())
   {
+
     while ( getline (myfile,line) )
     {
-      cout << line << '\n';
+      // Remove comments from line
+      int com = line.find("//");
+      line = line.substr(0,com);
+
+
+
+      cout << line << endl;
     }
     myfile.close();
+    return 1;
   }
 
-  else cout << "Unable to open file\n";
+  else return -1;
 }

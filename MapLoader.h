@@ -9,5 +9,5 @@ class Loader
 	public:
 		Loader(string);
 		void setFileName(string);
-		void readFile();
+		int readFile();
 };

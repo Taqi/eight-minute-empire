@@ -1,19 +1,31 @@
+#include <iostream>
 #include "MapLoader.h"
+#include "Map.h"
 using namespace std;
 
 int main () {
 
     // Create Loader instance with invalid file name
-    Loader my_map("no_file.map");
-    my_map.readFile();
 
-    // Set loader to non map file
-    my_map.setFileName("not_a_map.txt"); 
-    my_map.readFile();
+    string files[]= {"no_file.map","not_a_map.txt","example.map"};
 
-    // Set loader to map file
-    my_map.setFileName("example.map"); 
-    my_map.readFile();
+    Loader my_map("");
+    for(int i = 0;i<3;i++){
+      my_map.setFileName(files[i]); 
+      cout << "\nAbout to read file: "  << files[i] << endl;
+      switch(my_map.readFile())
+      {
+        case 1:
+          cout << "Map loaded" << endl;
+        break;
+        case 0:
+          cout << "Not a Map file" << endl;
+        break;
+        case -1:
+          cout << "Unable to open file" << endl;
+        break;
+      }
+    }
 
   return 0;
 }
