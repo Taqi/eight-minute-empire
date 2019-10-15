@@ -1,5 +1,6 @@
 # eight-minute-empire
-Computer game for C++ class at Concordia University. This assignment is to creat a board game Eight Minute Empire using C++.
+Computer game for C++ class at Concordia University. 
+The purpose of this assignment is to create a C++ version of the board game Eight-Minute Empire.
 
 ## Team members
 | Name          | ID        | Email  |

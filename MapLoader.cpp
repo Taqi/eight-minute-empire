@@ -22,54 +22,75 @@ int Loader::readFile()
   
   if (myfile.is_open())
   {
-    cout << endl << "*** File " << map_file << " is open" <<endl;
-    
     Graph graph;
     int totalNodes = 0;
-    vector<int> country;
 
+    /* 
+    
+    Decode Map file to build a vector containing:
+       - Label "country" to identify new entry
+       - Followed by the code of the current country
+       - Followed by as many entries as there are adjacent countries to the current one
+    and so on...
+
+    */
+    vector<string> countryList;
     while ( getline(myfile,line) )
     {
-      cout << "line: "<< line <<endl;
+      countryList.push_back("country");
+      //debug cout << "line: "<< line <<endl;
 
       // Remove comments from line
       int com = line.find("//");
       line = line.substr(0,com);
 
-      cout << "Split line on whitespaces" << endl;
+      //debug cout << "Split line on whitespaces" << endl;
       // Split line on whitespaces to extract country and adjacent ones
       int pos0 = 0;
-      int pos = 0;
-      int localNodes;
-      int adjacentCountries[localNodes];
+      int pos  = 0;
 
-      localNodes = 0;
-      // Read one line 
-      while(pos0<line.length()){
+      // Decode line
+      while(pos0<line.length())
+      {
         pos = line.find(" ",pos0+1);
-        adjacentCountries[localNodes++] = std::stoi(line.substr(pos0, pos));
+        countryList.push_back(line.substr(pos0, pos));
         pos0 = pos;
       }
-      country.push_back(adjacentCountries[0]);
       totalNodes++;
-      cout << "Found country: " << country.back() << " with " << localNodes-1 << " adjacent countries" <<endl;
-      for(int i=1;i<localNodes;i++){
-        cout << " => adjacent: " << adjacentCountries[i] <<endl;
-      }
-      cout <<endl;
-    }
-    cout << "I found " << totalNodes << " countries in this Map" << endl;
-    
-    // Creation of Map Graph begins
-    vector <int> adj[totalNodes];
+    }    
+    cout << "=> I found " << totalNodes << " countries in this Map" << endl;
 
-    // Read adjacent countries
-//    	graph.addEdge(adj, 0, 1);
+    // Creation of Map Graph begins
+    vector<int> adj[totalNodes+1];
+    int node0;
+    int node1;
+
+    bool newCountry = false;
+    for(vector<string>::iterator it = countryList.begin(); it < countryList.end(); it++)
+    {
+      if (*it == "country")
+      {
+        // New country description
+        newCountry = true;
+      }else{
+        if(newCountry){
+          // Get current country id
+          node0 = stoi(*it);
+          newCountry = false;
+        }else{
+          // Get adjacent to current
+          node1 = stoi(*it);
+         	graph.addEdge(adj, node0, node1);
+        }
+      }
+    }
+    cout << "== Graph creation complete" << endl;
+
   	// Print the graph
-//	  graph.printGraph(adj, totalNodes);
+	  graph.printGraph(adj, totalNodes);
 
   	//Check Connectivity
-//	  graph.checkConnectivity(adj, totalNodes);
+	  graph.checkConnectivity(adj, totalNodes);
 
 
     myfile.close();
