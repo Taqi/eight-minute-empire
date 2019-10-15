@@ -2,7 +2,7 @@
 using namespace std;
 #include <vector>
 
-class Card
+class Cards
 {
 	public:
 		int *action;
@@ -28,7 +28,7 @@ class Deck
 		int getTotalCards();
 		void draw();
 		//deck Will be initalized to a vector of Card objects in Cards.cpp (initially 42 card objects in the vector)
-		vector <Card*> deckVector; //Note: when I did   vector <Card> *deckVector; and 	(*deckVector).reserve(*totalCards); it gave an error. Asterix need to be inside "<>" it seems.
+		vector <Cards*> deckVector; //Note: when I did   vector <Card> *deckVector; and 	(*deckVector).reserve(*totalCards); it gave an error. Asterix need to be inside "<>" it seems.
 };
 
 
@@ -41,5 +41,5 @@ class Hand
 		void exchange();
 
 		//Vector of Cards object for the cards faced up
-		vector <Card*> handVector;
+		vector <Cards*> handVector;
 };
