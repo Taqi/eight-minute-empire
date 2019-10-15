@@ -22,8 +22,8 @@ int Loader::readFile()
   
   if (myfile.is_open())
   {
-    Graph graph;
-    int totalNodes = 0;
+    Graph *graph;
+    int totalCountries = 0;
 
     /* 
     
@@ -56,12 +56,14 @@ int Loader::readFile()
         countryList.push_back(line.substr(pos0, pos));
         pos0 = pos;
       }
-      totalNodes++;
+      totalCountries++;
     }    
-    cout << "=> I found " << totalNodes << " countries in this Map" << endl;
+    cout << "=> I found " << totalCountries << " countries in this Map" << endl;
 
     // Creation of Map Graph begins
-    vector<int> adj[totalNodes+1];
+    //Graph is pointed to by our *graph pointer.
+	  graph = createGraph(totalCountries);
+
     int node0;
     int node1;
 
@@ -80,17 +82,17 @@ int Loader::readFile()
         }else{
           // Get adjacent to current
           node1 = stoi(*it);
-         	graph.addEdge(adj, node0, node1);
+         	addEdge(graph, node0, node1);
         }
       }
     }
     cout << "== Graph creation complete" << endl;
 
   	// Print the graph
-	  graph.printGraph(adj, totalNodes);
+	  printGraph(graph);
 
   	//Check Connectivity
-	  graph.checkConnectivity(adj, totalNodes);
+	  checkConnectivity(graph, totalCountries);
 
 
     myfile.close();
