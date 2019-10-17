@@ -14,14 +14,14 @@ void Deck::setTotalCards(const int *tCards)
 	deckVector.reserve(*totalCards);
 
 	//Initialize a dynamic array of type Card of size 42
-	Cards *card[42];
+	Card *card[42];
 	int idNumber;
 
 	//Initialize *totalCards amount of card objects
 	for (int i = 0; i < *totalCards; i++)
 	{
 		//Create 42 card objects, and push each into the vector
-		card[i] = new Cards();
+		card[i] = new Card();
 
 		//Set the card id
 		card[i]->id = new int(i);
@@ -144,22 +144,22 @@ void Hand::exchange()
 {
 }
 
-int Cards::getGood()
+int Card::getGood()
 {
 	return *good ;
 }
 
-int Cards::getAction()
+int Card::getAction()
 {
 	return *action;
 }
 
-void Cards::setGood(int *gd)
+void Card::setGood(int *gd)
 {
 	good = gd;
 }
 
-void Cards::setAction(int *act)
+void Card::setAction(int *act)
 {
 	action = act;
 }
