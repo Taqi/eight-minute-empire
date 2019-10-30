@@ -15,6 +15,12 @@ CreateNode *newNode(int countryN)
 	CreateNode *countryPointer = new CreateNode;
 	//Set the data of the node to the number of its country (ex: Country 1 will have in linked list node ("1") in its data. That way we know which country a node is.
 	(*countryPointer).countryNumber = countryN;
+
+	//Set a player to own a country (will move this somewhere else since this does not happen when you create a node/country, but rather later).
+	//countryPointer->playerName = new string("Taqi");
+	//countryPointer->numArmies = new int(5);
+
+
 	return countryPointer;
 }
 
@@ -43,6 +49,7 @@ void addEdge(Graph *graph, int srs, int dest)
 	//Add an edge from source node (srs) to destination node (dest). A new node added to the adjacency list of src
 	CreateNode *countryPointer;
 	countryPointer = newNode(dest);	//node dest added at beginning
+
 	//Makes dest point to srs
 	(*countryPointer).next = (*graph).countryArray[srs].head; //Ex: srs = 2, dest = 3. So countryArray[2] is now linked to the node dest. Node dest is adjacent to 
 	//That element in the array (countryArray[srs]) becomes a node in the linked list. Its the head of the list.
@@ -69,12 +76,15 @@ void printGraph(Graph *graph)
 		if (root != NULL) //Only display part of array that has elements in it
 		{
 			cout << endl << "Adjacency list of country " << i << endl;
+			//cout << "Country " << (*root).countryNumber << " owned by player " << *(*root).playerName << " and contains " << *(root->numArmies) << " armies" << endl; //the first '*' is for pointer of playername, second '*' is for root pointer
 		}
+
 
 		//loop over each node in list
 		while (root != NULL) //Will become null once it reaches the end of the linked list
 		{
 			cout << (*root).countryNumber << " -> "; //This prints the data inside the node of a linked list
+
 			root = (*root).next; //Set the root to the next node of the linked list
 		}
 	}

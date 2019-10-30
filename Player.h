@@ -35,7 +35,7 @@ private: // begin private section
     vector<string*> countries; //the regions/countries that a player has
     vector<string*> resources; /*the resources that a given player has.*/
 
-    Cards*  cards; // the cards that a player has
+    //Cards*  cards; // the cards that a player has
     Bidding* bid; // the biding facility object that a player has
 
 
@@ -55,7 +55,7 @@ public: // begin public section
     int* getArmy() const; // Display the number of armies
     int* getAge() const; // Return the age of player
     string* getName() const; // Return the name of the player
-    Cards* getCards() const; // Display the number of the player's card
+    //Cards* getCards() const; // Display the number of the player's card
     Bidding* getBidding() const; // Return the number of bidding
 
 

@@ -1,9 +1,9 @@
 #include <iostream>
-#include <dirent.h>
 #include <sys/stat.h> 
 #include "MapLoader.h"
 #include "Map.h"
 #include <string>
+#include <dirent.h> //Need to do this to be able to use dirent.h on windows https://codeyarns.com/2014/06/06/how-to-use-dirent-h-with-visual-studio/?fbclid=IwAR24yPTiEBg1QsfFzWddJkBcOJhA_k63A7B4NNh501BCdyCtWFgfgRzBq20
 using namespace std;
 
 /* Returns a list of Map files in a directory (except the ones that begin with a dot) */
@@ -38,12 +38,12 @@ int readFilenames(std::vector<string> &filenames, const string &directory)
     }
     closedir(dir);
 
-    sort (filenames.begin(), filenames.end()); //optional, sort the filenames
+    //sort (filenames.begin(), filenames.end()); //optional, sort the filenames
     return(filenames.size()); //Return how many we found
 } // GetFilesInDirectory
 
 
-int main () {
+void MapLoaderDriver () {
 
     cout << endl << "+---------------------------------+" << endl;
     cout << endl << "|     This is MapLoaderDriver     |" << endl;
@@ -80,7 +80,4 @@ int main () {
 
     }
 
-
-
-  return 0;
 }

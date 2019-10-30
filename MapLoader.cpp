@@ -77,7 +77,7 @@ int Loader::readFile()
       }else{
         if(newCountry){
           // Get current country id
-          node0 = stoi(*it);
+          node0 = stoi(*it); //stoi converts string to integer
           newCountry = false;
         }else{
           // Get adjacent to current

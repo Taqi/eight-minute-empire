@@ -16,7 +16,8 @@ int Bidding::biddingPhase(vector<Player*> players, int numbOfPlayers)
 {
     int bid, highest;
     // Make a loop through the player array instead of this array
-    int bidArray [numbOfPlayers];
+    //int bidArray [numbOfPlayers];
+	int bidArray[5];
     int highestBidder = 0;
 
     // Eeach player makes a bid

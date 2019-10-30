@@ -8,6 +8,8 @@ struct CreateNode
 	public:
 		int countryNumber; //int data //Will be the data contained on a node of the linked list
 		CreateNode *next; //Points to the next node
+		string *playerName; //This makes the country owned by a player
+		int *numArmies; //Number of armies in a country
 };
 
 //struct for an adjacency list (linked list)

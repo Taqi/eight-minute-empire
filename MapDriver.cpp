@@ -2,10 +2,11 @@
 
 #include <iostream>
 #include "Map.h"
+#include "MapDriver.h"
 using namespace std;
 
 
-int main()
+void MapDriver()
 {
 	//Create graph object
 	Graph *graph;
@@ -87,5 +88,4 @@ int main()
 	map[2] = graph3;
 
 	mapValidation(map, totalNumberGraph);
-	return 0; 
 }

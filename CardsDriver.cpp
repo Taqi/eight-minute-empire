@@ -3,7 +3,7 @@
 #include "Cards.h"
 using namespace std;
 
-int main()
+void CardDriver()
 {
 	//Create deck object
 	Deck* deck = new Deck();
