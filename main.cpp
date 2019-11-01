@@ -10,9 +10,11 @@
 int main()
 {
 	
-	MapLoaderDriver();
-	MapDriver(); //Will remove since MapLoaderDriver calls map class
-	PlayerDriver();
+	//MapLoaderDriver();
+	//MapDriver(); //Will remove since MapLoaderDriver calls map class
+	//PlayerDriver();
 	CardDriver();
-	BiddingDriver();
+	//BiddingDriver();
+
+
 }

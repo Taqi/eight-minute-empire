@@ -13,11 +13,14 @@ void CardDriver()
 
 	(*deck).setTotalCards(totalCards);
 
-	//Create hand object
+	//Create hand object (hand space)
 	Hand* hand = new Hand();
 
-	(*deck).draw();
+	//Draw 6 cards for the hand space
+	(*deck).draw(hand);
+	//exchange lets user buy a card and it draws a new card from the deck
+	hand->exchange(deck);
+	hand->exchange(deck);
+	hand->exchange(deck);
 
-	/*int *value = (*deck).getTotalCards;
-	cout << *value;*/
 }

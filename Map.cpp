@@ -16,11 +16,6 @@ CreateNode *newNode(int countryN)
 	//Set the data of the node to the number of its country (ex: Country 1 will have in linked list node ("1") in its data. That way we know which country a node is.
 	(*countryPointer).countryNumber = countryN;
 
-	//Set a player to own a country (will move this somewhere else since this does not happen when you create a node/country, but rather later).
-	//countryPointer->playerName = new string("Taqi");
-	//countryPointer->numArmies = new int(5);
-
-
 	return countryPointer;
 }
 
@@ -40,6 +35,17 @@ Graph *createGraph(int totalCountries)
 	{
 		(*graph).countryArray[i].head = NULL;
 	}
+
+
+	//Create a 2nd array. This one will contain all the nodes
+	(*graph).playerArmyCountryArray = new AdjList[totalCountries];
+	//initialize with NULL
+	for (int i = 0; i < totalCountries; i++)
+	{
+		(*graph).playerArmyCountryArray[i].head = NULL;
+	}
+
+
 	return graph;
 }
 
@@ -56,12 +62,21 @@ void addEdge(Graph *graph, int srs, int dest)
 	(*graph).countryArray[srs].head = countryPointer;
 
 
+	//This Array contains only head, so no link to next node
+	(*graph).playerArmyCountryArray[dest].head = countryPointer;
+
+
+
 	//connect from dest to srs (since undirected)
 	//Create node srs and add it to the linked list
 	countryPointer = newNode(srs);
 	//Make node srs point to dest
 	(*countryPointer).next = (*graph).countryArray[dest].head;
 	(*graph).countryArray[dest].head = countryPointer;
+
+
+	//This Array contains only head, so no link to next node
+	(*graph).playerArmyCountryArray[srs].head = countryPointer;
 }
 
 //function to print the graph
@@ -263,4 +278,42 @@ void mapValidation(Graph* map[], const int totalNumberGraph)
 		cout << "\nCountry not found in more than 1 continent";
 	}
 
+}
+
+/*Set which player owns that country
+*/
+void Graph::setCountryPlayer(Graph* graph, string& player, int countryID)
+{
+	graph->playerArmyCountryArray[countryID].head->playerName = &player;
+}
+
+/*Return which player owns that country
+*/
+string Graph::getCountryPlayer(int countryID)
+{
+	return *(playerArmyCountryArray[countryID].head->playerName);
+}
+
+//set the number of army in that country 
+void Graph::setCountryArmy(Graph* graph, int& armyN, int countryID)
+{
+	graph->playerArmyCountryArray[countryID].head->numArmies = &armyN;
+}
+
+//Return the number of army in that country (army owned by the player who owns the country)
+int Graph::getCountryArmy(int countryID)
+{
+	return *(playerArmyCountryArray[countryID].head->numArmies);
+}
+
+//Set the country Id for the node
+void Graph::setCountryNumber(Graph* graph, int countryID)
+{
+	graph->playerArmyCountryArray[countryID].head->countryNumber = countryID;
+}
+
+//Return the country Id for the node
+int Graph::getCountryNumber(int countryID)
+{
+	return playerArmyCountryArray[countryID].head->countryNumber;
 }

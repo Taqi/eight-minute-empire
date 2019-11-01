@@ -16,8 +16,8 @@ void MapDriver()
 	//Graph is created in Map.cpp, which is pointed to by our *graph pointer.
 	graph = createGraph(totalCountries);
 
-	//Test creation of map1-----------------------------------------------------------------------------------------------
-	cout << "TEST CREATION OF MAP1-----------------------------------------------------------------------\n";
+	//Continent 1-----------------------------------------------------------------------------------------------
+	cout << "Continent 1-----------------------------------------------------------------------\n";
 
 	//connect edges
 	addEdge(graph, 0, 1);
@@ -25,15 +25,48 @@ void MapDriver()
 	addEdge(graph, 0, 2);
 	addEdge(graph, 1, 3);
 
+
 	//print the adjacency list representation of graph
 	printGraph(graph);
 
 	//Check if graph is connected
 	checkConnectivity(graph, totalCountries);
 
+	//BELOW SHOWS how to set player name and number of armies for a region---------------------------------------
+	string player1 = "Taqi";
+	string player2 = "Daphne";
+	string player3 = "James";
 
-	//Test creation of map2-----------------------------------------------------------------------------------------------
-	cout << "\nTEST CREATION OF MAP2-------------------------------------------------------------------------\n";
+	//Random army numbers
+	int army1 = 5;
+	int army2 = 3;
+	int army3 = 6;
+
+	//Random country number
+	int countryNumber1 = 1;
+
+	//Set player to the region
+	graph->setCountryPlayer(graph, player1, countryNumber1);
+	//Set army to the region
+	graph->setCountryArmy(graph, army3, countryNumber1);
+
+	//Print
+	cout << "Country ID (head) " << graph->getCountryNumber(countryNumber1) << " is owned by " << graph->getCountryPlayer(countryNumber1) << " and has " << graph->getCountryArmy(countryNumber1) << " armies." << endl;
+
+	//Modify who owns that country
+	graph->setCountryPlayer(graph, player2, countryNumber1);
+	graph->setCountryArmy(graph, army2, countryNumber1);
+	cout << "Country ID (head) " << graph->getCountryNumber(countryNumber1) << " is owned by " << graph->getCountryPlayer(countryNumber1) << " and has " << graph->getCountryArmy(countryNumber1) << " armies." << endl;
+
+	//--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+	//Continent 2-----------------------------------------------------------------------------------------------
+	cout << "\nContinent 2-------------------------------------------------------------------------\n";
 	
 	//Create graph object
 	Graph *graph2;
@@ -55,8 +88,8 @@ void MapDriver()
 
 
 	
-	//Test creation of map3-----------------------------------------------------------------------------------------------
-	cout << "\nTEST CREATION OF MAP3-------------------------------------------------------------------------\n";
+	//Continent 3-----------------------------------------------------------------------------------------------
+	cout << "\nContinent 3-------------------------------------------------------------------------\n";
 
 	//Create graph object
 	Graph* graph3;
