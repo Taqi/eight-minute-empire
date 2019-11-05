@@ -264,9 +264,12 @@ void Hand::printHand()
 	//Cards currently in card space
 	for (int i = 0; i < 6; ++i)
 	{
-		cout << *(handVector[i]->id) << "  "; 
+		cout << "Card index: " << *(handVector[i]->id) << "  "; 
+		cout << "||Action: " << *(handVector[i]->action) << "  ";
+		cout << "||Good: " << *(handVector[i]->Ngood) << "  ";
+		cout << *(handVector[i]->good) << "  ";
 		//Print with cost of card
-		cout << " with cost: " << cost[i] <<endl;
+		cout << "||Cost: " << cost[i] <<endl;
 	}
 
 }
