@@ -6,6 +6,33 @@ using namespace std;
 
 void Deck::setTotalCards(const int *tCards)
 {
+	//Every possible action
+	string* act1 = new string("MOVE_OVER_WATER 1"); //Can move 1 army over water
+	string* act2 = new string("PLACE_NEW_ARMIES_ON_BOARD 1");
+	string* act3 = new string("MOVE_OVER_LAND 1");
+	string* act4 = new string("BUILD_A_CITY 1"); 
+	string* act5 = new string("DESTROY_ARMY 1");
+
+	string* act6 = new string("MOVE_OVER_WATER 2"); //Can move 2 armies over water
+	string* act7 = new string("PLACE_NEW_ARMIES_ON_BOARD 2");
+	string* act8 = new string("MOVE_OVER_LAND 2");
+	string* act9 = new string("BUILD_A_CITY 2");
+	string* act10 = new string("DESTROY_ARMY 2");
+
+	string* act11 = new string("DESTROY_ARMY 1 AND PLACE_NEW_ARMIES_ON_BOARD 1"); //Can move 2 armies over water
+	string* act12 = new string("PLACE_NEW_ARMIES_ON_BOARD 1 OR MOVE_OVER_LAND 1");
+	string* act13 = new string("PLACE_NEW_ARMIES_ON_BOARD 1 OR BUILD_A_CITY 1");
+
+	//Every possible good: Carrot, Crystal, Tree, Anvil, Rock
+	string* good1 = new string("Carrot");
+	string* good2 = new string("Rock");
+	string* good3 = new string("Tree");
+	string* good4 = new string("Anvil");
+	string* good5 = new string("Crystal");
+
+	//Every possible Ngood
+	int* n = new int(1);
+	int* n2 = new int(2);
 	
 	//Set the total amount of cards in the deck to the value specified in the driver
 	totalCards = tCards;
@@ -13,8 +40,6 @@ void Deck::setTotalCards(const int *tCards)
 	//Reserve 42 spots (number in totalCards) in the vector
 	deckVector.reserve(*totalCards);
 
-	//Initialize a dynamic array of type Card of size 42
-	Card *card[42];
 	int idNumber;
 
 	//Initialize *totalCards amount of card objects
@@ -28,7 +53,116 @@ void Deck::setTotalCards(const int *tCards)
 		//cout << *(card[i]->id) << endl; //Prints every card
 		//card[i]->id = idNumber; 
 
-		deckVector.push_back(card[i]); //Note: Will need to initalize the value of good, action for each card in assignment 2
+		/*Set Ngood, action, good for each card*/
+
+		//Set Ngood (1 or 2 for each card, so that means 1 carrot/1 crystal/1 rock\2 carrot\2 trees, etc. for each card. 33 cards with 1 ngood, 9 cards with 2 ngood----------------
+		if (i < 33)
+		{
+			card[i]->setNGood(n);
+		}
+		else if (i >= 33 && i < 42)
+		{
+			card[i]->setNGood(n2);
+		}
+
+		//Set good for each card------------------------------
+		//Total of 10 cards with carrot
+		if (i < 10)
+		{
+			card[i]->setGood(good1);
+		}
+		//Total of 10 cards with rock
+		else if (i >= 10 && i < 20)
+		{
+			card[i]->setGood(good2);
+		}
+		//Total of 10 cards with tree
+		else if (i >= 20 && i < 30)
+		{
+			card[i]->setGood(good3);
+		}
+		//Total of 5 cards with anvil
+		else if (i >= 30 && i < 35)
+		{
+			card[i]->setGood(good4);
+		}
+
+		//Total of 8 cards with Crystal
+		else if (i >= 35 && i < 42)
+		{
+			card[i]->setGood(good5);
+		}
+
+
+		//Set action for each card --------------------------------------
+		//Total of 5 cards
+		if (i < 5)
+		{
+			card[i]->setAction(act1);
+		}
+		//Total of 5 cards
+		else if (i >= 5 && i < 10)
+		{
+			card[i]->setAction(act2);
+		}
+		//Total of 5 cards
+		else if (i >= 10 && i < 15)
+		{
+			card[i]->setAction(act3);
+		}
+		//Total of 5 cards
+		else if (i >= 15 && i < 20)
+		{
+			card[i]->setAction(act4);
+		}
+		//Total of 5 cards
+		else if (i >= 20 && i < 25)
+		{
+			card[i]->setAction(act5);
+		}
+		//Total of 3 cards
+		else if (i >= 25 && i < 28)
+		{
+			card[i]->setAction(act6);
+		}
+		//Total of 2 cards
+		else if (i >= 28 && i < 30)
+		{
+			card[i]->setAction(act7);
+		}
+		//Total of 5 cards with anvil
+		else if (i >= 30 && i < 32)
+		{
+			card[i]->setAction(act8);
+		}
+		//Total of 8 cards with Crystal
+		else if (i >= 32 && i < 34)
+		{
+			card[i]->setAction(act9);
+		}
+		//Total of 2 cards
+		else if (i >= 34 && i < 36)
+		{
+			card[i]->setAction(act10);
+		}
+		//Total of 2 cards
+		else if (i >= 36 && i < 38)
+		{
+			card[i]->setAction(act11);
+		}
+		//Total of 2 cards
+		else if (i >= 38 && i < 40)
+		{
+			card[i]->setAction(act12);
+		}
+		//Total of 2 cards
+		else if (i >= 40 && i < 42)
+		{
+			card[i]->setAction(act13);
+		}
+
+		//Push every card in the vector of deck
+		deckVector.push_back(card[i]);
 	}
 	
 }
@@ -154,22 +288,33 @@ void Hand::exchange(Deck *deck)
 	deck->draw(this); //Draw a new card from deck to put it in handspace
 }
 
-int Card::getGood()
+string Card::getGood()
 {
-	return *good ;
+	return *good;
 }
 
-int Card::getAction()
+string Card::getAction()
 {
 	return *action;
 }
 
-void Card::setGood(int *gd)
+void Card::setGood(string *gd)
 {
 	good = gd;
 }
 
-void Card::setAction(int *act)
+void Card::setAction(string *act)
 {
 	action = act;
 }
+
+void Card::setNGood(int* ngd)
+{
+	Ngood = ngd;
+}
+
+int Card::getNGood()
+{
+	return *Ngood;
+}
+

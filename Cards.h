@@ -1,22 +1,28 @@
 #pragma once
 using namespace std;
 #include <vector>
+#include <string>
 
 class Deck; //forward declaration of Deck class
 
 class Card
 {
 	public:
-		int *action;
-		int *good;
+		string *action; //MOVE_OVER_WATER, PLACE_NEW_ARMIES_ON_BOARD, MOVE_OVER_LAND, BUILD_A_CITY, DESTROY_ARMY
+		int *Ngood; //Number of 'good'
+		string* good; //Carrot, Crystal, Tree, Anvil, Rock
+
 		int *id; //Every card associated with an ID (number) 
 		bool *outDeck = new bool(false); //Member that tells whether the card is still in the deck. Initially false (= false means not taken out of deck, = true means taken out of deck)
 		bool *outHand = new bool(false); //Tells whether card is in the hand space (if = false, then no, if = true, then yes it is in the card space)
 
-		int getGood();
-		int getAction();
-		void setGood(int *gd);
-		void setAction(int *act);
+		string getGood();
+		string getAction();		
+		int getNGood();
+		void setGood(string *gd);
+		void setAction(string *act);		
+		void setNGood(int* ngd);
+
 };
 
 class Hand
@@ -35,6 +41,7 @@ class Deck
 
 	//Since its a class its members are private by default, so need to precise public to make the members public
 	public:
+		Card* card[42];
 		void setTotalCards(const int *tCards);
 		int getTotalCards();
 		void draw(Hand *hand);
