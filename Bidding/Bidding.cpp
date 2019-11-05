@@ -7,26 +7,36 @@
 
 using namespace std;
 
+// Constructor
 Bidding::Bidding()
 {
     Bidding::bid = new int(0);
 }
 
+
 int Bidding::biddingPhase(vector<Player*> players, int numbOfPlayers)
 {
-    int bid, highest;
+
+    // Local varibles
+    int bid, highest, maxBidder;
+
     // Make a loop through the player array instead of this array
     int bidArray [numbOfPlayers];
-	//int bidArray[5];
+
     int highestBidder = 0;
 
-    // Eeach player makes a bid
+    // Each player makes a bid
     for (int i = 0; i < numbOfPlayers; i++)
     {
         cout << "How much would you like to bid " << *(players[i]->getName()) << " ?" << endl;
         cin >> bid;
+        // Verify if a player could afford the bidding
+        while(bid < 0 || bid > *(players[i]->getCoins()))
+        {
+            cout << "INVALID BID! Enter an affordable bid between 0 and " << players[i]->getCoins() << ": ";
+            cin >> bid;
+        }
         players[i]->getBidding()->setBid(bid);
-        // Remove this sloppy code
         bidArray[i] = *(players[i]->getBidding()->getBid());
     }
 
@@ -57,6 +67,7 @@ int Bidding::biddingPhase(vector<Player*> players, int numbOfPlayers)
         }
     }
 
+    // Highest bidder pays the cost
     players[highestBidder]->payCoins(*(players[highestBidder]->getBidding()->getBid()));
 
     return highestBidder;

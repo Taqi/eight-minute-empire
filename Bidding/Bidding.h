@@ -5,7 +5,7 @@
 #ifndef COMP345A1_BIDDING_H
 #define COMP345A1_BIDDING_H
 
-#include "Player.h"
+#include "../Player/Player.h"
 #include <vector>
 
 using namespace std;
@@ -13,6 +13,7 @@ using namespace std;
 class Player;
 
 class Bidding {
+
 
 private:
     int* bid;
@@ -32,6 +33,8 @@ public:
     void setBid(int bid);
 
 
+// Destructor
+~Bidding();
 };
 
 

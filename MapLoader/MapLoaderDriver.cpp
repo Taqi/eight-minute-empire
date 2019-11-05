@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sys/stat.h> 
 #include "MapLoader.h"
-#include "Map.h"
+#include "../Map/Map.h"
 #include <string>
 #include <dirent.h> //Need to do this to be able to use dirent.h on windows https://codeyarns.com/2014/06/06/how-to-use-dirent-h-with-visual-studio/?fbclid=IwAR24yPTiEBg1QsfFzWddJkBcOJhA_k63A7B4NNh501BCdyCtWFgfgRzBq20
 using namespace std;

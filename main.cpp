@@ -1,18 +1,35 @@
 #include <iostream>
-#include "Player.h"
-#include "PlayerDriver.h"
-#include "BiddingDriver.h"
-#include "MapDriver.h"
-#include "MapLoaderDriver.h"
-#include "CardDriver.h"
+#include "Player/Player.h"
+#include "Player/PlayerDriver.h"
+#include "Bidding/BiddingDriver.h"
+#include "Map/MapDriver.h"
+#include "MapLoader/MapLoaderDriver.h"
+#include "Card/CardDriver.h"
+#include "GameScore/GameScore.h"
+#include "GameScore/GameScoreDriver.h"
+#include "GameMainLoop/GameMainLoop.h"
 
 
 int main()
 {
-	
-	MapLoaderDriver();
-	MapDriver(); //Will remove since MapLoaderDriver calls map class
-	PlayerDriver();
-	CardDriver();
-	BiddingDriver();
+
+    // Part 1)
+    // gameStateDriver();
+
+    // Part 2)
+    // gameStartupExample();
+
+    // Part 3 AND 5)
+    // mainLoopDriver();
+
+    // Part 4)
+    // playerMethodsDriver();
+
+    // Part 5)
+    // gameScoreExample();
+
+    return 0;
+
+
+
 }
