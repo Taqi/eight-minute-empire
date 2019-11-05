@@ -51,12 +51,12 @@ void MapDriver()
 	graph->setCountryArmy(graph, army3, countryNumber1);
 
 	//Print
-	cout << "Country ID (head) " << graph->getCountryNumber(countryNumber1) << " is owned by " << graph->getCountryPlayer(countryNumber1) << " and has " << graph->getCountryArmy(countryNumber1) << " armies." << endl;
+	//cout << "Country ID (head) " << graph->getCountryNumber(countryNumber1) << " is owned by " << graph->getCountryPlayer(countryNumber1) << " and has " << graph->getCountryArmy(countryNumber1) << " armies." << endl;
 
 	//Modify who owns that country
 	graph->setCountryPlayer(graph, player2, countryNumber1);
 	graph->setCountryArmy(graph, army2, countryNumber1);
-	cout << "Country ID (head) " << graph->getCountryNumber(countryNumber1) << " is owned by " << graph->getCountryPlayer(countryNumber1) << " and has " << graph->getCountryArmy(countryNumber1) << " armies." << endl;
+	//cout << "Country ID (head) " << graph->getCountryNumber(countryNumber1) << " is owned by " << graph->getCountryPlayer(countryNumber1) << " and has " << graph->getCountryArmy(countryNumber1) << " armies." << endl;
 
 	//--------------------------------------------------------------------------------------------------------------------
 
@@ -115,10 +115,20 @@ void MapDriver()
 	//Map is made up of several graphs, so create an array of graph objects
 	//Max of 3 graphs for memory
 	const int totalNumberGraph = 3;
-	Graph* map[totalNumberGraph];
-	map[0] = graph;
-	map[1] = graph2;
-	map[2] = graph3;
 
-	mapValidation(map, totalNumberGraph);
+	Map* m = new Map();
+	m->storeGraph(graph);
+	m->storeGraph(graph2);
+	m->storeGraph(graph3);
+
+
+	//mapValidation(map, totalNumberGraph);
+	m->mapValidationG(m->allGraph.size()); //Takes total number of graphs as argument
+
+	//Map* m = new Map();
+	//m->allGraph(graph)
+
+	//Deallocate
+	delete m;
+	m = NULL;
 }

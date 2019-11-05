@@ -36,7 +36,6 @@ Graph *createGraph(int totalCountries)
 		(*graph).countryArray[i].head = NULL;
 	}
 
-
 	//Create a 2nd array. This one will contain all the nodes
 	(*graph).playerArmyCountryArray = new AdjList[totalCountries];
 	//initialize with NULL
@@ -44,6 +43,21 @@ Graph *createGraph(int totalCountries)
 	{
 		(*graph).playerArmyCountryArray[i].head = NULL;
 	}
+
+	////playerArmyCountryArray2;
+
+	////if (*one == true)
+	//{
+	//	//Create a 2nd array. This one will contain all the nodes
+	//	//playerArmyCountryArray2 = new AdjList[totalCountries];
+	//	//initialize with NULL
+	//	for (int i = 0; i < totalCountries; i++)
+	//	{
+	//		playerArmyCountryArray2[i].head = NULL;
+	//	}
+
+	//	*one = false;
+	//}
 
 
 	return graph;
@@ -65,7 +79,7 @@ void addEdge(Graph *graph, int srs, int dest)
 	//This Array contains only head, so no link to next node
 	(*graph).playerArmyCountryArray[dest].head = countryPointer;
 
-
+	
 
 	//connect from dest to srs (since undirected)
 	//Create node srs and add it to the linked list
@@ -231,7 +245,7 @@ Anything else means the same country is found in another graph, making it invali
 Note: j.head = null, means there is no linked list in that element of the array
 
 */
-void mapValidation(Graph* map[], const int totalNumberGraph)
+void mapValidation(vector <Graph*> map, const int totalNumberGraph)
 {
 	cout << "Checking if a country is found in more than 1 continent...\n";
 	bool mapValid = true;
@@ -255,7 +269,7 @@ void mapValidation(Graph* map[], const int totalNumberGraph)
 				else if (k>i)
 				{
 					mapValid = false;
-					cout << "\nInvalid map, Country found in more than 1 continent";
+					cout << "\nInvalid map, Country found in more than 1 continent" <<endl;
 					//cout << "\nAt, graph i = " << i << "    graph k = " << k << "    element j = " << j <<endl;
 					break;
 				}
@@ -275,7 +289,7 @@ void mapValidation(Graph* map[], const int totalNumberGraph)
 
 	if (mapValid == true)
 	{
-		cout << "\nCountry not found in more than 1 continent";
+		cout << "\nCountry not found in more than 1 continent" <<endl;
 	}
 
 }
@@ -317,3 +331,14 @@ int Graph::getCountryNumber(int countryID)
 {
 	return playerArmyCountryArray[countryID].head->countryNumber;
 }
+
+void Map::storeGraph(Graph *graph)
+{
+	allGraph.push_back(graph);
+}
+
+void Map::mapValidationG(const int totalNumberGraph)
+{
+	mapValidation(allGraph, totalNumberGraph);
+}
+

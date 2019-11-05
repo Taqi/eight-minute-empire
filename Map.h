@@ -2,6 +2,7 @@
 using namespace std;
 #include <vector>
 
+
 // Creates a node with a country number (data inside the node)
 struct CreateNode
 {
@@ -41,10 +42,25 @@ struct Graph
 
 };
 
+class Map
+{
+	public:
+		vector <Graph*> allGraph;
+
+		void storeGraph(Graph *graph);
+		void mapValidationG(const int totalNumberGraph);
+
+
+		//bool* one = new bool(true);
+		//AdjList* playerArmyCountryArray2; //This array contains a country head in each index, and it tells which player owns the country and how many armies he has.
+
+};
+
 
 CreateNode* newNode(int countryN);
 Graph* createGraph(int totalCountries);
 void addEdge(Graph* graph, int srs, int dest);
 void printGraph(Graph* graph);
 void checkConnectivity(Graph* graph, int totalCountries);
-void DFS(int node, Graph* graph, bool visited[]);	void mapValidation(Graph* map[], const int totalNumberGraph);
+void DFS(int node, Graph* graph, bool visited[]);	
+void mapValidation(vector <Graph*> map, const int totalNumberGraph);

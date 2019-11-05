@@ -20,7 +20,7 @@ void CardDriver()
 	(*deck).draw(hand);
 	//exchange lets user buy a card and it draws a new card from the deck
 	hand->exchange(deck);
-	//hand->exchange(deck);
+	hand->exchange(deck);
 	//hand->exchange(deck);
 
 	//How to get action/good/ngood of card:

@@ -51,8 +51,7 @@ void Deck::setTotalCards(const int *tCards)
 		//Set the card id
 		card[i]->id = new int(i);
 		//cout << *(card[i]->id) << endl; //Prints every card
-		//card[i]->id = idNumber; 
-
+	
 		/*Set Ngood, action, good for each card*/
 
 		//Set Ngood (1 or 2 for each card, so that means 1 carrot/1 crystal/1 rock\2 carrot\2 trees, etc. for each card. 33 cards with 1 ngood, 9 cards with 2 ngood----------------
@@ -166,7 +165,7 @@ void Deck::setTotalCards(const int *tCards)
 	}
 	
 }
-
+//Return the total number of cards
 int Deck::getTotalCards()
 {
 	return *totalCards;
@@ -290,32 +289,40 @@ void Hand::exchange(Deck *deck)
 	handVector.erase(handVector.begin() + n); //Remove card at nth index (it moves the rest of cards to the front/left)
 	deck->draw(this); //Draw a new card from deck to put it in handspace
 }
-
+/* Return the good of the card
+*/
 string Card::getGood()
 {
 	return *good;
 }
 
+/* Return the action of the card
+*/
 string Card::getAction()
 {
 	return *action;
 }
-
+/* Set the good of the card
+*/
 void Card::setGood(string *gd)
 {
 	good = gd;
 }
-
+/* Set the action of the card
+*/
 void Card::setAction(string *act)
 {
 	action = act;
 }
-
+/* Set the number of good of the card
+*/
 void Card::setNGood(int* ngd)
 {
 	Ngood = ngd;
 }
 
+/* Return the number of goods of the card
+*/
 int Card::getNGood()
 {
 	return *Ngood;
