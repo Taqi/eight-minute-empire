@@ -9,8 +9,8 @@ struct CreateNode
 	public:
 		int countryNumber; //int data //Will be the data contained on a node of the linked list
 		CreateNode *next; //Points to the next node
-		string *playerName; //This makes the country owned by a player
-		int *numArmies; //Number of armies in a country
+		string *playerName = new string("-"); //This makes the country owned by a player
+		int* numArmies = new int(0); //Number of armies in a country
 
 };
 
@@ -27,40 +27,43 @@ struct AdjList
 struct Graph
 {
 	public:
-		int totalCountries;
+		int totalCountries; //total country in continent
 		AdjList *countryArray; //Create an array of adjacency list. Every node will be in this array (as the index), and each will have a linked list that points to their adjacent nodes. 
-		AdjList* playerArmyCountryArray; //This array contains a country head in each index, and it tells which player owns the country and how many armies he has.
-		
-		void setCountryPlayer(Graph* graph, string& player, int countryID); //Set which player owns that country
-		string getCountryPlayer(int countryID); //Return which player owns that country
-		
-		void setCountryArmy(Graph* graph, int& armyN, int countryID); //Set number of armies in that country
-		int getCountryArmy(int countryID); //Return the number of army in that country (army owned by that player)
-
-		void setCountryNumber(Graph* graph, int countryID); //Set the country Id for the node
-		int getCountryNumber(int countryID); //Return the country ID
 
 };
 
 class Map
 {
 	public:
-		vector <Graph*> allGraph;
+		vector <Graph*> allGraph; //Contains every graph (continent in this array)
 
-		void storeGraph(Graph *graph);
-		void mapValidationG(const int totalNumberGraph);
+		int* test;
+		void storeGraph(Graph *graph); //Function to store graph in alLGraph
+		void mapValidationG(const int totalNumberGraph); //Check if map is valid
 
 
-		//bool* one = new bool(true);
-		//AdjList* playerArmyCountryArray2; //This array contains a country head in each index, and it tells which player owns the country and how many armies he has.
+		bool* one = new bool(true); //True value so that the array gets initialized only once
+		AdjList* playerArmyCountryArray; //This array contains a country head in each index, and it tells which player owns the country and how many armies he has.
+		int* mapSize; //Total country in array
 
+		void setCountryPlayer(string& player, int countryID); //Set which player owns that country
+		string getCountryPlayer(int countryID); //Return which player owns that country
+
+		void setCountryArmy(int& armyN, int countryID); //Set number of armies in that country
+		int getCountryArmy(int countryID); //Return the number of army in that country (army owned by that player)
+
+		void setCountryNumber(int countryID); //Set the country Id for the node
+		int getCountryNumber(int countryID); //Return the country ID
+
+		void printMap(); //Print every country in map with player and army
+		void printAllAdjacentCountries(); //Print every country and their adjacent
 };
 
 
-CreateNode* newNode(int countryN);
-Graph* createGraph(int totalCountries);
-void addEdge(Graph* graph, int srs, int dest);
-void printGraph(Graph* graph);
-void checkConnectivity(Graph* graph, int totalCountries);
-void DFS(int node, Graph* graph, bool visited[]);	
-void mapValidation(vector <Graph*> map, const int totalNumberGraph);
+CreateNode* newNode(int countryN); //Creates a node/country
+Graph* createGraph(int totalCountries, Map *m); //Creates graph/continent
+void addEdge(Graph* graph, int srs, int dest, Map *m); //Add edges between 2 country
+void printGraph(Graph* graph); //prints a continent
+void checkConnectivity(Graph* graph, int totalCountries); //Check if continent is connected
+void DFS(int node, Graph* graph, bool visited[]); //DFS function
+void mapValidation(vector <Graph*> map, const int totalNumberGraph); //Check for map validity

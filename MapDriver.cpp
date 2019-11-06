@@ -8,60 +8,34 @@ using namespace std;
 
 void MapDriver()
 {
+	//Create map object
+	Map* map = new Map();
+	map->mapSize = new int(13); //Total countries in map
+
 	//Create graph object
 	Graph *graph;
 
-	const int totalCountries = 4; //=total number of nodes
+	const int totalCountries = 4; //=total number of nodes in 1 continent
 
 	//Graph is created in Map.cpp, which is pointed to by our *graph pointer.
-	graph = createGraph(totalCountries);
+	graph = createGraph(totalCountries, map);
 
 	//Continent 1-----------------------------------------------------------------------------------------------
 	cout << "Continent 1-----------------------------------------------------------------------\n";
 
 	//connect edges
-	addEdge(graph, 0, 1);
-	addEdge(graph, 2, 1);
-	addEdge(graph, 0, 2);
-	addEdge(graph, 1, 3);
+	addEdge(graph, 0, 1, map);
+	addEdge(graph, 2, 1, map);
+	addEdge(graph, 0, 2, map);
+	addEdge(graph, 1, 3, map);
 
 
 	//print the adjacency list representation of graph
 	printGraph(graph);
+	//map->printMap(map);
 
 	//Check if graph is connected
 	checkConnectivity(graph, totalCountries);
-
-	//BELOW SHOWS how to set player name and number of armies for a region---------------------------------------
-	string player1 = "Taqi";
-	string player2 = "Daphne";
-	string player3 = "James";
-
-	//Random army numbers
-	int army1 = 5;
-	int army2 = 3;
-	int army3 = 6;
-
-	//Random country number
-	int countryNumber1 = 1;
-
-	//Set player to the region
-	graph->setCountryPlayer(graph, player1, countryNumber1);
-	//Set army to the region
-	graph->setCountryArmy(graph, army3, countryNumber1);
-
-	//Print
-	//cout << "Country ID (head) " << graph->getCountryNumber(countryNumber1) << " is owned by " << graph->getCountryPlayer(countryNumber1) << " and has " << graph->getCountryArmy(countryNumber1) << " armies." << endl;
-
-	//Modify who owns that country
-	graph->setCountryPlayer(graph, player2, countryNumber1);
-	graph->setCountryArmy(graph, army2, countryNumber1);
-	//cout << "Country ID (head) " << graph->getCountryNumber(countryNumber1) << " is owned by " << graph->getCountryPlayer(countryNumber1) << " and has " << graph->getCountryArmy(countryNumber1) << " armies." << endl;
-
-	//--------------------------------------------------------------------------------------------------------------------
-
-
-
 
 
 
@@ -73,12 +47,12 @@ void MapDriver()
 
 	const int totalCountries2 = 8;
 
-	graph2 = createGraph(totalCountries2);
+	graph2 = createGraph(totalCountries2, map);
 	//Each country is associated with a number (ex: Country Japan is node 0, Canada is node 1)
-	addEdge(graph2, 4, 5);
-	addEdge(graph2, 6, 5);
-	addEdge(graph2, 6, 7);
-	//addEdge(graph2, 1, 7);	//Add to make the map invalid (country found in more than 1 continent)
+	addEdge(graph2, 4, 5, map);
+	addEdge(graph2, 6, 5, map);
+	addEdge(graph2, 6, 7, map);
+	//addEdge(graph2, 1, 7, map);	//Add to make the map invalid (country found in more than 1 continent)
 
 	//Print the graph
 	printGraph(graph2);
@@ -96,12 +70,12 @@ void MapDriver()
 
 	const int totalCountries3 = 13;
 
-	graph3 = createGraph(totalCountries3);
+	graph3 = createGraph(totalCountries3, map);
 
-	addEdge(graph3, 8, 10);
-	addEdge(graph3, 9, 11);//Remove to make graph not connected
-	addEdge(graph3, 10, 9);
-	addEdge(graph3, 11, 12);
+	addEdge(graph3, 8, 10, map);
+	addEdge(graph3, 9, 11, map);//Remove to make graph not connected
+	addEdge(graph3, 10, 9, map);
+	addEdge(graph3, 11, 12, map);
 
 
 	//Print the graph
@@ -110,25 +84,48 @@ void MapDriver()
 	//Check Connectivity
 	checkConnectivity(graph3, totalCountries3);
 
-
+	
 	//Check if map is valid (cannot have same country (node number) in more than 1 graph
 	//Map is made up of several graphs, so create an array of graph objects
 	//Max of 3 graphs for memory
-	const int totalNumberGraph = 3;
-
-	Map* m = new Map();
-	m->storeGraph(graph);
-	m->storeGraph(graph2);
-	m->storeGraph(graph3);
-
-
-	//mapValidation(map, totalNumberGraph);
-	m->mapValidationG(m->allGraph.size()); //Takes total number of graphs as argument
+	map->mapValidationG(map->allGraph.size()); //Takes total number of graphs as argument
 
 	//Map* m = new Map();
 	//m->allGraph(graph)
 
+	map->printMap();
+
+	//BELOW SHOWS how to set player name and number of armies for a region---------------------------------------
+	string player1 = "Taqi";
+	string player2 = "Daphne";
+	string player3 = "James";
+
+	//Random army numbers
+	int army1 = 5;
+	int army2 = 3;
+	int army3 = 6;
+
+	//Random country number
+	int countryNumber1 = 0;
+
+	//Set player to the region
+	map->setCountryPlayer(player1, countryNumber1);
+	//Set army to the region
+	map->setCountryArmy(army3, countryNumber1);
+
+	map->printMap();
+
+	//Modify who owns that country
+	map->setCountryPlayer(player2, countryNumber1);
+	map->setCountryArmy(army2, countryNumber1);
+
+	//print countries with player and army
+	map->printMap();
+
+	//print every country with their adjacent
+	map->printAllAdjacentCountries();
+
 	//Deallocate
-	delete m;
-	m = NULL;
+	delete map;
+	map = NULL;
 }

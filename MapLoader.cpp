@@ -22,6 +22,9 @@ int Loader::readFile()
   
   if (myfile.is_open())
   {
+	Map* map = new Map();
+	map->mapSize = new int(3); //Total countries in map
+
     Graph *graph;
     int totalCountries = 0;
 
@@ -62,7 +65,7 @@ int Loader::readFile()
 
     // Creation of Map Graph begins
     //Graph is pointed to by our *graph pointer.
-	  graph = createGraph(totalCountries);
+	  graph = createGraph(totalCountries, map);
 
     int node0;
     int node1;
@@ -82,7 +85,7 @@ int Loader::readFile()
         }else{
           // Get adjacent to current
           node1 = stoi(*it);
-         	addEdge(graph, node0, node1);
+         	addEdge(graph, node0, node1, map);
         }
       }
     }

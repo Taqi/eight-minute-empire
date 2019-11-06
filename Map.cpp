@@ -21,8 +21,10 @@ CreateNode *newNode(int countryN)
 
 //function to create a graph of totalCountries - nodes
 //Set total number of countries, initialize the array to AdjList objects, and set the head of each linked list to null.
-Graph *createGraph(int totalCountries)
+Graph *createGraph(int totalCountries, Map *m)
 {
+	bool falseValue = false; //Just a false value
+
 	Graph* graph = new Graph;
 	//Set the total number of countries (nodes) of the graph to the value received by this function
 	(*graph).totalCountries = totalCountries;
@@ -36,35 +38,29 @@ Graph *createGraph(int totalCountries)
 		(*graph).countryArray[i].head = NULL;
 	}
 
-	//Create a 2nd array. This one will contain all the nodes
-	(*graph).playerArmyCountryArray = new AdjList[totalCountries];
-	//initialize with NULL
-	for (int i = 0; i < totalCountries; i++)
+
+	////playerArmyCountryArray;
+	if (*(m->one) == true) //Only need to initialize the array once
 	{
-		(*graph).playerArmyCountryArray[i].head = NULL;
+		//Create a 2nd array. This one will contain all the nodes
+		(*m).playerArmyCountryArray = new AdjList[*(m->mapSize)]; 
+		//initialize with NULL
+		for (int i = 0; i < *(m->mapSize); i++)
+		{
+			(*m).playerArmyCountryArray[i].head = NULL;
+		}
+
+		m->one = &falseValue;
 	}
 
-	////playerArmyCountryArray2;
-
-	////if (*one == true)
-	//{
-	//	//Create a 2nd array. This one will contain all the nodes
-	//	//playerArmyCountryArray2 = new AdjList[totalCountries];
-	//	//initialize with NULL
-	//	for (int i = 0; i < totalCountries; i++)
-	//	{
-	//		playerArmyCountryArray2[i].head = NULL;
-	//	}
-
-	//	*one = false;
-	//}
-
+	//Store graph in vector allGraph;
+	m->storeGraph(graph);
 
 	return graph;
 }
 
 //add an edge to an undirected Graph
-void addEdge(Graph *graph, int srs, int dest)
+void addEdge(Graph *graph, int srs, int dest, Map *m)
 {
 	//Add an edge from source node (srs) to destination node (dest). A new node added to the adjacency list of src
 	CreateNode *countryPointer;
@@ -77,8 +73,7 @@ void addEdge(Graph *graph, int srs, int dest)
 
 
 	//This Array contains only head, so no link to next node
-	(*graph).playerArmyCountryArray[dest].head = countryPointer;
-
+	(*m).playerArmyCountryArray[dest].head = countryPointer;
 	
 
 	//connect from dest to srs (since undirected)
@@ -90,7 +85,7 @@ void addEdge(Graph *graph, int srs, int dest)
 
 
 	//This Array contains only head, so no link to next node
-	(*graph).playerArmyCountryArray[srs].head = countryPointer;
+	(*m).playerArmyCountryArray[srs].head = countryPointer;
 }
 
 //function to print the graph
@@ -180,7 +175,10 @@ void checkConnectivity(Graph *graph, int totalCountries)
 
 		//Not connected, so break out of outer loop
 		if (connection == false)
+		{
 			cout << "\n\nThe graph is not connected\n";
+			exit(0);
+		}
 
 		//Else its connected
 		else
@@ -284,7 +282,9 @@ void mapValidation(vector <Graph*> map, const int totalNumberGraph)
 
 
 		if (mapValid == false)
-			break;
+		{
+			exit(0);
+		}
 	}
 
 	if (mapValid == true)
@@ -292,44 +292,6 @@ void mapValidation(vector <Graph*> map, const int totalNumberGraph)
 		cout << "\nCountry not found in more than 1 continent" <<endl;
 	}
 
-}
-
-/*Set which player owns that country
-*/
-void Graph::setCountryPlayer(Graph* graph, string& player, int countryID)
-{
-	graph->playerArmyCountryArray[countryID].head->playerName = &player;
-}
-
-/*Return which player owns that country
-*/
-string Graph::getCountryPlayer(int countryID)
-{
-	return *(playerArmyCountryArray[countryID].head->playerName);
-}
-
-//set the number of army in that country 
-void Graph::setCountryArmy(Graph* graph, int& armyN, int countryID)
-{
-	graph->playerArmyCountryArray[countryID].head->numArmies = &armyN;
-}
-
-//Return the number of army in that country (army owned by the player who owns the country)
-int Graph::getCountryArmy(int countryID)
-{
-	return *(playerArmyCountryArray[countryID].head->numArmies);
-}
-
-//Set the country Id for the node
-void Graph::setCountryNumber(Graph* graph, int countryID)
-{
-	graph->playerArmyCountryArray[countryID].head->countryNumber = countryID;
-}
-
-//Return the country Id for the node
-int Graph::getCountryNumber(int countryID)
-{
-	return playerArmyCountryArray[countryID].head->countryNumber;
 }
 
 void Map::storeGraph(Graph *graph)
@@ -341,4 +303,92 @@ void Map::mapValidationG(const int totalNumberGraph)
 {
 	mapValidation(allGraph, totalNumberGraph);
 }
+
+/*Set which player owns that country
+*/
+void Map::setCountryPlayer(string& player, int countryID)
+{
+	playerArmyCountryArray[countryID].head->playerName = &player;
+}
+
+/*Return which player owns that country
+*/
+string Map::getCountryPlayer(int countryID)
+{
+
+	return *(playerArmyCountryArray[countryID].head->playerName);
+}
+
+//set the number of army in that country 
+void Map::setCountryArmy(int& armyN, int countryID)
+{
+	playerArmyCountryArray[countryID].head->numArmies = &armyN;
+}
+
+//Return the number of army in that country (army owned by the player who owns the country)
+int Map::getCountryArmy(int countryID)
+{
+
+	return *(playerArmyCountryArray[countryID].head->numArmies);
+}
+
+//Set the country Id for the node
+void Map::setCountryNumber(int countryID)
+{
+	playerArmyCountryArray[countryID].head->countryNumber = countryID;
+}
+
+//Return the country Id for the node
+int Map::getCountryNumber(int countryID)
+{
+	return playerArmyCountryArray[countryID].head->countryNumber;
+}
+
+void Map::printMap()
+{
+	cout << "\n|======================================MAP==============================================|\n";
+	//loop over each adjacent list
+	for (int i = 0; i < *mapSize; i++)
+	{
+		cout << endl << "Country: " << playerArmyCountryArray[i].head->countryNumber << " || Owned by " << *(playerArmyCountryArray[i].head->playerName) << " || Army: " << *(playerArmyCountryArray[i].head->numArmies) << endl;;
+
+	}		
+
+	cout << "\n[---------------------------------------------------------------------------------------]\n";
+}
+
+/*
+Prints every country with their adjacent
+*/
+void Map::printAllAdjacentCountries()
+{
+	cout << "\n|=================================ADJACENT COUNTRIES====================================|\n";
+	for (int k = 0; k < allGraph.size(); k++)
+	{
+		//loop over each adjacent list
+		for (int i = 0; i < (*allGraph[k]).totalCountries; i++)
+		{
+			//Node root becomes head of linked list (its initialized to the current head of the list). This is done for each node in the array (so countryArray[0], countryArray[1], etc.
+			CreateNode* root = (*allGraph[k]).countryArray[i].head;
+
+			if (root != NULL) //Only display part of array that has elements in it
+			{
+				cout << endl << "Adjacency list of country " << i << endl;
+				//cout << "Country " << (*root).countryNumber << " owned by player " << *(*root).playerName << " and contains " << *(root->numArmies) << " armies" << endl; //the first '*' is for pointer of playername, second '*' is for root pointer
+			}
+
+
+			//loop over each node in list
+			while (root != NULL) //Will become null once it reaches the end of the linked list
+			{
+				cout << (*root).countryNumber << " -> "; //This prints the data inside the node of a linked list
+
+				root = (*root).next; //Set the root to the next node of the linked list
+			}
+		}
+	}
+
+	cout << "\n[---------------------------------------------------------------------------------------]\n";
+}
+
 

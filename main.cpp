@@ -11,8 +11,8 @@ int main()
 {
 	
 	MapLoaderDriver();
-	MapDriver(); //Will remove since MapLoaderDriver calls map class
-	PlayerDriver();
-	CardDriver();
-	BiddingDriver();
+	MapDriver(); //Has some duplicates with MapLoaderDriver
+	//PlayerDriver();
+	//CardDriver();
+	//BiddingDriver();
 }
