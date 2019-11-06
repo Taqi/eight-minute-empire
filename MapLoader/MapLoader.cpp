@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include "MapLoader.h"
-#include "Map.h"
+#include "../Map/Map.h"
 using namespace std;
 
 Loader::Loader(string file)

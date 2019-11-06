@@ -2,7 +2,7 @@
 // Created by james on 2019-10-12.
 //
 
-#include "Player.h"
+#include "../Player/Player.h"
 #include "BiddingDriver.h"
 #include <iostream>
 
