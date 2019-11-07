@@ -46,10 +46,10 @@ class Map
 		AdjList* playerArmyCountryArray; //This array contains a country head in each index, and it tells which player owns the country and how many armies he has.
 		int* mapSize; //Total country in array
 
-		void setCountryPlayer(string& player, int countryID); //Set which player owns that country
+		void setCountryPlayer(string* player, int countryID); //Set which player owns that country
 		string getCountryPlayer(int countryID); //Return which player owns that country
 
-		void setCountryArmy(int& armyN, int countryID); //Set number of armies in that country
+		void setCountryArmy(int* armyN, int countryID); //Set number of armies in that country
 		int getCountryArmy(int countryID); //Return the number of army in that country (army owned by that player)
 
 		void setCountryNumber(int countryID); //Set the country Id for the node

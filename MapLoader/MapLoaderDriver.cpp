@@ -42,8 +42,8 @@ int readFilenames(std::vector<string> &filenames, const string &directory)
     return(filenames.size()); //Return how many we found
 } // GetFilesInDirectory
 
-
-void MapLoaderDriver () {
+//Return map object created in Loader
+Map* MapLoaderDriver () {
 
     cout << endl << "+---------------------------------+" << endl;
     cout << endl << "|     This is MapLoaderDriver     |" << endl;
@@ -79,5 +79,11 @@ void MapLoaderDriver () {
       }
 
     }
+
+	//We created the map object (in Loader) with all the graph (continents in it), so now return it.
+	Map* m = my_map.getMapPointer();
+
+	return m;
+
 
 }

@@ -6,7 +6,7 @@
 using namespace std;
 
 
-void MapDriver()
+Map* MapDriver()
 {
 	//Create map object
 	Map* map = new Map();
@@ -93,39 +93,41 @@ void MapDriver()
 	//Map* m = new Map();
 	//m->allGraph(graph)
 
-	map->printMap();
+	//map->printMap();
 
 	//BELOW SHOWS how to set player name and number of armies for a region---------------------------------------
-	string player1 = "Taqi";
-	string player2 = "Daphne";
-	string player3 = "James";
+	string *player1 = new string("Taqi");
+	string *player2 = new string("Daphne");
+	string *player3 = new string("James");
 
 	//Random army numbers
-	int army1 = 5;
-	int army2 = 3;
-	int army3 = 6;
+	int *army1 = new int(5);
+	int *army2 = new int(3);
+	int *army3 = new int(6);
 
 	//Random country number
 	int countryNumber1 = 0;
 
 	//Set player to the region
-	map->setCountryPlayer(player1, countryNumber1);
+	//map->setCountryPlayer(player1, countryNumber1);
 	//Set army to the region
-	map->setCountryArmy(army3, countryNumber1);
+	//map->setCountryArmy(army3, countryNumber1);
 
-	map->printMap();
+	//map->printMap();
 
 	//Modify who owns that country
-	map->setCountryPlayer(player2, countryNumber1);
-	map->setCountryArmy(army2, countryNumber1);
+	//map->setCountryPlayer(player2, countryNumber1);
+	//map->setCountryArmy(army2, 5);
 
 	//print countries with player and army
-	map->printMap();
+	//map->printMap();
 
 	//print every country with their adjacent
-	map->printAllAdjacentCountries();
+	//map->printAllAdjacentCountries();
 
-	//Deallocate
-	delete map;
-	map = NULL;
+	////Deallocate
+	//delete map;
+	//map = NULL;
+
+	return map;
 }

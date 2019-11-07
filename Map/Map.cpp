@@ -306,9 +306,9 @@ void Map::mapValidationG(const int totalNumberGraph)
 
 /*Set which player owns that country
 */
-void Map::setCountryPlayer(string& player, int countryID)
+void Map::setCountryPlayer(string* player, int countryID)
 {
-	playerArmyCountryArray[countryID].head->playerName = &player;
+	playerArmyCountryArray[countryID].head->playerName = player;
 }
 
 /*Return which player owns that country
@@ -320,9 +320,9 @@ string Map::getCountryPlayer(int countryID)
 }
 
 //set the number of army in that country 
-void Map::setCountryArmy(int& armyN, int countryID)
+void Map::setCountryArmy(int* armyN, int countryID)
 {
-	playerArmyCountryArray[countryID].head->numArmies = &armyN;
+	playerArmyCountryArray[countryID].head->numArmies = armyN;
 }
 
 //Return the number of army in that country (army owned by the player who owns the country)

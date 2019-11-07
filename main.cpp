@@ -8,20 +8,24 @@
 #include "GameScore/GameScore.h"
 #include "GameScore/GameScoreDriver.h"
 #include "GameMainLoop/GameMainLoop.h"
+#include "GameState/GameState.h"
+#include "GameState/GameStateDriver.h"
 
 
 int main()
 {
 	
-	MapLoaderDriver();
-	MapDriver(); //Has some duplicates with MapLoaderDriver
+	//MapLoaderDriver();
+	//Map *m = MapDriver(); //Has some duplicates with MapLoaderDriver //We probably won't end up using mapDriver.cpp
 	//PlayerDriver();
 	//CardDriver();
 	//BiddingDriver();
 
 
     // Part 1)
-    // gameStateDriver();
+	//Call gameStateDriver which creates a GameState object, and returns that GameState object
+     GameState state = gameStateDriver();
+
 
     // Part 2)
     // gameStartupExample();

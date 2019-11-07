@@ -23,6 +23,7 @@ class Card
 		void setAction(string *act);		
 		void setNGood(int* ngd);
 
+
 };
 
 class Hand
@@ -32,6 +33,8 @@ class Hand
 		void printHand(); //Will print cards currently in hand space
 		void exchange(Deck *deck); //Method that allows user to buy a card from the hand space, and it calls the draw method to pick a new card from deck
 		vector <Card*> handVector;	//Vector of Cards object for the cards faced up
+
+		
 };
 
 class Deck
@@ -41,6 +44,7 @@ class Deck
 
 	//Since its a class its members are private by default, so need to precise public to make the members public
 	public:
+
 		Card* card[42];
 		void setTotalCards(const int *tCards);
 		int getTotalCards();
@@ -50,6 +54,7 @@ class Deck
 
 		//deck Will be initalized to a vector of Card objects in Cards.cpp (initially 42 card objects in the vector)
 		vector <Card*> deckVector; //Note: when I did   vector <Card> *deckVector; and 	(*deckVector).reserve(*totalCards); it gave an error. Asterix need to be inside "<>" it seems.
+
 
 };
 

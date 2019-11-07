@@ -6,6 +6,6 @@
 #define COMP345A1_GAMESTATEDRIVER_H
 
 
-void gameStateDriver();
+GameState gameStateDriver();
 
 #endif //COMP345A1_GAMESTATEDRIVER_H

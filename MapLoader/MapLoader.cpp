@@ -5,10 +5,16 @@
 #include "../Map/Map.h"
 using namespace std;
 
+Loader::Loader()
+{
+	
+}
+
 Loader::Loader(string file)
 {
   map_file = file;
 }
+
 
 void Loader::setFileName(string file)
 {
@@ -22,10 +28,12 @@ int Loader::readFile()
   
   if (myfile.is_open())
   {
-	Map* map = new Map();
-	map->mapSize = new int(3); //Total countries in map
+	//Initialize map object
+	map = new Map();
 
-    Graph *graph;
+	map->mapSize = new int(6); //Total countries in map
+
+	Graph* graph = new Graph();
     int totalCountries = 0;
 
     /* 
@@ -103,4 +111,10 @@ int Loader::readFile()
   }
 
   else return -1;
+}
+
+//Return map object
+Map* Loader::getMapPointer()
+{
+	return map;
 }
