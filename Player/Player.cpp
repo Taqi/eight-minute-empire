@@ -13,82 +13,82 @@
 
 using namespace std;
 
-//// Constructor
-//Player::Player (string name, int age)
-//{
-//    Player::cities = new int(3);
-//    Player::armies = new int(14);
-//    Player::coins = new int(14);
-//    Player::name = new string(name);
-//    Player::age = new int(age);
-//    Player::bid = new Bidding();
-//    Player::getHandOfDeck() == new vector<Card>();
-//}
+// Constructor
+Player::Player (string name, int age)
+{
+    Player::cities = new int(3);
+    Player::armies = new int(14);
+    Player::coins = new int(14);
+    Player::name = new string(name);
+    Player::age = new int(age);
+    //Player::bid = new Bidding();
+    Player::getPlayerHand() == new vector<Card>();
+}
+
+Player::Player(string name, int numbOfPlayers, int age)
+{
+    Player::cities = new int(3);
+    Player::armies = new int(14);
+    Player::name = new string(name);
+    Player::age = new int(age);
+    //Player::bid = new Bidding();
+    Player::getPlayerHand() == new vector<Card>();
+
+    // Determine the amount of token/coins to players by number of players
+    switch (numbOfPlayers)
+    {
+        case 2:
+            Player::coins = new int(14);
+            break;
+        case 3:
+            Player::coins = new int(11);
+            break;
+        case 4:
+            Player::coins = new int(9);
+            break;
+        case 5:
+            Player::coins = new int(8);
+            break;
+    }
+}
+
+// Destructor
+Player::~Player()
+{
+    if (coins) {
+        delete coins;
+        coins = NULL;
+    }
+
+    if (armies) {
+        delete armies;
+        armies = NULL;
+    }
+    if (cities) {
+        delete cities;
+        cities = NULL;
+    }
+    if (age) {
+        delete age;
+        age = NULL;
+    }
+    if (name) {
+        delete name;
+        name = NULL;
+    }
+
+
+    if (playerHand) {
+        delete playerHand;
+        playerHand = NULL;
+    }
+    //if (bid) {
+    //    delete bid;
+    //    bid = NULL;
+    //}
+}
 //
-//Player::Player(string name, int numbOfPlayers, int age)
-//{
-//    Player::cities = new int(3);
-//    Player::armies = new int(14);
-//    Player::name = new string(name);
-//    Player::age = new int(age);
-//    Player::bid = new Bidding();
-//    Player::getHandOfDeck() == new vector<Card>();
-//
-//    // Determine the amount of token/coins to players by number of players
-//    switch (numbOfPlayers)
-//    {
-//        case 2:
-//            Player::coins = new int(14);
-//            break;
-//        case 3:
-//            Player::coins = new int(11);
-//            break;
-//        case 4:
-//            Player::coins = new int(9);
-//            break;
-//        case 5:
-//            Player::coins = new int(8);
-//            break;
-//    }
-//}
-//
-//// Destructor
-//Player::~Player()
-//{
-//    if (coins) {
-//        delete coins;
-//        coins = NULL;
-//    }
-//
-//    if (armies) {
-//        delete armies;
-//        armies = NULL;
-//    }
-//    if (cities) {
-//        delete cities;
-//        cities = NULL;
-//    }
-//    if (age) {
-//        delete age;
-//        age = NULL;
-//    }
-//    if (name) {
-//        delete name;
-//        name = NULL;
-//    }
-//
-//
-//    if (handOfDeck) {
-//        delete handOfDeck;
-//        handOfDeck = NULL;
-//    }
-//    if (bid) {
-//        delete bid;
-//        bid = NULL;
-//    }
-//}
-//
-//// Implemented Methods
+// Implemented Methods
 //bool Player::payCoins(int cost)
 //{
 //    if (*(this->getCoins()) < cost)
@@ -106,7 +106,7 @@ using namespace std;
 //
 //bool Player::placeNewArmies(int armies, Graph &gameboard)
 //{
-//    // Verify if the player has an available armies to place
+//     //Verify if the player has an available armies to place
 //    if (armies == 0)
 //    {
 //       cout << "Unavailable Armies To Place" << endl;
@@ -207,10 +207,10 @@ using namespace std;
 //        std::cout << "2 - " << secondAction << std::endl;
 //        std::cout << "Would you prefer to take '1' or '2' actions? : ";
 //
-//        // validate user selection
+//         //validate user selection
 //        answer = validateActionSelection();
 //
-//        // player only wants to use one of the actions
+//         //player only wants to use one of the actions
 //        if (answer == 1) {
 //            std::cout << "Please select one of the above actions by entering '1' or '2': ";
 //            answer = validateActionSelection();
@@ -221,7 +221,7 @@ using namespace std;
 //                takeAction(secondAction, gameBoard, allPlayers);
 //            }
 //        }
-//            // player wants to use both actions
+//             //player wants to use both actions
 //        else {
 //            std::cout << "Which action would you like to use first? Please select one of the above actions by entering '1' or '2': ";
 //            answer = validateActionSelection();
@@ -236,54 +236,54 @@ using namespace std;
 //        }
 //    }
 //}
-//// Getters
-//int* Player::getCoins() const {
-//    return coins;
-//}
-//
-//int* Player::getArmy() const {
-//    return armies;
-//}
-//
-//int* Player::getCities() const {
-//    return cities;
-//}
-//
-//int *Player::getAge() const {
-//    return age;
-//}
-//
-//string *Player::getName() const {
-//    return name;
-//}
-//
-//vector<Card> *Player::getHandOfDeck() const {
-//    return handOfDeck;
-//}
-//
-//Bidding *Player::getBidding() const {
-//    return bid;
-//}
-//
-//// Setters
-//void Player::setCoins(int coins) {
-//    *Player::coins = coins;
-//}
-//
-//void Player::setArmy(int armies){
-//    *Player::armies = armies;
-//}
-//
-//void Player::setCities(int cities) {
-//    *Player::cities = cities;
-//}
-//
-//void Player::setAge(int age){
-//    *Player::age = age;
-//}
-//
-//void Player::setName(string name) {
-//    *Player::name = name;
-//}
-//
-//
+// Getters
+int* Player::getCoins() const {
+    return coins;
+}
+
+int* Player::getArmy() const {
+    return armies;
+}
+
+int* Player::getCities() const {
+    return cities;
+}
+
+int *Player::getAge() const {
+    return age;
+}
+
+string *Player::getName() const {
+    return name;
+}
+
+vector<Card> *Player::getPlayerHand() const {
+    return playerHand;
+}
+
+Bidding *Player::getBidding() const {
+    return bid;
+}
+
+// Setters
+void Player::setCoins(int coins) {
+    *Player::coins = coins;
+}
+
+void Player::setArmy(int armies){
+    *Player::armies = armies;
+}
+
+void Player::setCities(int cities) {
+    *Player::cities = cities;
+}
+
+void Player::setAge(int age){
+    *Player::age = age;
+}
+
+void Player::setName(string name) {
+    *Player::name = name;
+}
+
+

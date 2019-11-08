@@ -153,13 +153,13 @@ void GameState::start()
 
 	// Players Generator
 	players = new vector<Player *>();
-	int playerCount;
+	int nPlayers;
 	cout << "How many people are playing in the game? ";
-	cin >> playerCount;
+	cin >> nPlayers;
 	cout << endl;
 	
 	// Retrieve the player name and ages
-	for (int i = 0; i < playerCount; i++)
+	for (int i = 0; i < nPlayers; i++)
 	{
 	    string name;
 	    int age;
@@ -171,9 +171,8 @@ void GameState::start()
 	    cin >> age;
 	
 	    // Using emplace_back instead of push back since I want to return a reference here for the Player
-	    //players->emplace_back(new Player(name, playerCount, age));
+	    players->emplace_back(new Player(name, nPlayers, age));
 	}
-
 
 
 
