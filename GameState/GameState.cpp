@@ -130,11 +130,11 @@ void GameState::start()
 	generateTitleScreen();
 	
 	//Load Map
-	//Map *map = MapLoaderDriver(); //Load Map using MapLoader //MapLoaderDriver in MapLoaderDriver.cpp returns the map created there
-	map = MapDriver(); //Load map using MapDriver.cpp (using this one temporarily until Daphne fixes the map loader file)
+	Map *map = MapLoaderDriver(); //Load Map using MapLoader //MapLoaderDriver in MapLoaderDriver.cpp returns the map created there
+	// map = MapDriver(); //Load map using MapDriver.cpp (using this one temporarily until Daphne fixes the map loader file)
 
 	map->printAllAdjacentCountries(); //Not needed here
-	map->printMap(); //Not needed here
+	// map->printMap(); //Not needed here
 
 
 	//An assigned deck with the right number of cards is created.
