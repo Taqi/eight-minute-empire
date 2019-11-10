@@ -21,7 +21,7 @@ Player::Player (string name, int age)
     Player::coins = new int(14);
     Player::name = new string(name);
     Player::age = new int(age);
-    //Player::bid = new Bidding();
+    Player::bid = new Bidding();
     Player::getPlayerHand() == new vector<Card>();
 }
 
@@ -31,7 +31,7 @@ Player::Player(string name, int numbOfPlayers, int age)
     Player::armies = new int(14);
     Player::name = new string(name);
     Player::age = new int(age);
-    //Player::bid = new Bidding();
+    Player::bid = new Bidding();
     Player::getPlayerHand() == new vector<Card>();
 
     // Determine the amount of token/coins to players by number of players
@@ -87,23 +87,22 @@ Player::~Player()
     //    bid = NULL;
     //}
 }
-//
-// Implemented Methods
-//bool Player::payCoins(int cost)
-//{
-//    if (*(this->getCoins()) < cost)
-//    {
-//        cout << "Insufficient coins to make this purchase." << endl;
-//        return false;
-//    }
-//    else
-//    {
-//        this->setCoins(*(this->getCoins()) - cost);
-//        cout << "Purchase Successfully!! You have " << *(this->getCoins()) << " amount of coins remaining." << endl;
-//        return true;
-//    }
-//}
-//
+
+bool Player::payCoins(int cost)
+{
+    if (*(this->getCoins()) < cost)
+    {
+        cout << "Insufficient coins to make this purchase." << endl;
+        return false;
+    }
+    else
+    {
+        this->setCoins(*(this->getCoins()) - cost);
+        cout << "Purchase Successfully!! You have " << *(this->getCoins()) << " amount of coins remaining." << endl;
+        return true;
+    }
+}
+
 //bool Player::placeNewArmies(int armies, Graph &gameboard)
 //{
 //     //Verify if the player has an available armies to place
@@ -114,27 +113,27 @@ Player::~Player()
 //    }
 //
 //}
-//
-//void Player::moveOverLand(int moves)
-//{
-//    cout << "This method allows player to move " << moves << " armies across land/over sea." << endl;
-//}
-//
-//void Player::moveArmies(int moves)
-//{
-//    cout << "This method allows player to move " << moves << " armies." << endl;
-//}
-//
-//void Player::buildCity()
-//{
-//    cout << "This method allows player to build city." << endl;
-//}
-//
-//void Player::destroyArmy()
-//{
-//    cout << "This method allows player to destroy other player's armies" << endl;
-//}
-//
+
+void Player::moveOverLand(int moves)
+{
+    cout << "This method allows player to move " << moves << " armies across land/over sea." << endl;
+}
+
+void Player::moveArmies(int moves)
+{
+    cout << "This method allows player to move " << moves << " armies." << endl;
+}
+
+void Player::buildCity()
+{
+    cout << "This method allows player to build city." << endl;
+}
+
+void Player::destroyArmy()
+{
+    cout << "This method allows player to destroy other player's armies" << endl;
+}
+
 //bool Player::ignore()
 //{
 //    bool invalidAnswer = true;

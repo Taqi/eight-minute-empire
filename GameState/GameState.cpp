@@ -91,29 +91,29 @@ using namespace std;
 //        deck = NULL;
 //    }
 //}
-//
-//
-//
-//int GameState::determineGameLength()
-//{
-//    //The game ends when each player owns a
-//    //certain number of cards depending on the number of players.
-//    //2 Players 13 Cards
-//    //3 Players 10 Cards
-//    //4 Players 8 Cards
-//    //5 Players 7 Cards
-//    switch (players->size())
-//    {
-//        case (2):
-//            return 13;
-//        case (3):
-//            return 10;
-//        case (4):
-//            return 8;
-//        case (5):
-//            return 7;
-//    }
-//}
+
+
+
+int GameState::gameLength()
+{
+    //The game ends when each player owns a
+    //certain number of cards depending on the number of players.
+    //2 Players 13 Cards
+    //3 Players 10 Cards
+    //4 Players 8 Cards
+    //5 Players 7 Cards
+    switch (players->size())
+    {
+        case (2):
+            return 13;
+        case (3):
+            return 10;
+        case (4):
+            return 8;
+        case (5):
+            return 7;
+    }
+}
 
 
 
@@ -151,7 +151,7 @@ void GameState::start()
 	//deck->draw(hand);
 
 
-	// Players Generator
+	// Players creation
 	players = new vector<Player *>();
 	int nPlayers;
 	cout << "How many people are playing in the game? ";
