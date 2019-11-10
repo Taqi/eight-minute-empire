@@ -1,57 +1,53 @@
-////
-//// Created by james on 2019-10-12.
-////
-//
 //#include <iostream>
-//#include "Player.h"
+//#include "player.h"
 //#include <string>
 //
 //using namespace std;
 //
-//void PlayerDriver()
+//void playerdriver()
 //{
-//    // Creating local variables for testing
-//    int numbOfPlayers;
+//    // creating local variables for testing
+//    int numbofplayers;
 //    int age;
 //    string name;
 //
-//    // Require input from test user
-//    cout << "Welcome to Eight Minute Empire, how many player(s) are there in total?" << endl;
-//    cin >> numbOfPlayers;
-//    cout << "What is your name?" << endl;
+//    // require input from test user
+//    cout << "welcome to eight minute empire, how many player(s) are there in total?" << endl;
+//    cin >> numbofplayers;
+//    cout << "what is your name?" << endl;
 //    cin >> name;
-//    cout << "How old are you?" << endl;
+//    cout << "how old are you?" << endl;
 //    cin >> age;
 //
-//    // Initialize User
-//    Player* testPlayer = new Player(name, numbOfPlayers, age);
+//    // initialize user
+//    Player *testplayer = new Player(name, numbofplayers, age);
 //
-//    // Return the user's info
-//    cout << "Hi " << *(testPlayer->getName()) << ", you are " << *(testPlayer->getAge()) << " years old." << endl;
-//    cout << "Player Setup as following: " << endl;
-//    cout << " - " << *(testPlayer->getCoins()) << " coins." << endl;
-//    cout << " - " << *(testPlayer->getArmy()) << " armies." << endl;
-//    cout << " - " << *(testPlayer->getCities()) << " cities." << endl;
+//    // return the user's info
+//    /*cout << "hi " << *(testplayer->getname()) << ", you are " << *(testplayer->getage()) << " years old." << endl;
+//    cout << "player setup as following: " << endl;
+//    cout << " - " << *(testplayer->getcoins()) << " coins." << endl;
+//    cout << " - " << *(testplayer->getarmy()) << " armies." << endl;
+//    cout << " - " << *(testplayer->getcities()) << " cities." << endl;*/
 //
-//    // Testing method
-//    testPlayer->payCoins(2);
-//    testPlayer->payCoins(2);
-//    testPlayer->payCoins(2);
-//    testPlayer->payCoins(2);
-//    testPlayer->payCoins(2);
+//    // testing method
+//    testplayer->payCoins(2);
+//    testplayer->payCoins(2);
+//    testplayer->payCoins(2);
+//    testplayer->payCoins(2);
+//    testplayer->payCoins(2);
 //
-//    // Player::moveArmies()
-//    testPlayer->moveArmies(3);
+//    // player::movearmies()
+//    testplayer->moveArmies(0, 1, map);
 //
-//    // Player::moveOverLand()
-//    testPlayer->moveOverLand(3);
+//    // player::moveoverland()
+//    testplayer->moveOverLand(0, 1, map);
 //
-//    // Player::buildCity()
-//    testPlayer->buildCity();
+//    // player::buildcity()
+//    testplayer->buildCity(0, 1, map);
 //
-//    // Player::destroyArmy()
-//    testPlayer->destroyArmy();
+//    // player::destroyarmy()
+//    testplayer->destroyArmy(1, map);
 //
-//    delete testPlayer;
+//    delete testplayer;
 //
 //}

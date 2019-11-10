@@ -12,6 +12,9 @@ struct CreateNode
 		string *playerName = new string("-"); //This makes the country owned by a player
 		int* numArmies = new int(0); //Number of armies in a country
 
+		vector <pair<int, int>> cityArmyPair; //Vector of type pair <number of armies, number of cities> for 1 country. The vector the size of the total number of players (so if 3 players, then vector of size 3). Each country has this vector.
+													  //It gives the number of armies and cities a player has for that specific country. The index of the vector gives the player. Index 0 means player 0.	
+
 };
 
 //struct for an adjacency list (linked list)

@@ -336,6 +336,7 @@ int Map::getCountryArmy(int countryID)
 void Map::setCountryNumber(int countryID)
 {
 	playerArmyCountryArray[countryID].head->countryNumber = countryID;
+
 }
 
 //Return the country Id for the node
@@ -346,12 +347,20 @@ int Map::getCountryNumber(int countryID)
 
 void Map::printMap()
 {
+
 	cout << "\n|======================================MAP==============================================|\n";
 	//loop over each adjacent list
 	for (int i = 0; i < *mapSize; i++)
 	{
-		cout << endl << "Country: " << playerArmyCountryArray[i].head->countryNumber << " || Owned by " << *(playerArmyCountryArray[i].head->playerName) << " || Army: " << *(playerArmyCountryArray[i].head->numArmies) << endl;;
-
+		cout << endl << "Country: " << playerArmyCountryArray[i].head->countryNumber << " || Owned by " << *(playerArmyCountryArray[i].head->playerName) << " || Army: " << *(playerArmyCountryArray[i].head->numArmies) << endl;
+		
+		//if (playerArmyCountryArray[i].head->cityArmyPair.size() > 1)
+		//{
+			for (int j = 0; j < playerArmyCountryArray[i].head->cityArmyPair.size(); j++)
+			{
+				cout << "Player: " << j << " Army: " << playerArmyCountryArray[i].head->cityArmyPair[j].first << " City: " << playerArmyCountryArray[i].head->cityArmyPair[j].second << endl;
+			}
+		//}
 	}		
 
 	cout << "\n[---------------------------------------------------------------------------------------]\n";

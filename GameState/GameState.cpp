@@ -1,6 +1,4 @@
-//
-// Created by james on 2019-11-04.
-//
+
 
 #include "../Player/Player.h"
 #include "GameState.h"
@@ -41,56 +39,9 @@ using namespace std;
 //        }
 //    }
 //
-//    // Deck of Cards Generator
-//    deck = new Deck();
-//
-//    // Players Generator
-//    players = new vector<Player *>();
-//    int playerCount;
-//    cout << "How many people are playing in the game? ";
-//    cin >> playerCount;
-//    cout << endl;
-//
-//    // Retrieve the player name and ages
-//    for (int i = 0; i < playerCount; i++)
-//    {
-//        string name;
-//        int age;
-//
-//        cout << "Please enter your name: ";
-//        cin >> name;
-//
-//        cout << "Please enter your age: ";
-//        cin >> age;
-//
-//        // Using emplace_back instead of push back since I want to return a reference here for the Player
-//        players->emplace_back(new Player(name, playerCount, age));
-//    }
+
 //}
-//
-//GameState::~GameState()
-//{
-//    // If there exists any map, delete it and set the map to NULL
-//    //if (map)
-//    //{
-//    //    delete map;
-//    //    map = NULL;
-//    //}
-//
-//    // If there exists any player, delete it and set the player to NULL
-//    if (players)
-//    {
-//        delete players;
-//        players = NULL;
-//    }
-//
-//    // If there exists any deck on hand, delete it and set the deck to NULL
-//    if (deck)
-//    {
-//        delete deck;
-//        deck = NULL;
-//    }
-//}
+
 
 
 
@@ -136,6 +87,7 @@ void GameState::start()
 	map->printAllAdjacentCountries(); //Not needed here
 	map->printMap(); //Not needed here
 
+	
 
 	//An assigned deck with the right number of cards is created.
 	//Create deck object
@@ -157,6 +109,30 @@ void GameState::start()
 	cout << "How many people are playing in the game? ";
 	cin >> nPlayers;
 	cout << endl;
+
+	int* three = new int(3);
+
+	//Initialize vector of pair (each player starts with 3 armies and 1 city  in the starting region (country 0), and nothing else where
+	for (int i = 0; i < *(map->mapSize); i++) //Index of array playerCountryArmyArray
+	{
+		for (int j = 0; j < nPlayers; j++) //Index of vector cityArmyPair
+		{
+			//map->playerArmyCountryArray[i].head->cityArmyPair = new vector<pair<int, int>>(); //when cityArmyPair is a pointer
+
+			if (i == 0) //At country 0, each player has 3 armies and 1 city
+			{
+				//map->playerArmyCountryArray[i].head->cityArmyPair->push_back(make_pair(3, 1)); //when cityArmyPair is a pointer
+				map->playerArmyCountryArray[i].head->cityArmyPair.push_back(make_pair(3, 1));
+			}
+
+			else
+			{
+				//map->playerArmyCountryArray[i].head->cityArmyPair->push_back(make_pair(0, 0));
+				map->playerArmyCountryArray[i].head->cityArmyPair.push_back(make_pair(0, 0));
+			}
+		}
+	}
+	
 	
 	// Retrieve the player name and ages
 	for (int i = 0; i < nPlayers; i++)
@@ -172,8 +148,28 @@ void GameState::start()
 	
 	    // Using emplace_back instead of push back since I want to return a reference here for the Player
 	    players->emplace_back(new Player(name, nPlayers, age));
+
 	}
 
+
+	
+	//Driver for PART 4 ASSIGNMENT 2
+	map->printMap();
+	Player *p = new Player("Taqi", 22);
+
+	p->buildCity(0, 1, *map);
+
+	p->placeNewArmies(0, 2, *map);
+
+	p->moveArmies(0, 1, *map);
+
+	p->destroyArmy(2, *map);
+
+	//p->ignore();
+
+	//p->andOrAction(0, "DESTROY_ARMY 1 AND PLACE_NEW_ARMIES_ON_BOARD 1", *map);
+	
+	//p->andOrAction(0, "PLACE_NEW_ARMIES_ON_BOARD 1 OR MOVE_OVER_LAND 1", *map);
 
 
 

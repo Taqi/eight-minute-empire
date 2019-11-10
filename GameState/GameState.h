@@ -21,17 +21,10 @@ class Deck;
 class Hand;
 class Player;
 
-class GameState {
-    // All members for this class need to be public since it will be using during gameplay
+class GameState 
+{
+
     public:
-        //// Game Map
-        //Graph *graph;
-
-        //// Players
-        //vector<Player *> *players;
-
-        //GameState();
-        //~GameState();
 
         int gameLength();
 

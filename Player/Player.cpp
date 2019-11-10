@@ -103,139 +103,289 @@ bool Player::payCoins(int cost)
     }
 }
 
-//bool Player::placeNewArmies(int armies, Graph &gameboard)
-//{
-//     //Verify if the player has an available armies to place
-//    if (armies == 0)
-//    {
-//       cout << "Unavailable Armies To Place" << endl;
-//       return false;
-//    }
-//
-//}
-
-void Player::moveOverLand(int moves)
+//This method allows player to move " << moves << " armies across land/over sea.
+void Player::moveOverLand(int player, int moves, Map& map)
 {
-    cout << "This method allows player to move " << moves << " armies across land/over sea." << endl;
+	cout << "-Move Over Land CARD-\n";
+	while (moves > 0)
+	{
+		cout << *name <<", you have armies in the following locations " << endl;
+		map.printMap();
+
+		int countrySource;
+		cout << "\nPlease select a region in which to move an army from: ";
+		cin >> countrySource;
+
+		int countryDest;
+		cout << "\nPlease select a region in which to move an army to ";
+		cin >> countryDest;
+
+		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
+		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;
+
+		cout << "Sucessfully moved 1 army from " << countrySource << " to " << countryDest << "." << endl;
+		moves--;
+	}
+
+	map.printMap();
 }
 
-void Player::moveArmies(int moves)
+//This method allows player to build city.
+bool Player::buildCity(int player, int cityToAdd, Map& map)
 {
-    cout << "This method allows player to move " << moves << " armies." << endl;
+	cout << "-BUILD CITY CARD-\n";
+
+	// check to see if player has available cities to place
+	if (*cities == 0)
+	{
+		cout << "Sorry, " << *name << "you have no more available cities." << std::endl;
+		return false;
+	}
+
+	//Display adjacent countries to show where they can put city
+	map.printAllAdjacentCountries();
+
+	while (cityToAdd > 0)
+	{
+		int country;
+		cout << *name <<", select a country (index) to place a city: ";
+		cin >> country;
+		(*cities)--;
+		map.playerArmyCountryArray[country].head->cityArmyPair[player].second++;
+		cityToAdd--;
+		cout << "Successfully added a city" << endl;
+	}
+
+	map.printMap();
+	return true;
 }
 
-void Player::buildCity()
+//This method allows player to destroy other player's armies
+void Player::destroyArmy(int armyToDestroy, Map& map)
 {
-    cout << "This method allows player to build city." << endl;
+	cout << "-DESTROY ARMY CARD-\n";
+	while (armyToDestroy > 0)
+	{
+		int playerDestroyed;
+		cout << *name << ", select a player (ex: index 0) to destroy one of their armies: ";
+		cin >> playerDestroyed;
+
+		map.printMap();
+
+
+		int country;
+		cout << endl << "\nSelect a country: ";
+		cin >> country;
+
+		map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first = map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first--;
+
+		armyToDestroy--;
+		cout << "Successfully destroyed an army" << endl;
+	}
+
+	map.printMap();
 }
 
-void Player::destroyArmy()
+bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 {
-    cout << "This method allows player to destroy other player's armies" << endl;
+	cout << "-PLACE NEW ARMIES CARD-\n";
+	// check to see if player has available armies to place
+	if (*armies == 0)
+	{
+		cout << "Sorry, " << *name << " you have no more available armies." << endl;
+		return false;
+	}
+
+	// place new armies
+	for (int i = 0; i < armiesToAdd; i++)
+	{
+		int country;
+		cout << "\nSelect a region in which you like to place an army: ";
+		cin >> country;
+
+		(*armies)--;
+
+		map.playerArmyCountryArray[country].head->cityArmyPair[player].first++;
+		cout << "Successfully added an army" <<endl;
+	}
+
+	map.printMap();
+	return true;
+	
 }
 
-//bool Player::ignore()
-//{
-//    bool invalidAnswer = true;
-//    std::string answer;
-//    std::cout << "Would you like to use the action listed on the card (y/n)? ";
-//    do {
-//        std::cin >> answer;
-//        if (answer == "y" || answer == "n") {
-//            invalidAnswer = false;
-//        }
-//        else {
-//            std::cout << "Invalid answer. Please response with \'y\' or \'n\': ";
-//        }
-//    } while (invalidAnswer);
-//    return (answer == "n");
-//}
-//
-//void Player::takeAction(string action, Graph &gameBoard, vector<Player*> &allPlayers)
-//{
-//    std::string playerAction = action.substr(0, action.find(" "));
-//    int quantity = std::stoi(action.substr(action.find(" ") + 1));
-//
-//    if (playerAction == "MOVE_OVER_WATER") {
-//        moveArmies(quantity, gameBoard, true);
-//    }
-//    else if (playerAction == "MOVE_OVER_LAND") {
-//        moveArmies(quantity, gameBoard, false);
-//    }
-//    else if (playerAction == "PLACE_NEW_ARMIES_ON_BOARD") {
-//        placeNewArmies(quantity, gameBoard);
-//    }
-//    else if (playerAction == "BUILD_A_CITY") {
-//        buildCity(gameBoard);
-//    }
-//    else if (playerAction == "DESTROY_ARMY") {
-//        destroyArmy(gameBoard, allPlayers);
-//    }
-//}
-//
-//void Player::andOrAction(std::string action, Map &gameBoard, std::vector<Player*> &allPlayers)
-//{
-//    int answer;
-//
-//    if (action.find("OR") != std::string::npos) {
-//        // split string into two halves
-//        std::string firstAction = action.substr(0, action.find("OR"));
-//        std::string secondAction = action.substr(action.find("OR") + 3);
-//
-//        std::cout << "Here are your following choices: " << std::endl;
-//        std::cout << "1 - " << firstAction << std::endl;
-//        std::cout << "2 - " << secondAction << std::endl;
-//        std::cout << "Please select one of the following by entering '1' or '2': ";
-//
-//        answer = validateActionSelection();
-//
-//        if (answer == 1) {
-//            takeAction(firstAction, gameBoard, allPlayers);
-//        }
-//        else {
-//            takeAction(secondAction, gameBoard, allPlayers);
-//        }
-//    }
-//    else {
-//        // split string into two halves
-//        std::string firstAction = action.substr(0, action.find("AND"));
-//        std::string secondAction = action.substr(action.find("AND") + 4);
-//
-//        std::cout << "Here are your following choices: " << std::endl;
-//        std::cout << "1 - " << firstAction << std::endl;
-//        std::cout << "2 - " << secondAction << std::endl;
-//        std::cout << "Would you prefer to take '1' or '2' actions? : ";
-//
-//         //validate user selection
-//        answer = validateActionSelection();
-//
-//         //player only wants to use one of the actions
-//        if (answer == 1) {
-//            std::cout << "Please select one of the above actions by entering '1' or '2': ";
-//            answer = validateActionSelection();
-//            if (answer == 1) {
-//                takeAction(firstAction, gameBoard, allPlayers);
-//            }
-//            else {
-//                takeAction(secondAction, gameBoard, allPlayers);
-//            }
-//        }
-//             //player wants to use both actions
-//        else {
-//            std::cout << "Which action would you like to use first? Please select one of the above actions by entering '1' or '2': ";
-//            answer = validateActionSelection();
-//            if (answer == 1) {
-//                takeAction(firstAction, gameBoard, allPlayers);
-//                takeAction(secondAction, gameBoard, allPlayers);
-//            }
-//            else {
-//                takeAction(secondAction, gameBoard, allPlayers);
-//                takeAction(firstAction, gameBoard, allPlayers);
-//            }
-//        }
-//    }
-//}
-// Getters
+void Player::moveArmies(int player, int moves, Map &map)
+{
+	cout << "-MOVE ARMIES CARD-\n";
+	while (moves > 0)
+	{
+		cout << *name << ", you have armies in the following locations " << endl;
+		map.printMap();
+
+		int countrySource;
+		cout << "\nPlease select a region in which to move an army from: ";
+		cin >> countrySource;
+
+		int countryDest;
+		cout << "\nPlease select a region in which to move an army to ";
+		cin >> countryDest;
+
+		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
+		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;
+
+		cout << "Sucessfully moved 1 army from " << countrySource << " to " << countryDest << "." << endl;
+		moves--;
+	}
+	map.printMap();
+}
+
+
+bool Player::ignore()
+{
+	cout << "-IGNORE CARD-\n";
+
+    bool invalidAnswer = true;
+    string answer;
+    cout << *name << ", would you like to use the action on the card (y or n)? ";
+    do {
+        cin >> answer;
+        if (answer == "y" || answer == "n") {
+            invalidAnswer = false;
+        }
+        else {
+            cout << "Invalid answer. Answer with y or n: ";
+        }
+    } while (invalidAnswer);
+    return (answer == "n");
+}
+
+
+//Goes to approprate method according to cards action
+void Player::actionMethod(string choiceAction, int player, int quantity, Map &map)
+{
+	if (choiceAction == "MOVE_OVER_WATER") {
+		moveArmies(player, quantity, map);
+	}
+	else if (choiceAction == "MOVE_OVER_LAND") {
+		moveArmies(player, quantity, map);
+	}
+	else if (choiceAction == "PLACE_NEW_ARMIES_ON_BOARD") {
+		placeNewArmies(player, quantity, map);
+	}
+	else if (choiceAction == "BUILD_A_CITY") {
+		buildCity(player, quantity, map);
+	}
+	else if (choiceAction == "DESTROY_ARMY") {
+		destroyArmy(quantity, map);
+	}
+}
+
+
+//Method that will the other methods depending on what the action is (action is the string telling the action of the card)
+void Player::andOrAction(int player, string action, Map &map)
+{
+	cout << "-" <<action << " card-\n";
+    int choice;
+	string choiceAction;
+	int quantity;
+
+    if (action.find("OR") != string::npos) {
+        // split string into two halves
+        string firstAction = action.substr(0, action.find("OR"));
+        string secondAction = action.substr(action.find("OR") + 3);
+
+        cout << *name << ", choose one of the 2 actions (1 or 2): " << endl;
+        cout << "1 - " << firstAction << endl;
+        cout << "2 - " << secondAction << endl;
+		cin >> choice;
+
+
+
+		string choiceAction;
+        if (choice == 1) 
+		{
+
+			choiceAction = firstAction.substr(0, firstAction.find(" "));
+			quantity = stoi(firstAction.substr(firstAction.find(" ") + 1));
+        }
+        else 
+		{
+			choiceAction = secondAction.substr(0, secondAction.find(" "));
+			quantity = stoi(secondAction.substr(secondAction.find(" ") + 1));
+        }
+
+		actionMethod(choiceAction, player, quantity, map);
+    }
+    else {
+        // split string into two halves
+        string firstAction = action.substr(0, action.find("AND"));
+        string secondAction = action.substr(action.find("AND") + 4);
+
+        cout << *name << ", take 1 action or 2 actions? (1 or 2): " << endl;
+        cout << "1 - " << firstAction << endl;
+        cout << "2 - " << secondAction << endl;
+		int answer;
+		cin >> answer;
+
+         //player only wants to use one of the actions
+        if (answer == 1) 
+		{
+            cout << "Please select one of the above actions by entering '1' or '2': ";
+			cin >> choice;
+
+			string choiceAction;
+			int quantity;
+
+            if (choice == 1) 
+			{
+				choiceAction = firstAction.substr(0, firstAction.find(" "));
+				quantity = stoi(firstAction.substr(firstAction.find(" ") + 1));
+
+				actionMethod(choiceAction, player, quantity, map);
+            }
+            else 
+			{
+				choiceAction = secondAction.substr(0, secondAction.find(" "));
+				quantity = stoi(secondAction.substr(secondAction.find(" ") + 1));
+				actionMethod(choiceAction, player, quantity, map);
+            }
+        }
+        //player wants to use both actions
+        else 
+		{
+            cout << "Which action would you like to use first? Please select one of the above actions by entering '1' or '2': ";
+			int first;
+			cin >> first;
+
+            if (first == 1) 
+			{
+				//First action
+				choiceAction = firstAction.substr(0, firstAction.find(" "));
+				quantity = stoi(firstAction.substr(firstAction.find(" ") + 1));
+				actionMethod(choiceAction, player, quantity, map);
+
+				//Second action
+				choiceAction = secondAction.substr(0, secondAction.find(" "));
+				quantity = stoi(secondAction.substr(secondAction.find(" ") + 1));
+				actionMethod(choiceAction, player, quantity, map);
+            }
+            else 
+			{
+				//Second action
+				choiceAction = secondAction.substr(0, secondAction.find(" "));
+				quantity = stoi(secondAction.substr(secondAction.find(" ") + 1));
+				actionMethod(choiceAction, player, quantity, map);
+
+				//First action
+				choiceAction = firstAction.substr(0, firstAction.find(" "));
+				quantity = stoi(firstAction.substr(firstAction.find(" ") + 1));
+				actionMethod(choiceAction, player, quantity, map);
+            }
+        }
+    }
+}
+
+
 int* Player::getCoins() const {
     return coins;
 }

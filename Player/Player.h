@@ -72,14 +72,18 @@ public: // begin public section
     // Implement Methods Declaration
     bool payCoins(int cost); // Player who wins the bid will pay the coins
     //bool placeNewArmies(int armies, string place, Map gameMap); // for A2 implementation
-    bool placeNewArmies(int armies, Graph &place); // Place armies on a starting point or player's cities collection
-    void moveArmies(int moves); // Move armies according to the indicated number of armies - land movement only
-    void moveOverLand(int moves); // Move between two regions(over water) as if they were adjacent
-    void buildCity(); // Place a city anywhere on the board where player has an army
-    void destroyArmy(); // Remove an army from the board belonging to any player
+
+    //bool placeNewArmies(int armies, Graph &place); // Place armies on a starting point or player's cities collection
+	bool placeNewArmies(int player, int armiesToAdd, Map &map);
+
+    void moveArmies(int player, int moves, Map &map); // Move armies according to the indicated number of armies - land movement only
+    void moveOverLand(int player, int moves, Map& map); // Move between two regions(over water or Land) as if they were adjacent
+    bool buildCity(int player, int cityToAdd, Map& map); // Place a city anywhere on the board where player has an army
+    void destroyArmy(int armyToDestroy, Map& map); // Remove an army from the board belonging to any player
     bool ignore(); // Ignore the card and end the player turn
-    void takeAction(string action, Map &gameBoard, vector<Player *> &allPlayers); // Player choose action to perform
-    void andOrAction(string action, Graph &gameBoard, vector<Player *> &allPlayers); // Two diffrent actions for player to choose
+    //void takeAction(string action, Map &gameBoard, vector<Player *> &allPlayers); // Player choose action to perform
+    void andOrAction(int player, string action, Map &map); // Two diffrent actions for player to choose
+	void actionMethod(string choiceAction, int player, int quantity, Map& map); //Goes to approprate method according to cards action
 
 };
 
