@@ -15,7 +15,7 @@
 int main()
 {
 	
-	//MapLoaderDriver();
+	 MapLoaderDriver();
 	//Map *m = MapDriver(); //Has some duplicates with MapLoaderDriver //We probably won't end up using mapDriver.cpp
 	// PlayerDriver();
 	//CardDriver();
