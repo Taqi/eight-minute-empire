@@ -17,14 +17,14 @@ int main()
 	
 	//MapLoaderDriver();
 	//Map *m = MapDriver(); //Has some duplicates with MapLoaderDriver //We probably won't end up using mapDriver.cpp
-	//PlayerDriver();
+	// PlayerDriver();
 	//CardDriver();
 	//BiddingDriver();
 
 
     // Part 1)
 	//Call gameStateDriver which creates a GameState object, and returns that GameState object
-     GameState state = gameStateDriver();
+    GameState state = gameStateDriver();
 
 
     // Part 2)

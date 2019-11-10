@@ -13,6 +13,7 @@ class Loader
 		Loader();
 
 		Loader(string);
+		
 		void setFileName(string);
 		int readFile();
 
