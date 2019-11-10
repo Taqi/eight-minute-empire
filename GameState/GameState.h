@@ -33,7 +33,7 @@ class GameState {
         //GameState();
         //~GameState();
 
-        int gameLength();
+        //int determineGameLength();
 
 		Map* map; //Map pointer (points to Map object that contains all the graphs)
 		Deck* deck; //Deck pointer
