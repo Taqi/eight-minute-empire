@@ -1,32 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <map>
 #include "MapLoader.h"
 #include "../Map/Map.h"
 using namespace std;
-
-void SplitLine(vector<string> &list, string line){
-  // Split line on whitespaces to extract country and adjacent ones
-  string num = "";
-  for(auto c : line)
-  {
-    if (strncmp(&c, " ", 1) == 0){
-      if (num.length()>0)
-      {
-        list.push_back(num);
-      }
-      num = "";
-    }else{
-      num += c;
-    }
-  }
-  if (num.length()>0)
-    {
-      list.push_back(num);
-      num = "";
-    }
-}
 
 Loader::Loader()
 {
@@ -37,6 +14,7 @@ Loader::Loader(string file)
 {
   map_file = file;
 }
+
 
 void Loader::setFileName(string file)
 {
@@ -50,27 +28,13 @@ int Loader::readFile()
   
   if (myfile.is_open())
   {
+	//Initialize map object
+	map = new Map();
 
-    Graph* graph = new Graph();
+	map->mapSize = new int(6); //Total countries in map
 
+	Graph* graph = new Graph();
     int totalCountries = 0;
-    int totalCountriesByBorder = 0;
-    int totalContinents = 0;
-
-    char currentParagraph = ' ';
-
-    typedef std::map<int, std::string> myStringMapType;
-    typedef std::map<int, int> myIntMapType;
-    myStringMapType continentName;
-    myStringMapType countryName;
-    myIntMapType countryContinent;
-    myIntMapType countriesInContinent;
-
-    vector<string> countryList;
-
-    bool validContinent = false;
-    bool validCountry = false;
-    bool validBorder = false;
 
     /* 
     
@@ -81,244 +45,71 @@ int Loader::readFile()
     and so on...
 
     */
-
+    vector<string> countryList;
     while ( getline(myfile,line) )
     {
+      countryList.push_back("country");
       //debug cout << "line: "<< line <<endl;
 
       // Remove comments from line
-      int com = line.find(";");
+      int com = line.find("//");
       line = line.substr(0,com);
 
-      //debug      cout << pos << " for " << line << endl;
+      //debug cout << "Split line on whitespaces" << endl;
+      // Split line on whitespaces to extract country and adjacent ones
+      int pos0 = 0;
+      int pos  = 0;
 
-      // Skip empty lines
-      if (line=="")
-        continue;
-      else if (line.find("[continents]") == 0 or line.find("[continent]")==0) // Check for continent descriptions starting point
+      // Decode line
+      while(pos0<line.length())
       {
-        currentParagraph = 'c';
-        continue;
-      } 
-      else if (line.find("[countries]") == 0 or line.find("[country]")==0) // Check for country descriptions starting point
-      {
-        currentParagraph = 'y';
-        continue;
-      } 
-      else if (line.find("[borders]")==0)      // Check for borders descriptions starting point
-      {
-        currentParagraph = 'b';
-        continue;
+        pos = line.find(" ",pos0+1);
+        countryList.push_back(line.substr(pos0, pos));
+        pos0 = pos;
       }
-      else
-      {
+      totalCountries++;
+    }    
+    cout << "=> I found " << totalCountries << " countries in this Map" << endl;
 
-        switch(currentParagraph)
-        {
-        case 'c':
-          {
-            // The line describes a continent, we have to collect id and name
-            // Split line on whitespaces to extract continent id and name
-            string tmp = "";
-            int id = 0;
-            string name = "";
-            bool next = false;
+    // Creation of Map Graph begins
+    //Graph is pointed to by our *graph pointer.
+	  graph = createGraph(totalCountries, map);
 
-            for(auto c : line)
-            {
-              if (strncmp(&c, " ", 1) == 0)
-              {
-                if (tmp.length()>0)
-                {
-                  if (next)
-                  {
-                    name = tmp;
-                  }
-                  else
-                  {
-                    id = stoi(tmp);
-                    next = true;
-                  }                
-                }
-                tmp = "";
-              }
-              else
-              {
-                tmp += c;
-              }
-            }
+    int node0;
+    int node1;
 
-            if (tmp.length()>0)
-            {
-              name = tmp;
-            }
-
-            continentName[id] = name;
-            
-            totalContinents++;
-            validContinent = true;
-          }
-          break;
-        case 'y':
-          {
-            // The line describes a country, we have to collect id, continent id and name
-            string tmp = "";
-            int id = 0;
-            int continent_id = 0;
-            string name = "";
-            bool next = false;
-            bool last = false;
-
-            for(auto c : line)
-            {
-              if (strncmp(&c, " ", 1) == 0)
-              {
-                if (tmp.length()>0)
-                {
-                  if (next)
-                  {
-                    if (last)
-                    {
-                      continent_id = stoi(tmp);
-                    }
-                    else
-                    {                   
-                      name = tmp;
-                      last = true;
-                    }
-                  }
-                  else
-                  {
-                    id = stoi(tmp);
-                    next = true;
-                  }                
-                }
-                tmp = "";
-              }
-              else
-              {
-                tmp += c;
-              }
-            }
-
-            if (tmp.length()>0)
-            {
-              continent_id = stoi(tmp);
-            }
-
-            countryName[id] = name;
-            countryContinent[id] = continent_id;
-            countriesInContinent[continent_id]++;
-
-            totalCountries++;
-            validCountry = true;
-          }
-          break;
-        case 'b':  
-          // The line gives the list of adjacent countries to a specific one
-          countryList.push_back("next");
-          SplitLine(countryList, line);
-          totalCountriesByBorder++;
-          validBorder = true;
-          break;
-        default:
-          cout << "*** WARNING: No Paragraph Identified, assuming BORDER" << endl;
-          currentParagraph = 'b';
-          // The line gives the list of adjacent countries to a specific one
-          countryList.push_back("next");
-          SplitLine(countryList, line);
-          totalCountriesByBorder++;
-          validBorder = true;
-          break;
-        } //switch
-      } // if line
-    } //while
-    myfile.close();
-
-    if (validBorder)
+    bool newCountry = false;
+    for(vector<string>::iterator it = countryList.begin(); it < countryList.end(); it++)
     {
-      if((!validContinent) and (!validCountry))
+      if (*it == "country")
       {
-        cout << "*** WARNING: Short Map File Syntax Detected" << endl;
-      }
-      else if ((validContinent) and (validCountry))
-      {
-        cout << "==> Found " << totalCountries << " countries "<< " on " << totalContinents << " continents in this Map" << endl;
-        if(totalCountries != totalCountriesByBorder)
-        {
-          cout << "ERROR Inconsistent number of countries and borders: " << totalCountriesByBorder << endl;
-          return -2;
+        // New country description
+        newCountry = true;
+      }else{
+        if(newCountry){
+          // Get current country id
+          node0 = stoi(*it); //stoi converts string to integer
+          newCountry = false;
+        }else{
+          // Get adjacent to current
+          node1 = stoi(*it);
+         	addEdge(graph, node0, node1, map);
         }
       }
-      else
-      {
-        return -3;
-      }
-    }
-    else
-    {
-      return -3;
-    }
-  	//Initialize map object
-	  map = new Map();
-
-	  map->mapSize = new int(totalCountriesByBorder); //Total countries in map
-
-    // Creation of Map Graphs begins, one Graph per continent
-    for (myStringMapType::const_iterator continent=continentName.begin(); continent!=continentName.end(); ++continent)
-    //for_each(continentName.begin(), continentName.end(), [](std::map<int, string> continent) 
-    {
-      int continent_id = continent->first;
-      string continent_name = continent->second;
-      cout << "    - Processing Continent: " << continent_name  << " containing " << countriesInContinent[continent_id]<< " countries." << endl;
-
-      //Graph is pointed to by our *graph pointer.
-      graph = createGraph(totalCountries, map);
-
-      int node0;
-      int node1;
-
-      bool newCountry = false;
-      bool skip = false;
-      for(vector<string>::iterator it = countryList.begin(); it < countryList.end(); it++)
-      {
-        if (*it == "next")
-        {
-          // New country description
-          newCountry = true;
-          skip = false;
-        }
-        else
-        {
-          if(newCountry){
-            // Get current country id
-            node0 = stoi(*it); //stoi converts string to integer
-            if(countryContinent[node0] == continent_id){
-              newCountry = false;
-            }else{
-              skip = true;
-              continue; // skip this country, not in continent
-            }
-          }else if (!skip){
-            // Get adjacent to current
-            node1 = stoi(*it);
-            addEdge(graph, node0, node1, map);
-            //debug cout << "create node " << node0 << " == " << node1 << endl;
-          }
-        }
-      }
-      cout << "    - Continent Complete" << endl << endl;
     }
     cout << "== Graph creation complete" << endl;
-    
-    // Print the graph
-	  // printGraph(graph);
+
+  	// Print the graph
+	  printGraph(graph);
 
   	//Check Connectivity
-	  // checkConnectivity(graph, totalCountries);
+	  checkConnectivity(graph, totalCountries);
 
+
+    myfile.close();
     return 1;
-  }// if file open
+  }
+
   else return -1;
 }
 

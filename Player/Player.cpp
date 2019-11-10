@@ -89,8 +89,8 @@ Player::~Player()
 }
 //
 // Implemented Methods
-// bool Player::payCoins(int cost)
-// {
+//bool Player::payCoins(int cost)
+//{
 //    if (*(this->getCoins()) < cost)
 //    {
 //        cout << "Insufficient coins to make this purchase." << endl;
@@ -102,41 +102,41 @@ Player::~Player()
 //        cout << "Purchase Successfully!! You have " << *(this->getCoins()) << " amount of coins remaining." << endl;
 //        return true;
 //    }
-// }
-
-// bool Player::placeNewArmies(int armies, Graph &gameboard)
-// {
+//}
+//
+//bool Player::placeNewArmies(int armies, Graph &gameboard)
+//{
 //     //Verify if the player has an available armies to place
 //    if (armies == 0)
 //    {
 //       cout << "Unavailable Armies To Place" << endl;
 //       return false;
 //    }
-
-// }
-
-// void Player::moveOverLand(int moves)
-// {
+//
+//}
+//
+//void Player::moveOverLand(int moves)
+//{
 //    cout << "This method allows player to move " << moves << " armies across land/over sea." << endl;
-// }
-
-// void Player::moveArmies(int moves)
-// {
+//}
+//
+//void Player::moveArmies(int moves)
+//{
 //    cout << "This method allows player to move " << moves << " armies." << endl;
-// }
-
-// void Player::buildCity()
-// {
+//}
+//
+//void Player::buildCity()
+//{
 //    cout << "This method allows player to build city." << endl;
-// }
-
-// void Player::destroyArmy()
-// {
+//}
+//
+//void Player::destroyArmy()
+//{
 //    cout << "This method allows player to destroy other player's armies" << endl;
-// }
-
-// bool Player::ignore()
-// {
+//}
+//
+//bool Player::ignore()
+//{
 //    bool invalidAnswer = true;
 //    std::string answer;
 //    std::cout << "Would you like to use the action listed on the card (y/n)? ";
@@ -150,13 +150,13 @@ Player::~Player()
 //        }
 //    } while (invalidAnswer);
 //    return (answer == "n");
-// }
-
-// void Player::takeAction(string action, Graph &gameBoard, vector<Player*> &allPlayers)
-// {
+//}
+//
+//void Player::takeAction(string action, Graph &gameBoard, vector<Player*> &allPlayers)
+//{
 //    std::string playerAction = action.substr(0, action.find(" "));
 //    int quantity = std::stoi(action.substr(action.find(" ") + 1));
-
+//
 //    if (playerAction == "MOVE_OVER_WATER") {
 //        moveArmies(quantity, gameBoard, true);
 //    }
@@ -172,24 +172,24 @@ Player::~Player()
 //    else if (playerAction == "DESTROY_ARMY") {
 //        destroyArmy(gameBoard, allPlayers);
 //    }
-// }
-
-// void Player::andOrAction(std::string action, Map &gameBoard, std::vector<Player*> &allPlayers)
-// {
+//}
+//
+//void Player::andOrAction(std::string action, Map &gameBoard, std::vector<Player*> &allPlayers)
+//{
 //    int answer;
-
+//
 //    if (action.find("OR") != std::string::npos) {
 //        // split string into two halves
 //        std::string firstAction = action.substr(0, action.find("OR"));
 //        std::string secondAction = action.substr(action.find("OR") + 3);
-
+//
 //        std::cout << "Here are your following choices: " << std::endl;
 //        std::cout << "1 - " << firstAction << std::endl;
 //        std::cout << "2 - " << secondAction << std::endl;
 //        std::cout << "Please select one of the following by entering '1' or '2': ";
-
+//
 //        answer = validateActionSelection();
-
+//
 //        if (answer == 1) {
 //            takeAction(firstAction, gameBoard, allPlayers);
 //        }
@@ -201,15 +201,15 @@ Player::~Player()
 //        // split string into two halves
 //        std::string firstAction = action.substr(0, action.find("AND"));
 //        std::string secondAction = action.substr(action.find("AND") + 4);
-
+//
 //        std::cout << "Here are your following choices: " << std::endl;
 //        std::cout << "1 - " << firstAction << std::endl;
 //        std::cout << "2 - " << secondAction << std::endl;
 //        std::cout << "Would you prefer to take '1' or '2' actions? : ";
-
+//
 //         //validate user selection
 //        answer = validateActionSelection();
-
+//
 //         //player only wants to use one of the actions
 //        if (answer == 1) {
 //            std::cout << "Please select one of the above actions by entering '1' or '2': ";
@@ -235,7 +235,7 @@ Player::~Player()
 //            }
 //        }
 //    }
-// }
+//}
 // Getters
 int* Player::getCoins() const {
     return coins;

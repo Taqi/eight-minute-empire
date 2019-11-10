@@ -45,8 +45,8 @@ int readFilenames(std::vector<string> &filenames, const string &directory)
 //Return map object created in Loader
 Map* MapLoaderDriver () {
 
-    cout << endl << "+---------------------------------+";
-    cout << endl << "|     This is MapLoaderDriver     |";
+    cout << endl << "+---------------------------------+" << endl;
+    cout << endl << "|     This is MapLoaderDriver     |" << endl;
     cout << endl << "+---------------------------------+" << endl << endl;
 
     // Read Map files from current directory
@@ -61,31 +61,23 @@ Map* MapLoaderDriver () {
 
     for(size_t i = 0; i < filenames.size(); ++i)
     {
-      cout << "File #"<< i+1 << ": \t" << filenames[i] << endl;
-    }
-    
-    
-    int file_choice = -1;
-    while (file_choice < 1 or file_choice > num_files){
-      cout << endl << "Select file # to process: ==> " ;
-      cin >> file_choice;
-    }
-    
-    cout << endl << "==  About to process file #" << file_choice << " = " << filenames[file_choice-1] << endl;
+      cout << endl << "==  About to process file #" << i+1 << " = " << filenames[i] << endl;
 
-    my_map.setFileName(filenames[file_choice-1]); 
+      my_map.setFileName(filenames[i]); 
 
-    switch(my_map.readFile())
-    {
-      case 1:
-        cout << "=== Map loaded" << endl;
-      break;
-      case 0:
-        cout << "*** Not a Map file" << endl;
-      break;
-      case -1:
-        cout << "*** Unable to open file" << endl;
-      break;
+      switch(my_map.readFile())
+      {
+        case 1:
+          cout << "=== Map loaded" << endl;
+        break;
+        case 0:
+          cout << "*** Not a Map file" << endl;
+        break;
+        case -1:
+          cout << "*** Unable to open file" << endl;
+        break;
+      }
+
     }
 
 	//We created the map object (in Loader) with all the graph (continents in it), so now return it.
