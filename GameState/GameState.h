@@ -45,6 +45,8 @@ class GameState
 		void start(); 
 
 		void generateTitleScreen(); //Outputs the title screen
+
+		int gameTurns(int totalPlayer);
 };
 
 
