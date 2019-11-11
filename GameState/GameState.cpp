@@ -4,6 +4,7 @@
 #include "GameState.h"
 #include "../Map/Map.h"
 #include "../Map/MapDriver.h"
+#include "../GameMainLoop/GameMainLoop.h"
 //#include <utility>
 
 
@@ -43,6 +44,21 @@ using namespace std;
 //}
 
 
+int GameState::gameTurns(int totalPlayers)
+{
+	switch (totalPlayers)
+	{
+	case (2):
+		return 13;
+	case (3):
+		return 10;
+	case (4):
+		return 8;
+	case (5):
+		return 7;
+	}
+}
+
 
 
 int GameState::gameLength()
@@ -81,10 +97,10 @@ void GameState::start()
 	generateTitleScreen();
 	
 	//Load Map
-	Map *map = MapLoaderDriver(); //Load Map using MapLoader //MapLoaderDriver in MapLoaderDriver.cpp returns the map created there
-	//map = MapDriver(); //Load map using MapDriver.cpp (using this one temporarily until Daphne fixes the map loader file)
+	//map = MapLoaderDriver(); //Load Map using MapLoader //MapLoaderDriver in MapLoaderDriver.cpp returns the map created there
+	map = MapDriver(); //Load map using MapDriver.cpp (using this one temporarily until Daphne fixes the map loader file)
 
-	map->printAllAdjacentCountries(); //Not needed here
+	//map->printAllAdjacentCountries(); //Not needed here
 	//map->printMap(); //Not needed here 
 
 	
@@ -152,8 +168,9 @@ void GameState::start()
 	}
 
 
+
 	
-	//Driver for PART 4 ASSIGNMENT 2
+	//Test for PART 4 ASSIGNMENT 2
 	map->printMap();
 	Player *p = new Player("Taqi", 22);
 
@@ -163,7 +180,7 @@ void GameState::start()
 
 	p->moveArmies(0, 1, *map);
 
-	p->destroyArmy(2, *map);
+	//p->destroyArmy(2, *map);
 
 	//p->ignore();
 
@@ -172,6 +189,7 @@ void GameState::start()
 	//p->andOrAction(0, "PLACE_NEW_ARMIES_ON_BOARD 1 OR MOVE_OVER_LAND 1", *map);
 
 
+	//Part 3 and 5
 
 	//Deallocate
 	delete map;
