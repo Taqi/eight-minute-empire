@@ -63,23 +63,23 @@ int GameState::gameTurns(int totalPlayers)
 
 int GameState::gameLength()
 {
-    //The game ends when each player owns a
-    //certain number of cards depending on the number of players.
-    //2 Players 13 Cards
-    //3 Players 10 Cards
-    //4 Players 8 Cards
-    //5 Players 7 Cards
-    switch (players->size())
-    {
-        case (2):
-            return 13;
-        case (3):
-            return 10;
-        case (4):
-            return 8;
-        case (5):
-            return 7;
-    }
+	//The game ends when each player owns a
+	//certain number of cards depending on the number of players.
+	//2 Players 13 Cards
+	//3 Players 10 Cards
+	//4 Players 8 Cards
+	//5 Players 7 Cards
+	switch (players->size())
+	{
+	case (2):
+		return 13;
+	case (3):
+		return 10;
+	case (4):
+		return 8;
+	case (5):
+		return 7;
+	}
 }
 
 
@@ -95,16 +95,16 @@ int GameState::gameLength()
 void GameState::start()
 {
 	generateTitleScreen();
-	
+
 	//Load Map
-	//map = MapLoaderDriver(); //Load Map using MapLoader //MapLoaderDriver in MapLoaderDriver.cpp returns the map created there
+	Map *m = MapLoaderDriver(); //Load Map using MapLoader //MapLoaderDriver in MapLoaderDriver.cpp returns the map created there
 	map = MapDriver(); //Load map using MapDriver.cpp (using this one temporarily until Daphne fixes the map loader file)
 
-	//map->printAllAdjacentCountries(); //Not needed here
+	map->printAllAdjacentCountries(); //Not needed here
 	//map->printMap(); //Not needed here 
 
-	
 
+	//PART 1
 	//An assigned deck with the right number of cards is created.
 	//Create deck object
 	deck = new Deck();
@@ -120,13 +120,11 @@ void GameState::start()
 
 
 	// Players creation
-	players = new vector<Player *>();
+	players = new vector<Player*>();
 	int nPlayers;
 	cout << "How many people are playing in the game? ";
 	cin >> nPlayers;
 	cout << endl;
-
-	int* three = new int(3);
 
 	//Initialize vector of pair (each player starts with 3 armies and 1 city  in the starting region (country 0), and nothing else where
 	for (int i = 0; i < *(map->mapSize); i++) //Index of array playerCountryArmyArray
@@ -148,44 +146,67 @@ void GameState::start()
 			}
 		}
 	}
-	
-	
+
+
 	// Retrieve the player name and ages
 	for (int i = 0; i < nPlayers; i++)
 	{
-	    string name;
-	    int age;
-	
-	    cout << "Please enter your name: ";
-	    cin >> name;
-	
-	    cout << "Please enter your age: ";
-	    cin >> age;
-	
-	    // Using emplace_back instead of push back since I want to return a reference here for the Player
-	    players->emplace_back(new Player(name, nPlayers, age));
+		string name;
+		int age;
+
+		cout << "Please enter your name: ";
+		cin >> name;
+
+		cout << "Please enter your age: ";
+		cin >> age;
+
+		// Using emplace_back instead of push back since I want to return a reference here for the Player
+
+		//Players *playerArray = new Player();
+		players->emplace_back(new Player(name, nPlayers, age));
+		//players->begin.
 
 	}
 
 
+	//Test for PART 3 & 5 ASSIGNMENT 2			
+	//cout << "Current map: \n";
+	//map->printMap();			
+	//deck->draw(hand);
+	//GameState state = GameState();
+	//int gameLength = state.gameTurns(nPlayers); //Get total number of turns
 
-	
+	//for (int i = 0; i < gameLength; i++)
+	//{
+	//	cout << "\nTURN " << i << ". " << gameLength - i << " Turns remain." << endl;
+
+	//	//Loop for each player 
+	//	for (int j = 0; j < nPlayers; j++)
+	//	{
+	//		cout << *(players->at(j)->getName()) << " it is your turn.\n";
+
+	//		hand->exchange(deck);
+	//	}
+	//}
+
+
+
 	//Test for PART 4 ASSIGNMENT 2
-	map->printMap();
-	Player *p = new Player("Taqi", 22);
+	//map->printMap();
+	//Player *p = new Player("Taqi", 22);
 
-	p->buildCity(0, 1, *map);
+	//p->moveArmies(0, 1, *map);
 
-	p->placeNewArmies(0, 2, *map);
+	//p->buildCity(0, 1, *map);
 
-	p->moveArmies(0, 1, *map);
+	//p->placeNewArmies(0, 2, *map);
 
-	//p->destroyArmy(2, *map);
+	//p->destroyArmy(1, *map);
 
 	//p->ignore();
 
 	//p->andOrAction(0, "DESTROY_ARMY 1 AND PLACE_NEW_ARMIES_ON_BOARD 1", *map);
-	
+
 	//p->andOrAction(0, "PLACE_NEW_ARMIES_ON_BOARD 1 OR MOVE_OVER_LAND 1", *map);
 
 
@@ -201,7 +222,7 @@ void GameState::start()
 	delete deck;
 	deck = NULL;
 
-	
+
 
 }
 

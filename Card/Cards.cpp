@@ -263,7 +263,7 @@ void Hand::printHand()
 	//Cards currently in card space
 	for (int i = 0; i < 6; ++i)
 	{
-		cout << "Card index: " << *(handVector[i]->id) << "  "; 
+		cout << "Index: " << i << ", Card number: " << *(handVector[i]->id) << "  "; 
 		cout << "||Action: " << *(handVector[i]->action) << "  ";
 		cout << "||Good: " << *(handVector[i]->Ngood) << "  ";
 		cout << *(handVector[i]->good) << "  ";
@@ -284,7 +284,7 @@ void Hand::exchange(Deck *deck)
 	cout <<endl << "Which card do you want to buy (index)? ";
 	int n;
 	cin >> n;
-	cout << endl << "Card " << *(handVector[n]->id) << " is no longer in the hand space." << endl;
+	cout << endl << "Card " << *(handVector[n]->id) << ", " << handVector[n]->getAction() << " is no longer in the hand space." << endl;
 	
 	handVector.erase(handVector.begin() + n); //Remove card at nth index (it moves the rest of cards to the front/left)
 	deck->draw(this); //Draw a new card from deck to put it in handspace

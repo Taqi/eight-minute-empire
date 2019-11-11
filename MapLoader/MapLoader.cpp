@@ -82,12 +82,21 @@ int Loader::readFile()
 
     */
 
+	//If file is empty then its invalid
+	if (myfile.peek() == ifstream::traits_type::eof())
+	{
+		cout << "Invalid file.";
+		exit(0);
+	}
+
     while ( getline(myfile,line) )
     {
       //debug cout << "line: "<< line <<endl;
 
       // Remove comments from line
       int com = line.find(";");
+
+
       line = line.substr(0,com);
 
       //debug      cout << pos << " for " << line << endl;
@@ -112,7 +121,6 @@ int Loader::readFile()
       }
       else
       {
-
         switch(currentParagraph)
         {
         case 'c':
@@ -308,14 +316,11 @@ int Loader::readFile()
         }
       }
       cout << "    - Continent Complete" << endl << endl;
+
     }
     cout << "== Graph creation complete" << endl;
     
-    // Print the graph
-	  // printGraph(graph);
 
-  	//Check Connectivity
-	  // checkConnectivity(graph, totalCountries);
 
     return 1;
   }// if file open

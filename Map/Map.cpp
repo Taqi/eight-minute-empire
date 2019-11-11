@@ -352,7 +352,7 @@ void Map::printMap()
 	//loop over each adjacent list
 	for (int i = 0; i < *mapSize; i++)
 	{
-		cout << endl << "Country: " << playerArmyCountryArray[i].head->countryNumber << " || Owned by " << *(playerArmyCountryArray[i].head->playerName) << " || Army: " << *(playerArmyCountryArray[i].head->numArmies) << endl;
+		cout << endl << "Country: " << playerArmyCountryArray[i].head->countryNumber <<endl;// << " || Owned by " << *(playerArmyCountryArray[i].head->playerName) << " || Army: " << *(playerArmyCountryArray[i].head->numArmies) << endl;
 		
 		//if (playerArmyCountryArray[i].head->cityArmyPair.size() > 1)
 		//{
