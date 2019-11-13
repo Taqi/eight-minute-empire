@@ -1,7 +1,3 @@
-//
-// Created by james on 2019-11-04.
-//
-
 #include <string>
 #include <iostream>
 #include "../GameState/GameState.h"

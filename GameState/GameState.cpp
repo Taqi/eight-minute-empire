@@ -183,8 +183,12 @@ void GameState::start()
 		// Using emplace_back instead of push back since I want to return a reference here for the Player
 		players->emplace_back(new Player(name, nPlayers, age));
 
-
+		cout << name << " has join the game to bid!" << endl;
 	}
+
+	cout << endl << "Total number of players: " << nPlayers << endl;
+
+	cout << endl << "Each player has 0 cards on their hand! " << endl << endl;
 
 
 	//Test for PART 3 & 5 ASSIGNMENT 2			
@@ -234,6 +238,7 @@ void GameState::generateTitleScreen()
 	cout << endl << "+----------------------------------------------------+" << endl;
 	cout << endl << "|      WELCOME TO THE EIGHT-MINUTE EMPIRE GAME       |" << endl;
 	cout << endl << "+----------------------------------------------------+" << endl << endl;
+
 }
 
 

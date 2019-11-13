@@ -10,77 +10,63 @@ using namespace std;
 // Constructor
 Bidding::Bidding()
 {
-    Bidding::bid = new int(0);
+	Bidding::bid = new int(0);
 }
 
 
 int Bidding::biddingPhase(vector<Player*> players, int numbOfPlayers)
 {
 
-    // Local varibles
-    int bid, highest, maxBidder;
+	// Local varibles
+	int bid, highest;
 
-    // Make a loop through the player array instead of this array
-    //int bidArray [numbOfPlayers];
-	int bidArray[5];
+	// Each player makes a bid
+	for (int i = 0; i < numbOfPlayers; i++)
+	{//*(players[i]->getName())
+		cout << "How much would you like to bid " << players[i]->getName() << " ?" << endl;
+		cin >> bid;
+		// Verify if a player could afford the bidding
+		while (bid < 0 || bid > *(players[i]->getCoins()))
+		{
+			cout << "INVALID BID! Enter an affordable bid between 0 and " << players[i]->getCoins() << ": ";
+			cin >> bid;
+		}
+		players[i]->getBidding()->setBid(bid);
+	}
 
-    int highestBidder = 0;
 
-    // Each player makes a bid
-    for (int i = 0; i < numbOfPlayers; i++)
-    {
-        cout << "How much would you like to bid " << *(players[i]->getName()) << " ?" << endl;
-        cin >> bid;
-        // Verify if a player could afford the bidding
-        while(bid < 0 || bid > *(players[i]->getCoins()))
-        {
-            cout << "INVALID BID! Enter an affordable bid between 0 and " << players[i]->getCoins() << ": ";
-            cin >> bid;
-        }
-        players[i]->getBidding()->setBid(bid);
-        bidArray[i] = *(players[i]->getBidding()->getBid());
-    }
+	// Set the highest bid to the first array
+	int highestBidder = 0;
+	highest = players[0]->getBidding()->getBid();
 
-    // Test code to display the array
-    for (int i = 0; i < numbOfPlayers; i++)
-    {
-        cout << *(players[i]->getName()) << " has bid " << bidArray[i] << " coins" << endl;
-    }
+	// A bid is made by compared who has the highest bid and index of highest bidder gets returned
+	for (int i = 0; i < numbOfPlayers - 1; i++)
+	{
+		if (highest < players[i + 1]->getBidding()->getBid())
+		{
+			highestBidder = i + 1;
+			highest = players[i + 1]->getBidding()->getBid();
+		}
+		// The youngest player wins the bid when bids are tied or all the bids are zero
+		if (highest == players[i + 1]->getBidding()->getBid()
+			&& players[highestBidder]->getAge() > players[i + 1]->getAge())
+		{
+			highestBidder = i + 1;
+		}
+	}
 
-    // Set the highest bid to the first array
-    highest = bidArray[0];
+	// Highest bidder pays the cost
+	players[highestBidder]->payCoins(players[highestBidder]->getBidding()->getBid());
 
-    // A bid is made by compared who has the highest bid and index of highest bidder gets returned
-    for (int i = 0; i < numbOfPlayers-1; i++)
-    {
-        if( highest < bidArray[i +1] )
-        {
-            highestBidder = i + 1;
-            highest = bidArray[i + 1];
-        }
-        // The youngest player wins the bid when bids are tied or all the bids are zero
-        if ( highest == bidArray[i+1] )
-        {
-            if( *(players[highestBidder]->getAge()) > (*(players[i+1]->getAge())))
-            {
-                highestBidder = i + 1;
-            }
-        }
-    }
-
-    // Highest bidder pays the cost
-    players[highestBidder]->payCoins(*(players[highestBidder]->getBidding()->getBid()));
-
-    return highestBidder;
+	return highestBidder;
 }
 
-int* Bidding::getBid() const
+int Bidding::getBid() const
 {
-    return bid;
+	return *bid;
 }
 
 void Bidding::setBid(int bid)
 {
-    *Bidding::bid = bid;
+	*Bidding::bid = bid;
 }
-

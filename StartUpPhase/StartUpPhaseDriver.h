@@ -6,7 +6,7 @@
 #define COMP345A1_STARTUPPHASEDRIVER_H
 
 
-void startUpPhaseDriver();
+void StartUpPhaseDriver(Map& map, Deck& deck, Hand& hand, vector<Player*>* players);
 
 
 #endif //COMP345A1_STARTUPPHASEDRIVER_H

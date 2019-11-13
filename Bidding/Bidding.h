@@ -16,25 +16,25 @@ class Bidding {
 
 
 private:
-    int* bid;
+	int* bid;
 
 public:
 
-    // Constructor
-    Bidding();
+	// Constructor
+	Bidding();
 
-    // Gameplay Methods
-    static int biddingPhase(vector<Player*> players, int numbOfPlayers);
+	// Gameplay Methods
+	static int biddingPhase(vector<Player*> players, int numbOfPlayers);
 
-    // Getters
-    int* getBid() const;
+	// Getters
+	int getBid() const;
 
-    // Setters
-    void setBid(int bid);
+	// Setters
+	void setBid(int bid);
 
 
-// Destructor
-//~Bidding();
+	// Destructor
+	//~Bidding();
 };
 
 

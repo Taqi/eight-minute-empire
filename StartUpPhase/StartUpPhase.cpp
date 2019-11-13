@@ -1,83 +1,76 @@
+#include "StartUpPhase.h"
 ////
-//// Created by james on 2019-11-04.
+//// created by james on 2019-11-04.
 ////
 //
 //#pragma once
-//#include "GameStartup.h"
-//#include "BiddingFacility.h"
-//
-//int startGame(GameState& state)
-//{
-//	// Add three armies for each player to map
-//	addArmiesToStart(state);
-//
-//	// if two players add 10 netural armies
-//	if (state.players->size() == 2)
-//	{
-//		addNeutralArmies(state);
-//	}
-//
-//	// Begin the bidding phase
-//	int firstPlayer = BiddingFacility::biddingPhase(*(state.players), state.players->size());
-//
-//	return firstPlayer;
-//}
-//
-//void addArmiesToStart(GameState& state)
-//{
-//	// add three armies for each player to the starting region
-//	// set army count to 11
-//	for (int i = 0; i < state.players->size(); i++)
-//	{
-//		state.map->addArmy(*(state.map->getStart()), state.players->at(i)->getName());
-//		state.map->addArmy(*(state.map->getStart()), state.players->at(i)->getName());
-//		state.map->addArmy(*(state.map->getStart()), state.players->at(i)->getName());
-//		state.players->at(i)->setArmies(11);
-//	}
-//}
-//
+#include "StartupPhase.h"
+#include "../Bidding/Bidding.h"
+#include "../GameState/GameState.h"
+#include "../GameScore/GameScore.h"
+#include "../Player/Player.h"
+#include "../Map/Map.h"
+#include "../Map/MapDriver.h"
+#include <map>
+using namespace std;
+
+int start(Map& map, vector<Player*>* players)
+{
+
+	// begin the bidding phase
+	int firstplayer = Bidding::biddingPhase(*(players), players->size());
+
+	cout << endl;
+
+	return firstplayer;
+
+	if (players->size() == 2)
+	{
+		//addNeutralArmies(state);
+	}
+
+
+
+}
+
+
 //void addNeutralArmies(GameState& state)
 //{
-//	std::cout << "In two player games, you each take turns adding five neutral armies each to any region.\n";
+//	cout << "For a game of two players, each players take their turn to add five neutral armies to any region." << endl;
+//	
 //
-//	// loop over players ten times to add armies
 //	for (int i = 1; i < 11; i++)
 //	{
-//		std::string neutralRegion;
-//		auto regionNames = state.map->getRegionNames();
-//		bool validName = false;
+//
+//		int neutralCountry;
+//		auto countryID = state.map->getCountryPlayer();
 //
 //		// print the map so player can reference it
-//		std::cout << "Printing map's current state:\n";
-//		state.map->printNodes();
+//		cout << "Printing map's current state: \n";
+//		state.map->printMap();
 //
-//		// loop to add the army
-//		while (!validName)
-//		{
-//			// use i % 2 to alternate between 0 and 1
-//			std::cout << state.players->at(i % 2)->getName() << ", where do you want to place the army? ";
-//			std::cin >> neutralRegion;
+//		// add the army through the loop statement
+//		//while (!validname)
 //
-//			// validate region name
-//			for (int j = 0; j < regionNames.size(); j++)
-//			{
-//				if (regionNames.at(j) == neutralRegion)
-//				{
-//					validName = true;
-//					break;
-//				}
-//			}
+//			//for (int i = 0; i < *(map->mapSize); i++) //Index of array playerCountryArmyArray
+//				//{
+//				//	for (int j = 0; j < nPlayers; j++) //Index of vector cityArmyPair
+//				//	{
+//				//		//map->playerArmyCountryArray[i].head->cityArmyPair = new vector<pair<int, int>>(); //when cityArmyPair is a pointer
 //
-//			// inform user of error
-//			if (!validName)
-//			{
-//				std::cout << "Invalid region name. Please try again.\n";
-//			}
-//		}
+//				//		if (i == 0) //At country 0, each player has 3 armies and 1 city
+//				//		{
+//				//			//map->playerArmyCountryArray[i].head->cityArmyPair->push_back(make_pair(3, 1)); //when cityArmyPair is a pointer
+//				//			map->playerArmyCountryArray[i].head->cityArmyPair.push_back(make_pair(3, 1));
+//				//	
+//				//		}
 //
-//		// add the neutral army to the region
-//		state.map->addArmy(neutralRegion, "neutral");
+//				//		else
+//				//		{
+//				//			//map->playerArmyCountryArray[i].head->cityArmyPair->push_back(make_pair(0, 0));
+//				//			map->playerArmyCountryArray[i].head->cityArmyPair.push_back(make_pair(0, 0));
+//				//		}
+//				//	}
+//
 //	}
-//
-//	std::cout << "Neutral armies added, we're almost ready to play!\n";
 //}

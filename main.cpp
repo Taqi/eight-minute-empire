@@ -10,6 +10,7 @@
 #include "GameMainLoop/GameMainLoop.h"
 #include "GameState/GameState.h"
 #include "GameState/GameStateDriver.h"
+#include "StartUpPhase/StartUpPhaseDriver.h"
 
 
 int main()
@@ -40,19 +41,14 @@ int main()
 	//Get hand object created in gamestate
 	Hand* hand = state.getHand();
 
-	deck->draw(hand);
+	//deck->draw(hand);
+	StartUpPhaseDriver(*map, *deck, *hand, players);
 
 	mainLoopDriver(*map, *deck, *hand, players);
 
-
+	
     // Part 2)
     // gameStartupExample();
-
-    // Part 3 AND 5)
-    // mainLoopDriver();
-
-    // Part 4)
-    // in gamestate.cpp
 
     // Part 6)
     // gameScoreExample();
