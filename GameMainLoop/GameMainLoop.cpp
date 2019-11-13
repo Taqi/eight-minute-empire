@@ -1,20 +1,40 @@
-////
-//// Created by james on 2019-11-04.
-////
 //
-//#include <string>
-//#include <iostream>
-//#include "../GameState/GameState.h"
-//#include "../StartUpPhase/StartUpPhase.h"
-//#include "GameMainLoop.h"
+// Created by james on 2019-11-04.
 //
-//using namespace std;
-//
-//void mainLoopDriver()
-//{
-//    // Have the game set up
+
+#include <string>
+#include <iostream>
+#include "../GameState/GameState.h"
+#include "../StartUpPhase/StartUpPhase.h"
+#include "GameMainLoop.h"
+
+using namespace std;
+
+void mainLoopDriver(Map &map, Deck &deck, Hand &hand, vector<Player*>* players)
+{
+
+	cout << "Current map: \n";
+	map.printMap();
+
+	GameState state = GameState();
+	int gameLength = state.gameTurns(players->size()); //Get total number of turns
+
+	for (int i = 0; i < gameLength; i++)
+	{
+		cout << "\nTURN " << i << ". " << gameLength - i << " Turns remain." << endl;
+
+		//Loop for each player 
+		for (int j = 0; j < players->size(); j++)
+		{
+			cout <<endl << *(players->at(j)->getName()) << " it is your turn.\n";
+			hand.exchange(&deck, (players->at(j)), j, &map);
+		}
+	}
+
+
+    // Have the game set up
 //    GameState state = GameState();
-//
+	
 //    int _1stPlayerIndex = startGame(state);
 //    int lengthOfGame = state.determineGameLength();
 ////    vector<Card*> topBoard = state.deck->topBoardGenerator(*state.deck);
@@ -61,6 +81,6 @@
 //            }
 //        }
 //    }
-//
-//
-//}
+
+
+}

@@ -17,6 +17,8 @@ class Bidding;
 
 class Map;
 
+class Card;
+
 class Player{
 
 

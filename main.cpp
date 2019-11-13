@@ -26,6 +26,24 @@ int main()
 	//Call gameStateDriver which creates a GameState object, and returns that GameState object
     GameState state = gameStateDriver();
 
+	//Get the vector of player created in gamestate
+	vector<Player*> *players = state.players;
+	
+	//Get map
+	Map* map = state.map;
+
+	map->printMap();
+
+	//Get the deck created in gamestate
+	Deck* deck = state.getDeck();
+
+	//Get hand object created in gamestate
+	Hand* hand = state.getHand();
+
+	deck->draw(hand);
+
+	mainLoopDriver(*map, *deck, *hand, players);
+
 
     // Part 2)
     // gameStartupExample();
@@ -34,9 +52,9 @@ int main()
     // mainLoopDriver();
 
     // Part 4)
-    // playerMethodsDriver();
+    // in gamestate.cpp
 
-    // Part 5)
+    // Part 6)
     // gameScoreExample();
 
     return 0;

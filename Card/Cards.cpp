@@ -2,6 +2,7 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
+#include "../Player/Player.h"
 using namespace std;
 
 void Deck::setTotalCards(const int *tCards)
@@ -278,14 +279,32 @@ void Hand::printHand()
 The hand object is a collection of cards that has an exchange () method that allows the player to select the card from its position in the row 
 and pay the coin cost listed at the top of the board
 */
-void Hand::exchange(Deck *deck)
+void Hand::exchange(Deck *deck, Player *player, int playerIndex, Map *map)
 {
 	//Player selects a card in the hand space
-	cout <<endl << "Which card do you want to buy (index)? ";
+	cout <<endl << *(player->getName()) << ", Which card do you want to buy (index)? ";
 	int n;
 	cin >> n;
 	cout << endl << "Card " << *(handVector[n]->id) << ", " << handVector[n]->getAction() << " is no longer in the hand space." << endl;
-	
+
+	//Action of the card
+	//First seperate action with quantity (ex: action = "build_city", quantity = 2)
+	string choiceAction = handVector[n]->getAction().substr(0, handVector[n]->getAction().find(" "));
+	int quantity = stoi(handVector[n]->getAction().substr(handVector[n]->getAction().find(" ") + 1));
+
+	//Ask player if he wants to ignore the action
+	bool ignore = player->ignore();
+	if (ignore == true)
+	{
+		player->actionMethod(choiceAction, playerIndex, quantity, *map);
+	}
+
+	else
+	{
+		cout << "\nAction ignored.\n";
+	}
+	//player->actionMethod(choiceAction, player, quantity, map);
+
 	handVector.erase(handVector.begin() + n); //Remove card at nth index (it moves the rest of cards to the front/left)
 	deck->draw(this); //Draw a new card from deck to put it in handspace
 }

@@ -2,8 +2,11 @@
 using namespace std;
 #include <vector>
 #include <string>
+#include "../Player/Player.h"
 
 class Deck; //forward declaration of Deck class
+class Player;
+class Map;
 
 class Card
 {
@@ -31,7 +34,7 @@ class Hand
 	public:
 		int *cost = new int[6]; //Cost of each card in the hand (0, 1, 1, 2, 2, 3)
 		void printHand(); //Will print cards currently in hand space
-		void exchange(Deck *deck); //Method that allows user to buy a card from the hand space, and it calls the draw method to pick a new card from deck
+		void exchange(Deck* deck, Player *player, int playerIndex, Map *map); //Method that allows user to buy a card from the hand space, and it calls the draw method to pick a new card from deck
 		vector <Card*> handVector;	//Vector of Cards object for the cards faced up
 
 		

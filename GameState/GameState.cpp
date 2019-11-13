@@ -59,6 +59,26 @@ int GameState::gameTurns(int totalPlayers)
 	}
 }
 
+vector<Player*> GameState::getPlayers()
+{
+	return vector<Player*>();
+}
+
+Map* GameState::getMap()
+{
+	return map;
+}
+
+Deck* GameState::getDeck()
+{
+	return deck;
+}
+
+Hand* GameState::getHand()
+{
+	return hand;
+}
+
 
 
 int GameState::gameLength()
@@ -161,10 +181,8 @@ void GameState::start()
 		cin >> age;
 
 		// Using emplace_back instead of push back since I want to return a reference here for the Player
-
-		//Players *playerArray = new Player();
 		players->emplace_back(new Player(name, nPlayers, age));
-		//players->begin.
+
 
 	}
 
@@ -208,21 +226,6 @@ void GameState::start()
 	//p->andOrAction(0, "DESTROY_ARMY 1 AND PLACE_NEW_ARMIES_ON_BOARD 1", *map);
 
 	//p->andOrAction(0, "PLACE_NEW_ARMIES_ON_BOARD 1 OR MOVE_OVER_LAND 1", *map);
-
-
-	//Part 3 and 5
-
-	//Deallocate
-	delete map;
-	map = NULL;
-
-	delete hand;
-	hand = NULL;
-
-	delete deck;
-	deck = NULL;
-
-
 
 }
 

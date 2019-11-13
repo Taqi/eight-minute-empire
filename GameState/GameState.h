@@ -47,6 +47,18 @@ class GameState
 		void generateTitleScreen(); //Outputs the title screen
 
 		int gameTurns(int totalPlayer);
+
+		//Return pointer to player vector
+		vector<Player*> getPlayers();
+
+		//Return map object
+		Map* getMap();
+
+		//Return map object
+		Deck* getDeck();
+
+		//Return hand object
+		Hand* getHand();
 };
 
 

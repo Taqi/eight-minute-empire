@@ -106,7 +106,7 @@ bool Player::payCoins(int cost)
 //This method allows player to move " << moves << " armies across land/over sea.
 void Player::moveOverLand(int player, int moves, Map& map)
 {
-	cout << "-Move Over Land CARD-\n";
+	cout << "\n-Move Over Land CARD-\n";
 	while (moves > 0)
 	{
 		cout << *name <<", you have armies in the following locations " << endl;
@@ -133,7 +133,7 @@ void Player::moveOverLand(int player, int moves, Map& map)
 //This method allows player to build city.
 bool Player::buildCity(int player, int cityToAdd, Map& map)
 {
-	cout << "-BUILD CITY CARD-\n";
+	cout << "\n-BUILD CITY CARD-\n";
 
 	// check to see if player has available cities to place
 	if (*cities == 0)
@@ -163,7 +163,7 @@ bool Player::buildCity(int player, int cityToAdd, Map& map)
 //This method allows player to destroy other player's armies
 void Player::destroyArmy(int armyToDestroy, Map& map)
 {
-	cout << "-DESTROY ARMY CARD-\n";
+	cout << "\n-DESTROY ARMY CARD-\n";
 	while (armyToDestroy > 0)
 	{
 		int playerDestroyed;
@@ -188,7 +188,7 @@ void Player::destroyArmy(int armyToDestroy, Map& map)
 
 bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 {
-	cout << "-PLACE NEW ARMIES CARD-\n";
+	cout << "\n-PLACE NEW ARMIES CARD-\n";
 	// check to see if player has available armies to place
 	if (*armies == 0)
 	{
@@ -216,7 +216,7 @@ bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 
 void Player::moveArmies(int player, int moves, Map &map)
 {
-	cout << "-MOVE ARMIES CARD-\n";
+	cout << "\n-MOVE ARMIES CARD-\n";
 	while (moves > 0)
 	{
 		cout << *name << ", you have armies in the following locations " << endl;
@@ -242,11 +242,9 @@ void Player::moveArmies(int player, int moves, Map &map)
 
 bool Player::ignore()
 {
-	cout << "-IGNORE CARD-\n";
-
     bool invalidAnswer = true;
     string answer;
-    cout << *name << ", would you like to use the action on the card (y or n)? ";
+    cout <<endl<< *name << ", would you like to use the action on the card (y or n)? ";
     do {
         cin >> answer;
         if (answer == "y" || answer == "n") {
@@ -256,7 +254,7 @@ bool Player::ignore()
             cout << "Invalid answer. Answer with y or n: ";
         }
     } while (invalidAnswer);
-    return (answer == "n");
+    return (answer == "y"); //Return true if answer is yes (dont want to ignore), else return false (want to ignore action)
 }
 
 
