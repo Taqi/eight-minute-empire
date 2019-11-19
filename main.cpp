@@ -22,6 +22,16 @@ int main()
 	//CardDriver();
 	//BiddingDriver();
 
+	int* m = new int(5);
+	int* n = new int(7);
+	int* k = new int(0);
+	int l = 3;
+
+	k = n;
+	cout << "ITS " << *k <<endl;
+	k = &l; //makes the pointer point to a new address. Note: if it was *k = l, it would change the value inside k, which would also change thevalue inside n, since k was pointing to n.
+	cout << "ITS " << *k <<endl;
+	cout << "ITS " << *n << endl;
 
     // Part 1)
 	//Call gameStateDriver which creates a GameState object, and returns that GameState object
@@ -33,7 +43,7 @@ int main()
 	//Get map
 	Map* map = state.map;
 
-	map->printMap();
+	map->printMap(players);
 
 	//Get the deck created in gamestate
 	Deck* deck = state.getDeck();

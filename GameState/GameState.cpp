@@ -135,10 +135,6 @@ void GameState::start()
 	//Create hand object (hand space) (PROBABLY PUT THIS IN PART 2 - STARTUPPHASE)
 	hand = new Hand();
 
-	//Draw 6 cards for the hand space (PUT THIS IN STARTUPPHASE SINCE ITS PART 2 OF ASSIGNMENT)
-	//deck->draw(hand);
-
-
 	// Players creation
 	players = new vector<Player*>();
 	int nPlayers;

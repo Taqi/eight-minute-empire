@@ -3,6 +3,7 @@
 #include "../GameState/GameState.h"
 #include "../StartUpPhase/StartUpPhase.h"
 #include "GameMainLoop.h"
+#include "../Map/Map.h"
 
 using namespace std;
 
@@ -10,7 +11,7 @@ void mainLoopDriver(Map &map, Deck &deck, Hand &hand, vector<Player*>* players)
 {
 
 	cout << "Current map: \n";
-	map.printMap();
+	map.printMap(players);
 
 	GameState state = GameState();
 	int gameLength = state.gameTurns(players->size()); //Get total number of turns
@@ -21,9 +22,12 @@ void mainLoopDriver(Map &map, Deck &deck, Hand &hand, vector<Player*>* players)
 
 		//Loop for each player 
 		for (int j = 0; j < players->size(); j++)
-		{
+		{	
+			map.printMap(players);
 			cout <<endl << *(players->at(j)->getName()) << " it is your turn.\n";
 			hand.exchange(&deck, (players->at(j)), j, &map);
+			//map.updateCountryOwner(players); NOT DONE IMPLEMENTING METHOD
+		
 		}
 	}
 

@@ -5,6 +5,7 @@ Every node has a Linked List. Each Node in this Linked list represents the refer
 
 #include <iostream>
 #include "Map.h"
+#include "../Player/Player.h"
 using namespace std;
 
 
@@ -293,6 +294,18 @@ void mapValidation(vector <Graph*> map, const int totalNumberGraph)
 	}
 
 }
+//Constructor
+Map::Map()
+{
+
+}
+
+Map* Map::getInstance()
+{
+	if (!map_instance)
+		map_instance = new Map;
+	return map_instance;
+}
 
 void Map::storeGraph(Graph *graph)
 {
@@ -345,23 +358,20 @@ int Map::getCountryNumber(int countryID)
 	return playerArmyCountryArray[countryID].head->countryNumber;
 }
 
-void Map::printMap()
+void Map::printMap(vector<Player*>* players)
 {
 
 	cout << "\n|======================================MAP==============================================|\n";
 	//loop over each adjacent list
 	for (int i = 0; i < *mapSize; i++)
 	{
-		cout << endl << "Country: " << playerArmyCountryArray[i].head->countryNumber <<endl;// << " || Owned by " << *(playerArmyCountryArray[i].head->playerName) << " || Army: " << *(playerArmyCountryArray[i].head->numArmies) << endl;
-		
-		//if (playerArmyCountryArray[i].head->cityArmyPair.size() > 1)
-		//{
-			for (int j = 0; j < playerArmyCountryArray[i].head->cityArmyPair.size(); j++)
-			{
-				cout << "Player: " << j << " Army: " << playerArmyCountryArray[i].head->cityArmyPair[j].first << " City: " << playerArmyCountryArray[i].head->cityArmyPair[j].second << endl;
-			}
-		//}
-	}		
+		cout << endl << "Country: " << playerArmyCountryArray[i].head->countryNumber << " || Owned by " << *(playerArmyCountryArray[i].head->playerName) << " || Army: " << *(playerArmyCountryArray[i].head->numArmies) << endl;
+
+		for (int j = 0; j < playerArmyCountryArray[i].head->cityArmyPair.size(); j++)
+		{
+			cout << "Player: " << *(players->at(j)->getName()) << "	-Army: " << playerArmyCountryArray[i].head->cityArmyPair[j].first << " -City: " << playerArmyCountryArray[i].head->cityArmyPair[j].second << endl;
+		}
+	}
 
 	cout << "\n[---------------------------------------------------------------------------------------]\n";
 }
@@ -400,4 +410,61 @@ void Map::printAllAdjacentCountries()
 	cout << "\n[---------------------------------------------------------------------------------------]\n";
 }
 
+void Map::updateCountryOwner(vector<Player*>* players)
+{
 
+	for (int country = 0; country < *mapSize; country++) //Do for each country
+	{	
+		cout << "COuntry: " << country <<endl;
+
+
+		//playerArmyCountryArray[country].head->playerName = players->at(0)->getName();
+		for (int i = 1; i < playerArmyCountryArray[country].head->cityArmyPair.size(); i++) //Each player
+		{ 
+			cout << "	3.Max is " << *max << " and playergetname " << *(players->at(i)->getName()) << endl;
+			playerArmyCountryArray[country].head->playerName = players->at(0)->getName();		
+			max = &(playerArmyCountryArray[country].head->cityArmyPair[0].first);
+			playerArmyCountryArray[country].head->numArmies = max;
+			cout << "Player comp: " << i <<endl;
+
+
+			if (*max > playerArmyCountryArray[country].head->cityArmyPair[i].first)
+			{
+				//playerArmyCountryArray[country].head->playerName = players->at(i)->getName();
+				cout << "	1.Max after is " << *max << endl;
+				continue;
+			}
+			else if (*max < playerArmyCountryArray[country].head->cityArmyPair[i].first)
+			{				
+				//cout << "	2.Max is " << max << " and playergetname " << *(players->at(i)->getName())<< endl;
+				max = &(playerArmyCountryArray[country].head->cityArmyPair[i].first);
+				*(playerArmyCountryArray[country].head->numArmies) = *max;
+
+				//owner = *(players->at(i)->getName());
+				playerArmyCountryArray[country].head->playerName = players->at(i)->getName();
+
+				//playerArmyCountryArray[country].head->playerName = players->at(i)->getName();
+				//playerArmyCountryArray[country].head->playerName = &owner;
+
+				//cout << *(playerArmyCountryArray[country].head->playerName) << " 2." << *(players->at(i)->getName());
+			}
+
+			else if (*max == playerArmyCountryArray[country].head->cityArmyPair[i].first)
+			{				
+				//cout << "	3.Max is " << max << " and playergetname " << *(players->at(i)->getName()) << endl;
+
+				//owner = "-";
+				//playerArmyCountryArray[country].head->playerName = &owner;
+				//*(playerArmyCountryArray[country].head->playerName) = "-";
+				playerArmyCountryArray[country].head->playerName = empty;
+				playerArmyCountryArray[country].head->numArmies = emptyN;
+				//max = &emptyN;
+
+
+			}
+
+			cout << "	1.Max after is " << *max << endl;
+			
+		}
+	}
+}

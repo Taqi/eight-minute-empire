@@ -2,6 +2,7 @@
 using namespace std;
 #include <vector>
 
+class Player;
 
 // Creates a node with a country number (data inside the node)
 struct CreateNode
@@ -14,7 +15,7 @@ struct CreateNode
 
 		vector <pair<int, int>> cityArmyPair; //Vector of type pair <number of armies, number of cities> for 1 country. The vector the size of the total number of players (so if 3 players, then vector of size 3). Each country has this vector.
 													  //It gives the number of armies and cities a player has for that specific country. The index of the vector gives the player. Index 0 means player 0.	
-
+		
 };
 
 //struct for an adjacency list (linked list)
@@ -37,7 +38,14 @@ struct Graph
 
 class Map
 {
+	private:
+		static Map* map_instance;
+		/* Private constructor to prevent instancing. */
+		//Map();
+
 	public:
+		static Map* getInstance(); //Returns the map object
+
 		vector <Graph*> allGraph; //Contains every graph (continent in this array)
 
 		int* test;
@@ -58,10 +66,17 @@ class Map
 		void setCountryNumber(int countryID); //Set the country Id for the node
 		int getCountryNumber(int countryID); //Return the country ID
 
-		void printMap(); //Print every country in map with player and army
+		void printMap(vector<Player*>* players); //Print every country in map with player and army
 		void printAllAdjacentCountries(); //Print every country and their adjacent
+
+		void updateCountryOwner(vector<Player*>* players); //Gives a country the ownership to the player with the most armies
+
+		string* empty = new string("-");
+		int* emptyN = new int(0);
+		int* max = new int(0);
 };
 
+Map* Map::map_instance = 0; /* Null, because instance will be initialized on demand. */
 
 CreateNode* newNode(int countryN); //Creates a node/country
 Graph* createGraph(int totalCountries, Map *m); //Creates graph/continent
