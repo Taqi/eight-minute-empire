@@ -41,7 +41,7 @@ class Map
 	private:
 		static Map* map_instance;
 		/* Private constructor to prevent instancing. */
-		//Map();
+		Map();
 
 	public:
 		static Map* getInstance(); //Returns the map object
