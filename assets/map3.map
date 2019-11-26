@@ -1,0 +1,10 @@
+COMMENT|This is an example of a valid map
+COMMENT| Note that the nesting of delimiters is consistent: | ; / ,
+REGIONS|Vietnam;France;Bangladesh
+CONTINENTS|South East Asia;Europe;South Asia
+PLAYERS|james;taqi;daphne
+START|Vietnam
+COMMENT| Nodes MUST come last in the map file
+NODE|Vietnam;South East Asia;;;Bangladesh,false
+NODE|Bangladesh;South Asia;;;Vietnam,false/France,true
+NODE|France;Europe;;;Bangladesh,true
