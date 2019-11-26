@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="eight_minute_empire"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="eight_minute_empire">
+				<Option output="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/eight_minute_empire" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Bidding"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Card"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameMainLoop"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameScore"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameState"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Bidding"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Card"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameMainLoop"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameScore"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameState"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Map"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/MapLoader"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Player"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/StartUpPhase"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Map"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/MapLoader"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Player"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/StartUpPhase"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 eight_minute_empire"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="eight_minute_empire/fast">
+				<Option output="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/eight_minute_empire" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Bidding"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Card"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameMainLoop"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameScore"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameState"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Bidding"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Card"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameMainLoop"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameScore"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameState"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Map"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/MapLoader"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Player"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/StartUpPhase"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Map"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/MapLoader"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Player"/>
+					<Add directory="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/StartUpPhase"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 eight_minute_empire/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/daphneaugier/Desktop/Coding/eight-minute-empire/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Bidding/Bidding.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Bidding/Bidding.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Bidding/BiddingDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Bidding/BiddingDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Card/CardDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Card/Cards.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Card/Cards.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Card/CardsDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameMainLoop/GameMainLoop.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameMainLoop/GameMainLoop.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameScore/GameScore.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameScore/GameScore.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameScore/GameScoreDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameScore/GameScoreDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameState/GameState.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameState/GameState.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameState/GameStateDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/GameState/GameStateDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Bidding/Bidding.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Bidding/Bidding.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Bidding/BiddingDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Bidding/BiddingDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Card/CardDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Card/Cards.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Card/Cards.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Card/CardsDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameMainLoop/GameMainLoop.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameMainLoop/GameMainLoop.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameScore/GameScore.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameScore/GameScore.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameScore/GameScoreDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameScore/GameScoreDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameState/GameState.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameState/GameState.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameState/GameStateDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/GameState/GameStateDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Map/Map.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Map/Map.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Map/MapDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Map/MapDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/MapLoader/MapLoader.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/MapLoader/MapLoader.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/MapLoader/MapLoaderDriver">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/MapLoader/MapLoaderDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/MapLoader/MapLoaderDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/MapLoaderDriver">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Player/Player.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Player/Player.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Player/PlayerDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/Player/PlayerDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/README.md">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/StartUpPhase/StartUpPhase.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/StartUpPhase/StartUpPhase.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/StartUpPhase/StartUpPhaseDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/StartUpPhase/StartUpPhaseDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/example.map">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/main">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/main.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/short_syntax.map">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/James&apos;s Part 2/version1.map">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Map/Map.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Map/Map.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Map/MapDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Map/MapDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/MapLoader/MapLoader.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/MapLoader/MapLoader.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/MapLoader/MapLoaderDriver">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/MapLoader/MapLoaderDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/MapLoader/MapLoaderDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Player/Player.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Player/Player.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Player/PlayerDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/Player/PlayerDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/README.md">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/StartUpPhase/StartUpPhase.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/StartUpPhase/StartUpPhase.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/StartUpPhase/StartUpPhaseDriver.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/StartUpPhase/StartUpPhaseDriver.h">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/example.map">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/main">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/main.cpp">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/short_syntax.map">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/version1.map">
+			<Option target="eight_minute_empire"/>
+		</Unit>
+		<Unit filename="/Users/daphneaugier/Desktop/Coding/eight-minute-empire/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
