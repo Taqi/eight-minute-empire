@@ -285,6 +285,16 @@ int Player::getVictoryPoint()
 	return *victoryPoints;
 }
 
+void Player::setGoodPoint(int points)
+{
+	(*goodPoints) = points;
+}
+
+void Player::setVictoryPoint(int points)
+{
+	*(victoryPoints) = points;
+}
+
 //Method that will the other methods depending on what the action is (action is the string telling the action of the card)
 void Player::andOrAction(int player, string action, Map &map)
 {

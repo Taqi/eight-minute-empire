@@ -7,6 +7,7 @@ Every node has a Linked List. Each Node in this Linked list represents the refer
 #include "../Observer/GameObservers.h"
 #include "Map.h"
 #include "../Player/Player.h"
+#include "../GameScore/GameScore.h"
 using namespace std;
 
 
@@ -595,13 +596,14 @@ bool Map::checkPlayerOwnsCountry(vector<Player*>* players, int player, int count
 	}
 }
 
+
 void Map::displayPlayerStats(vector<Player*>* players)
 {
 
 	//Display countries and continent owned by each player
 	for (int player = 0; player < players->size(); player++)
 	{
-		cout << "\nPlayer: " << *(players->at(player)->getName());
+		cout << "\n\tPlayer: " << *(players->at(player)->getName());
 		//Continent
 		cout << "\nOwns the following continents: ";
 		for (int continent = 0; continent < players->at(player)->playerContinent.size(); continent++)
@@ -613,12 +615,84 @@ void Map::displayPlayerStats(vector<Player*>* players)
 		{
 			cout << players->at(player)->playerCountries[countries] << ", ";
 		}
-		cout << "\nOwns the following cards: \n";
+		/*cout << "\nOwns the following cards: \n";
 		for (int card = 0; card < players->at(player)->pHand.size(); card++)
 		{
 			cout << "-" << players->at(player)->pHand.at(card)->getAction() << " (" << players->at(player)->pHand.at(card)->getNGood() << " " << players->at(player)->pHand.at(card)->getGood() << ")" << endl;
-		}
+		}*/
 		cout << endl;
+
+
+		GameScore finalScore;
+		finalScore.computeCurrentGameScore(players, player);
+
+		int graphSize = 4;
+
+		string* graph = new string[graphSize];
+
+		for (int i = 0; i < graphSize; i++)
+		{			
+			int itemSize = 0;
+			if (i == 0)
+			{
+				itemSize = players->at(player)->playerCountries.size();			
+				string myString(itemSize, '*');
+				graph[i] = myString;
+			}
+
+			else if (i == 1)
+			{
+				itemSize = players->at(player)->playerContinent.size();
+				string myString(itemSize, '*');
+				graph[i] = myString;
+			}
+
+			else if (i == 2)
+			{
+				itemSize = players->at(player)->getGoodPoint();
+				string myString(itemSize, '*');
+				graph[i] = myString;
+			}
+
+			else if (i == 3)
+			{
+				itemSize = players->at(player)->getVictoryPoint();
+				string myString(itemSize, '*');
+				graph[i] = myString;
+			}
+
+		}
+
+		cout << "\n---------------------Bar Chart-----------------------" << std::endl;
+		cout << "Player: " << *(players->at(player)->getName()) <<endl;
+		for (int i = 0; i < graphSize; i++)
+		{
+
+			if (i == 0)
+			{
+				cout << "Country points: " << graph[i] << endl;
+			}
+
+			else if (i == 1)
+			{
+				cout << "Continent points: " << graph[i] << endl;
+			}
+
+			else if (i == 2)
+			{
+				cout << "Good points: " << graph[i] << endl;
+			}
+
+			else if (i == 3)
+			{
+				cout << "Victory points: " << graph[i] << endl;
+			}
+		}
+
+		cout << "-----------------------------------------------------" << std::endl;
+
+		delete[] graph;
+		graph = NULL;
 
 	}
 	

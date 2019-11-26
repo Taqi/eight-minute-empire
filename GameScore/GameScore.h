@@ -36,9 +36,11 @@ public:
 
 	void countCrystalPoint(int crystal, Player* player);
 
-	void computeGameScore(vector<Player*>* players);
+	void computeGameScore(vector<Player*>* players); //Compute final scores
 
-    void winnerGenerator (vector <Player*>* players);
+	void computeCurrentGameScore(vector<Player*>* players, int player); //Compute score during game
+
+    void winnerGenerator (vector <Player*>* players); //Generates the winner
 };
 
 

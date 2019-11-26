@@ -165,7 +165,7 @@ void GameScore::countCrystalPoint(int crystal, Player* player)
 	}
 }
 
-
+//Compute the score of each players
 void GameScore::computeGameScore(vector<Player*>* players)
 {
 	//Count points for every player
@@ -243,6 +243,94 @@ void GameScore::computeGameScore(vector<Player*>* players)
 		cout << "\nTotal good (carrots, rocks, etc.) points for player " << *(players->at(player)->getName()) << ": " << players->at(player)->getGoodPoint() << endl;
 		cout << "Total victory points " << players->at(player)->getVictoryPoint();
 	}
+
+}
+
+//Compute the score of each players
+void GameScore::computeCurrentGameScore(vector<Player*>* players, int player)
+{
+	int previousGoodPoints = players->at(player)->getGoodPoint();
+
+	//Reset values
+	players->at(player)->setGoodPoint(0);
+	players->at(player)->setVictoryPoint(0);
+
+	//Total amount of goods a player has
+	int sum = 0;
+	int rock = 0;
+	int crystal = 0;
+	int anvil = 0;
+	int carrot = 0;
+	int tree = 0;
+
+	cout << "\nOwns the following cards: \n";
+	//Check for every card the player has
+	for (int card = 0; card < players->at(player)->pHand.size(); card++)
+	{
+		if (players->at(player)->pHand.at(card)->getGood() == "Carrot")
+		{
+			carrot += players->at(player)->pHand.at(card)->getNGood();
+		}
+
+		else if (players->at(player)->pHand.at(card)->getGood() == "Rock")
+		{
+			rock += players->at(player)->pHand.at(card)->getNGood();
+		}
+
+		else if (players->at(player)->pHand.at(card)->getGood() == "Tree")
+		{
+			tree += players->at(player)->pHand.at(card)->getNGood();
+		}
+
+		else if (players->at(player)->pHand.at(card)->getGood() == "Anvil")
+		{
+			anvil += players->at(player)->pHand.at(card)->getNGood();
+		}
+
+		else if (players->at(player)->pHand.at(card)->getGood() == "Crystal")
+		{
+			crystal += players->at(player)->pHand.at(card)->getNGood();
+		}
+
+		cout << "-" << players->at(player)->pHand.at(card)->getAction() << " (" << players->at(player)->pHand.at(card)->getNGood() << " " << players->at(player)->pHand.at(card)->getGood() << ")" << endl;
+	}
+
+	//Now that we collected total amounts of carrots, rocks, etc. for a player, send it to the method to add points depending on the amount they have
+	countTreePoint(tree, (players->at(player)));
+
+	countAnvilPoint(anvil, (players->at(player)));
+
+	countCarrotPoint(carrot, (players->at(player)));
+
+	countRockPoint(rock, (players->at(player)));
+
+	countCrystalPoint(crystal, (players->at(player)));
+
+	//cout << "\nOwns the following countries: ";
+	//Points for region owned
+	for (int countries = 0; countries < players->at(player)->playerCountries.size(); countries++)
+	{
+		//cout << players->at(player)->playerContinent[countries] << ", ";
+		players->at(player)->addVictoryPoint(1); //Add a point for each country
+	}
+
+	//cout << "\nOwns the following continents: ";
+	//Points for continents owned		
+	for (int continent = 0; continent < players->at(player)->playerContinent.size(); continent++)
+	{
+		//cout << players->at(player)->playerContinent[continent] << ", ";
+		players->at(player)->addVictoryPoint(1); //Add a point for each continent
+	}
+
+	//Congratulate player for scoring a new point
+	if (previousGoodPoints < players->at(player)->getGoodPoint())
+	{
+		cout << "\nCongratulation " << *(players->at(player)->getName()) << ", you scored a new good point!\n";
+	}
+
+	cout << "\nTotal good (carrots, rocks, etc.) points for player " << *(players->at(player)->getName()) << ": " << players->at(player)->getGoodPoint() << endl;
+	cout << "Total victory points " << players->at(player)->getVictoryPoint();
+
 
 }
 

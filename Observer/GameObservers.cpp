@@ -47,19 +47,6 @@ void PhaseObserver::update(Map& map, vector<Player*>* players)
 {
 }
 
-
-string StatisticsObserver::graph(string title, int width, int v)
-{
-	// Add enough spaces so that all rows are equal length
-	for (int i = 0; i < (width - title.length()); i++)
-	{
-		title += " ";
-	}
-
-	// Return the row with a newline character on the end
-	return title + "\n";
-}
-
 StatisticsObserver::StatisticsObserver()
 {
 }
@@ -70,7 +57,7 @@ StatisticsObserver::~StatisticsObserver()
 
 void StatisticsObserver::update(Map& map, vector<Player*>* players)
 {
-	cout << "Game stats------------------------------" << endl;
+	cout << "\nGame stats------------------------------" << endl;
 	map.updateCountryOwner(players);
 	map.updatePlayerContinent(players);
 	map.displayPlayerStats(players);

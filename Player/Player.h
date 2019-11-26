@@ -90,6 +90,8 @@ public:
 	int getGoodPoint();
 	void addVictoryPoint(int point); //Add to total points
 	int getVictoryPoint();
+	void setGoodPoint(int points);
+	void setVictoryPoint(int points);
 
 };
 

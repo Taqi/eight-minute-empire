@@ -48,10 +48,6 @@ class PhaseObserver : public Observer
 //Part 3Asg
 class StatisticsObserver : public Observer
 {
-	private:
-		// makes a graph row
-		string graph(string title, int width, int v);
-
 	public:
 		StatisticsObserver();
 		~StatisticsObserver();

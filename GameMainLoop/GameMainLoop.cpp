@@ -12,9 +12,6 @@ using namespace std;
 void Loop::mainLoopDriver(Map &map, Deck &deck, Hand &hand, vector<Player*>* players)
 {
 
-	cout << "Current map: \n";
-	map.printMap(players);
-
 	GameState state = GameState();
 	int gameLength = state.gameTurns(players->size()); //Get total number of turns
 
