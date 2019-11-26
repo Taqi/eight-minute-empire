@@ -34,4 +34,43 @@ int start(Map& map, vector<Player*>* players)
 }
 
 
+//void addNeutralArmies(GameState& state)
+//{
+//	cout << "For a game of two players, each players take their turn to add five neutral armies to any region." << endl;
+//	
+//
+//	for (int i = 1; i < 11; i++)
+//	{
+//
+//		int neutralCountry;
+//		auto countryID = state.map->getCountryPlayer();
+//
+//		// print the map so player can reference it
+//		cout << "Printing map's current state: \n";
+//		state.map->printMap();
+//
+//		// add the army through the loop statement
+//		//while (!validname)
+//
+//			//for (int i = 0; i < *(map->mapSize); i++) //Index of array playerCountryArmyArray
+//				//{
+//				//	for (int j = 0; j < nPlayers; j++) //Index of vector cityArmyPair
+//				//	{
+//				//		//map->playerArmyCountryArray[i].head->cityArmyPair = new vector<pair<int, int>>(); //when cityArmyPair is a pointer
+//
+//				//		if (i == 0) //At country 0, each player has 3 armies and 1 city
+//				//		{
+//				//			//map->playerArmyCountryArray[i].head->cityArmyPair->push_back(make_pair(3, 1)); //when cityArmyPair is a pointer
+//				//			map->playerArmyCountryArray[i].head->cityArmyPair.push_back(make_pair(3, 1));
+//				//	
+//				//		}
+//
+//				//		else
+//				//		{
+//				//			//map->playerArmyCountryArray[i].head->cityArmyPair->push_back(make_pair(0, 0));
+//				//			map->playerArmyCountryArray[i].head->cityArmyPair.push_back(make_pair(0, 0));
+//				//		}
+//				//	}
+//
+//	}
 //}

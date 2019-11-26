@@ -5,6 +5,8 @@
 #include "../Map/Map.h"
 #include "../Map/MapDriver.h"
 #include "../GameMainLoop/GameMainLoop.h"
+#include <vector>
+#include <algorithm>
 //#include <utility>
 
 
@@ -94,7 +96,7 @@ int GameState::gameLength()
 	case (2):
 		return 13;
 	case (3):
-		return 10;
+		return 10; 
 	case (4):
 		return 8;
 	case (5):

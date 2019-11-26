@@ -15,23 +15,6 @@
 
 int main()
 {
-	
-	//MapLoaderDriver();
-	//Map *m = MapDriver(); //Has some duplicates with MapLoaderDriver //We probably won't end up using mapDriver.cpp
-	// PlayerDriver();
-	//CardDriver();
-	//BiddingDriver();
-
-	int* m = new int(5);
-	int* n = new int(7);
-	int* k = new int(0);
-	int l = 3;
-
-	k = n;
-	cout << "ITS " << *k <<endl;
-	k = &l; //makes the pointer point to a new address. Note: if it was *k = l, it would change the value inside k, which would also change thevalue inside n, since k was pointing to n.
-	cout << "ITS " << *k <<endl;
-	cout << "ITS " << *n << endl;
 
     // Part 1)
 	//Call gameStateDriver which creates a GameState object, and returns that GameState object
@@ -51,18 +34,15 @@ int main()
 	//Get hand object created in gamestate
 	Hand* hand = state.getHand();
 
-	//deck->draw(hand);
+	//Start up
 	StartUpPhaseDriver(*map, *deck, *hand, players);
 
-	mainLoopDriver(*map, *deck, *hand, players);
+	//Main loop
+	Loop loop;
+	loop.mainLoopDriver(*map, *deck, *hand, players);
 
-	
-    // Part 2)
-    // gameStartupExample();
-
-    // Part 6)
-    // gameScoreExample();
-
+	//Compute final score
+	score(players);
     return 0;
 
 

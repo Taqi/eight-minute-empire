@@ -1,7 +1,11 @@
 #pragma once
 #include <string>
 #include <list>
+#include "../Player/Player.h"
+//#include "../Map/Map.h"
 using namespace std;
+
+class Map;
 
 class Observer
 {
@@ -11,7 +15,7 @@ class Observer
 		~Observer();
 
 		//Observer gets updated with new data
-		virtual void update() = 0;
+		virtual void update(Map& map, vector<Player*>* players) = 0;
 };
 
 
@@ -24,7 +28,7 @@ class Observable
 	public:
 		void attach(Observer* o);
 		void detach(Observer* o);
-		void notify();
+		void notify(Map& map, vector<Player*>* players);
 		Observable();
 		~Observable();
 

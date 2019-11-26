@@ -31,17 +31,15 @@ private:
     string* name; // player's name
     string* color; // color for each player
 
-
-    // Implementation according to the question
-    vector<string*> countries; //the regions/countries that a player has
     vector<string*> resources; /*the resources that a given player has.*/
-    vector<Card> *playerHand; //Contains the cards that a player owns
 
-    //Cards*  cards; // the cards that a player has
     Bidding* bid; // the biding facility object that a player has
 
+	int* goodPoints = new int(0);; //Points from goods (carrots, rock, et.c)
+	int* victoryPoints = new int(0); //Total amount of points for a player
 
-public: // begin public section
+
+public:
 
 
     // Constructors
@@ -51,6 +49,11 @@ public: // begin public section
     // Deconstructor
     ~Player();
 
+	vector <int> playerCountries;  ////Vector containing the countries a player own
+	vector <int> playerContinent; //Vector containing the continents a player own
+	vector<Card>* playerHand; 
+	vector<Card*> pHand; //Contains the cards that a player owns
+	
     // Getters
     int* getCoins() const; // Display the player's coin
     int* getCities() const; // Display the player's cities
@@ -63,7 +66,6 @@ public: // begin public section
 
 
     // Setters
-    void addCards(Card card); // Change the player's card
     void setCoins(int coins); // Change the player's coins
     void setArmy(int armies); // Change the player's armies
     void setCities(int cities); // Change the player's cities
@@ -73,9 +75,8 @@ public: // begin public section
 
     // Implement Methods Declaration
     bool payCoins(int cost); // Player who wins the bid will pay the coins
-    //bool placeNewArmies(int armies, string place, Map gameMap); // for A2 implementation
 
-    //bool placeNewArmies(int armies, Graph &place); // Place armies on a starting point or player's cities collection
+    // Place armies on a starting point or player's cities collection
 	bool placeNewArmies(int player, int armiesToAdd, Map &map);
 
     void moveArmies(int player, int moves, Map &map); // Move armies according to the indicated number of armies - land movement only
@@ -83,9 +84,12 @@ public: // begin public section
     bool buildCity(int player, int cityToAdd, Map& map); // Place a city anywhere on the board where player has an army
     void destroyArmy(int armyToDestroy, Map& map); // Remove an army from the board belonging to any player
     bool ignore(); // Ignore the card and end the player turn
-    //void takeAction(string action, Map &gameBoard, vector<Player *> &allPlayers); // Player choose action to perform
     void andOrAction(int player, string action, Map &map); // Two diffrent actions for player to choose
 	void actionMethod(string choiceAction, int player, int quantity, Map& map); //Goes to approprate method according to cards action
+	void addGoodPoint(int point); //Add to good points
+	int getGoodPoint();
+	void addVictoryPoint(int point); //Add to total points
+	int getVictoryPoint();
 
 };
 

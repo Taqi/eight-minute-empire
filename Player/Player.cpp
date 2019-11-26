@@ -263,6 +263,27 @@ void Player::actionMethod(string choiceAction, int player, int quantity, Map &ma
 	}
 }
 
+//Increment the good (carrots, rocks, etc.) points a player has
+void Player::addGoodPoint(int point)
+{
+	(*goodPoints)+= point;
+}
+
+int Player::getGoodPoint()
+{
+	return *goodPoints;
+}
+
+//Increment the total points a player has
+void Player::addVictoryPoint(int point)
+{
+	(*victoryPoints)+= point;
+}
+
+int Player::getVictoryPoint()
+{
+	return *victoryPoints;
+}
 
 //Method that will the other methods depending on what the action is (action is the string telling the action of the card)
 void Player::andOrAction(int player, string action, Map &map)

@@ -268,7 +268,8 @@ int Loader::readFile()
       return -3;
     }
   	//Initialize map object
-	map = Map::getInstance();
+	//map = Map::getInstance(); //SINGLETON
+	map = new Map();
 
 	  map->mapSize = new int(totalCountriesByBorder); //Total countries in map
 
