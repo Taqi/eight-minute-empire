@@ -4,7 +4,9 @@ Every node has a Linked List. Each Node in this Linked list represents the refer
 */
 
 #include <iostream>
+#include "../Observer/GameObservers.h"
 #include "Map.h"
+#include "../Player/Player.h"
 using namespace std;
 
 
@@ -293,6 +295,19 @@ void mapValidation(vector <Graph*> map, const int totalNumberGraph)
 	}
 
 }
+//Constructor //SINGLETON
+//Map::Map()
+//{
+//
+//}
+//SINGLETON
+//
+//Map* Map::getInstance()
+//{
+//	if (!map_instance)
+//		map_instance = new Map;
+//	return map_instance;
+//}
 
 void Map::storeGraph(Graph *graph)
 {
@@ -345,23 +360,35 @@ int Map::getCountryNumber(int countryID)
 	return playerArmyCountryArray[countryID].head->countryNumber;
 }
 
-void Map::printMap()
+void Map::printMap(vector<Player*>* players)
 {
 
 	cout << "\n|======================================MAP==============================================|\n";
 	//loop over each adjacent list
 	for (int i = 0; i < *mapSize; i++)
 	{
-		cout << endl << "Country: " << playerArmyCountryArray[i].head->countryNumber <<endl;// << " || Owned by " << *(playerArmyCountryArray[i].head->playerName) << " || Army: " << *(playerArmyCountryArray[i].head->numArmies) << endl;
-		
-		//if (playerArmyCountryArray[i].head->cityArmyPair.size() > 1)
-		//{
-			for (int j = 0; j < playerArmyCountryArray[i].head->cityArmyPair.size(); j++)
-			{
-				cout << "Player: " << j << " Army: " << playerArmyCountryArray[i].head->cityArmyPair[j].first << " City: " << playerArmyCountryArray[i].head->cityArmyPair[j].second << endl;
-			}
-		//}
-	}		
+		if (i == 0)
+		{
+			cout << "\n\nContinent 0";
+		}
+
+		else if (i == allGraph[0]->totalCountries)
+		{
+			cout << "\n\nContinent 1";
+		}
+
+		else if (i == allGraph[1]->totalCountries)
+		{
+			cout << "\n\nContinent 2";
+		}
+
+		cout << endl << "Country: " << playerArmyCountryArray[i].head->countryNumber << " || Owned by " << *(playerArmyCountryArray[i].head->playerName) << " || Army: " << *(playerArmyCountryArray[i].head->numArmies) << endl;
+
+		for (int j = 0; j < playerArmyCountryArray[i].head->cityArmyPair.size(); j++)
+		{
+			cout << "Player: " << *(players->at(j)->getName()) << "	-Army: " << playerArmyCountryArray[i].head->cityArmyPair[j].first << " -City: " << playerArmyCountryArray[i].head->cityArmyPair[j].second << endl;
+		}
+	}
 
 	cout << "\n[---------------------------------------------------------------------------------------]\n";
 }
@@ -374,6 +401,7 @@ void Map::printAllAdjacentCountries()
 	cout << "\n|=================================ADJACENT COUNTRIES====================================|\n";
 	for (int k = 0; k < allGraph.size(); k++)
 	{
+		cout << "\n\nContinent " << k;
 		//loop over each adjacent list
 		for (int i = 0; i < (*allGraph[k]).totalCountries; i++)
 		{
@@ -400,4 +428,198 @@ void Map::printAllAdjacentCountries()
 	cout << "\n[---------------------------------------------------------------------------------------]\n";
 }
 
+void Map::updateCountryOwner(vector<Player*>* players)
+{
 
+	for (int country = 0; country < *mapSize; country++) //Do for each country
+	{	
+		//Reset value of owner and army of a country
+		playerArmyCountryArray[country].head->playerName = new string("-");
+		playerArmyCountryArray[country].head->numArmies = new int(0);
+
+		int armyMax = playerArmyCountryArray[country].head->cityArmyPair[0].first; //Biggest army of a country, initially set to player 0
+		int owner = 0; //Owner for armyMax
+
+		for (int i = 1; i < playerArmyCountryArray[country].head->cityArmyPair.size(); i++) //Each player
+		{
+
+			//Bigger so no changes
+			if (armyMax > playerArmyCountryArray[country].head->cityArmyPair[i].first)
+			{
+				continue;
+			}
+
+			//Smaller, so we need to change the owner of the country
+			else if (armyMax < playerArmyCountryArray[country].head->cityArmyPair[i].first)
+			{
+				armyMax = playerArmyCountryArray[country].head->cityArmyPair[i].first;
+				owner = i;
+			}
+
+			//If equal, then there is no owner.
+			else if (armyMax == playerArmyCountryArray[country].head->cityArmyPair[i].first)
+			{
+				owner = -1; //This tell us there is no owner since nobody has the most armies in a country
+			}
+		}
+
+		//Finished checking for that country, now check results
+
+		//If its not -1, then someone owns the country
+		if (owner != -1)
+		{
+			playerArmyCountryArray[country].head->playerName = players->at(owner)->getName();
+			playerArmyCountryArray[country].head->numArmies = &(playerArmyCountryArray[country].head->cityArmyPair[owner].first);
+		}
+
+		//Else, nobody owns that country, so continue
+		else
+		{
+			continue;
+		}
+
+	}
+}
+
+//Method updates which player owns a continent (player with most countries there), and it puts those continent in the 
+void Map::updatePlayerContinent(vector<Player*>* players)
+{
+	//Reset vector of countries and continent of each player
+	for (int player = 0; player < players->size(); player++)
+	{
+		players->at(player)->playerCountries.clear();
+		players->at(player)->playerContinent.clear();
+	}
+
+	//Array that counter the number of countries for each player
+	int* count = new int[players->size()]; //Index 0 of array is counter for player 0
+
+	//Check which player owns the most countries in each continent
+	for (int i = 0; i < allGraph.size(); i++) //Loop for each continent
+	{
+		//Initialize array
+		for (int m = 0; m < players->size(); m++)
+		{
+			count[m] = 0;
+		}
+
+		//Loop for each country and check who owns it
+		for (int j = 0; j < allGraph.at(i)->totalCountries; j++)
+		{
+			if (i == 1 && j < allGraph.at(0)->totalCountries)
+			{
+				continue;
+			}
+			if (i == 2 && j < allGraph.at(1)->totalCountries)
+			{
+				continue;
+			}
+
+			//Loop each player
+			for (int k = 0; k < players->size(); k++)
+			{
+				if (*(playerArmyCountryArray[j].head->playerName) == *(players->at(k)->getName()) && checkPlayerOwnsCountry(players, k, j) == false)
+				{
+					count[k]++; //Increment when a player owns a country
+					players->at(k)->playerCountries.push_back(j);
+				}
+			}
+
+		}
+		//Number of countries player owns
+		//cout << "Continent : " << i << endl;
+		//cout << "Player count 0 : " << *(count) <<endl;
+		//cout << "Player count 1 : " << *(count + 1) <<endl;
+		//cout << "Player count 2 : " << *(count + 2) <<endl <<endl;
+
+		int continentOwner = 0; //Store the player index with most countries for a specific continent. Initially we give it to player 0, and then compare it with everyone else
+		int maxCountries = *(count); //Store how many countries he has (initially set for player 0)
+
+		for (int i = 1; i < players->size(); i++) //Each player
+		{
+
+			//Bigger so no changes
+			if (maxCountries > *(count +i))
+			{
+				continue;
+			}
+
+			//Smaller, so we need to change the owner of the country
+			else if (maxCountries < *(count + i))
+			{
+				maxCountries = *(count + i);
+				continentOwner = i;
+			}
+
+			//If equal, then there is no owner.
+			else if (maxCountries == *(count + i))
+			{
+				continentOwner = -1; //This tell us there is no owner since nobody has the most armies in a country
+			}
+		}
+
+		//Finished checking for that continent, now check results
+
+		//If its not -1, then someone owns the continent
+		if (continentOwner != -1)
+		{
+			//Push the continent to the player continent vector
+			players->at(continentOwner)->playerContinent.push_back(i);
+
+			//playerArmyCountryArray[country].head->playerName = players->at(owner)->getName();
+			//playerArmyCountryArray[country].head->numArmies = &(playerArmyCountryArray[country].head->cityArmyPair[owner].first);
+		}
+
+		//Else, nobody owns that country, so continue
+		else
+		{
+			continue;
+		}
+	}
+
+}
+
+//Check if that player already owns this country
+bool Map::checkPlayerOwnsCountry(vector<Player*>* players, int player, int country)
+{
+	vector<int>::iterator it = find(players->at(player)->playerCountries.begin(), players->at(player)->playerCountries.end(), country);
+	//Country was found, return true
+	if (it != players->at(player)->playerCountries.end()) 
+	{
+		return true;
+	}
+	//Country was not found, so return false
+	else 
+	{
+		return false;
+	}
+}
+
+void Map::displayPlayerStats(vector<Player*>* players)
+{
+
+	//Display countries and continent owned by each player
+	for (int player = 0; player < players->size(); player++)
+	{
+		cout << "\nPlayer: " << *(players->at(player)->getName());
+		//Continent
+		cout << "\nOwns the following continents: ";
+		for (int continent = 0; continent < players->at(player)->playerContinent.size(); continent++)
+		{
+			cout << players->at(player)->playerContinent[continent] << ", ";
+		}
+		cout << "\nOwns the following Countries: ";
+		for (int countries = 0; countries < players->at(player)->playerCountries.size(); countries++)
+		{
+			cout << players->at(player)->playerCountries[countries] << ", ";
+		}
+		cout << "\nOwns the following cards: \n";
+		for (int card = 0; card < players->at(player)->pHand.size(); card++)
+		{
+			cout << "-" << players->at(player)->pHand.at(card)->getAction() << " (" << players->at(player)->pHand.at(card)->getNGood() << " " << players->at(player)->pHand.at(card)->getGood() << ")" << endl;
+		}
+		cout << endl;
+
+	}
+	
+}

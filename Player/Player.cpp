@@ -106,9 +106,6 @@ void Player::moveOverLand(int player, int moves, Map& map)
 	cout << "\n-Move Over Land CARD-\n";
 	while (moves > 0)
 	{
-		cout << *name <<", you have armies in the following locations " << endl;
-		map.printMap();
-
 		int countrySource;
 		cout << "\nPlease select a region in which to move an army from: ";
 		cin >> countrySource;
@@ -124,7 +121,6 @@ void Player::moveOverLand(int player, int moves, Map& map)
 		moves--;
 	}
 
-	map.printMap();
 }
 
 //This method allows player to build city.
@@ -153,7 +149,6 @@ bool Player::buildCity(int player, int cityToAdd, Map& map)
 		cout << "Successfully added a city" << endl;
 	}
 
-	map.printMap();
 	return true;
 }
 
@@ -167,8 +162,6 @@ void Player::destroyArmy(int armyToDestroy, Map& map)
 		cout << *name << ", select a player (ex: index 0) to destroy one of their armies: ";
 		cin >> playerDestroyed;
 
-		map.printMap();
-
 
 		int country;
 		cout << endl << "\nSelect a country: ";
@@ -180,7 +173,6 @@ void Player::destroyArmy(int armyToDestroy, Map& map)
 		cout << "Successfully destroyed an army" << endl;
 	}
 
-	map.printMap();
 }
 
 bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
@@ -206,7 +198,6 @@ bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 		cout << "Successfully added an army" <<endl;
 	}
 
-	map.printMap();
 	return true;
 	
 }
@@ -216,8 +207,6 @@ void Player::moveArmies(int player, int moves, Map &map)
 	cout << "\n-MOVE ARMIES CARD-\n";
 	while (moves > 0)
 	{
-		cout << *name << ", you have armies in the following locations " << endl;
-		map.printMap();
 
 		int countrySource;
 		cout << "\nPlease select a region in which to move an army from: ";
@@ -233,7 +222,6 @@ void Player::moveArmies(int player, int moves, Map &map)
 		cout << "Sucessfully moved 1 army from " << countrySource << " to " << countryDest << "." << endl;
 		moves--;
 	}
-	map.printMap();
 }
 
 
@@ -261,7 +249,7 @@ void Player::actionMethod(string choiceAction, int player, int quantity, Map &ma
 	if (choiceAction == "MOVE_OVER_WATER") {
 		moveArmies(player, quantity, map);
 	}
-	else if (choiceAction == "MOVE_OVER_LAND") {
+	else if (choiceAction == "MOVE_OVER_LANND") {
 		moveArmies(player, quantity, map);
 	}
 	else if (choiceAction == "PLACE_NEW_ARMIES_ON_BOARD") {
@@ -275,6 +263,27 @@ void Player::actionMethod(string choiceAction, int player, int quantity, Map &ma
 	}
 }
 
+//Increment the good (carrots, rocks, etc.) points a player has
+void Player::addGoodPoint(int point)
+{
+	(*goodPoints)+= point;
+}
+
+int Player::getGoodPoint()
+{
+	return *goodPoints;
+}
+
+//Increment the total points a player has
+void Player::addVictoryPoint(int point)
+{
+	(*victoryPoints)+= point;
+}
+
+int Player::getVictoryPoint()
+{
+	return *victoryPoints;
+}
 
 //Method that will the other methods depending on what the action is (action is the string telling the action of the card)
 void Player::andOrAction(int player, string action, Map &map)
@@ -284,7 +293,8 @@ void Player::andOrAction(int player, string action, Map &map)
 	string choiceAction;
 	int quantity;
 
-    if (action.find("OR") != string::npos) {
+    if (action.find("OR") != string::npos) //find returns the position (zero based offset) in the string where the word is found. If the word is not found it returns npos.
+	{
         // split string into two halves
         string firstAction = action.substr(0, action.find("OR"));
         string secondAction = action.substr(action.find("OR") + 3);

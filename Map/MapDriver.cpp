@@ -10,6 +10,7 @@ Map* MapDriver()
 {
 	//Create map object
 	Map* map = new Map();
+	//Map* map = Map::getInstance(); //SINGLETON
 	map->mapSize = new int(13); //Total countries in map
 
 	//Create graph object

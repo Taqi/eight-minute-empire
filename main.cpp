@@ -15,13 +15,6 @@
 
 int main()
 {
-	
-	//MapLoaderDriver();
-	//Map *m = MapDriver(); //Has some duplicates with MapLoaderDriver //We probably won't end up using mapDriver.cpp
-	// PlayerDriver();
-	//CardDriver();
-	//BiddingDriver();
-
 
     // Part 1)
 	//Call gameStateDriver which creates a GameState object, and returns that GameState object
@@ -33,7 +26,7 @@ int main()
 	//Get map
 	Map* map = state.map;
 
-	map->printMap();
+	map->printMap(players);
 
 	//Get the deck created in gamestate
 	Deck* deck = state.getDeck();
@@ -41,18 +34,15 @@ int main()
 	//Get hand object created in gamestate
 	Hand* hand = state.getHand();
 
-	//deck->draw(hand);
+	//Start up
 	StartUpPhaseDriver(*map, *deck, *hand, players);
 
-	mainLoopDriver(*map, *deck, *hand, players);
+	//Main loop
+	Loop loop;
+	loop.mainLoopDriver(*map, *deck, *hand, players);
 
-	
-    // Part 2)
-    // gameStartupExample();
-
-    // Part 6)
-    // gameScoreExample();
-
+	//Compute final score
+	score(players);
     return 0;
 
 

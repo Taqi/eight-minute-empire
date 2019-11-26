@@ -1,7 +1,3 @@
-//
-// Created by james on 2019-11-04.
-//
-
 
 #ifndef COMP345A1_GAMESCORE_H
 #define COMP345A1_GAMESCORE_H
@@ -13,10 +9,8 @@
 
 using namespace std;
 
-class GameScore {
-    int* point;
-    vector<Card*> gameHand;
-    vector<Player*> players;
+class GameScore 
+{
     int* numOfRegions;
     int* numOfContinents;
     int* numOfCoins;
@@ -31,38 +25,21 @@ class GameScore {
 public:
     GameScore();
 
-    GameScore(const vector<Card*> &gameHand, const vector<Player *> &players);
-
-    virtual ~GameScore();
-
     // Calculate the points of cards with the same good type
-    int* countTreePoint(int *tree);
+    void countTreePoint(int tree, Player* player);
 
-    int* countAnvilPoint(int *anvil);
+	void countAnvilPoint(int anvil, Player* player);
 
-    int* countCarrotPoint(int *carrot);
+	void countCarrotPoint(int carrot, Player* player);
 
-    int* countRockPoint(int *rock);
+	void countRockPoint(int rock, Player* player);
 
-    int* countCrystalPoint(int *crystal);
+	void countCrystalPoint(int crystal, Player* player);
 
-    // Initially count the number of the same good type
-    int* numOfTree(vector<Card*> &gameHand);
+	void computeGameScore(vector<Player*>* players);
 
-    int* numOfAnvil(vector<Card*> &gameHand);
-
-    int* numOfCarrot(vector<Card*> &gameHand);
-
-    int* numOfRock(vector<Card*> &gameHand);
-
-    int* numOfCrystal(vector<Card*> &gameHand);
-
-    int* numOfWild(vector<Card*> &gameHand);
-
-    int* computeGameScore(vector<Card*> &gameHand);
-
-    void winnerGenerator (vector <Player*> playerVector);
+    void winnerGenerator (vector <Player*>* players);
 };
 
 
-#endif //COMP345A1_GAMESCORE_H
+#endif 

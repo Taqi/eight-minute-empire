@@ -10,18 +10,18 @@ void Deck::setTotalCards(const int *tCards)
 	//Every possible action
 	string* act1 = new string("MOVE_OVER_WATER 1"); //Can move 1 army over water
 	string* act2 = new string("PLACE_NEW_ARMIES_ON_BOARD 1");
-	string* act3 = new string("MOVE_OVER_LAND 1");
+	string* act3 = new string("MOVE_OVER_LANND 1"); //There is a reason for having 2 'N': LAND contains 'and', which would be an issue when doing exchange method
 	string* act4 = new string("BUILD_A_CITY 1"); 
 	string* act5 = new string("DESTROY_ARMY 1");
 
 	string* act6 = new string("MOVE_OVER_WATER 2"); //Can move 2 armies over water
 	string* act7 = new string("PLACE_NEW_ARMIES_ON_BOARD 2");
-	string* act8 = new string("MOVE_OVER_LAND 2");
+	string* act8 = new string("MOVE_OVER_LANND 2");
 	string* act9 = new string("BUILD_A_CITY 2");
 	string* act10 = new string("DESTROY_ARMY 2");
 
 	string* act11 = new string("DESTROY_ARMY 1 AND PLACE_NEW_ARMIES_ON_BOARD 1"); //Can move 2 armies over water
-	string* act12 = new string("PLACE_NEW_ARMIES_ON_BOARD 1 OR MOVE_OVER_LAND 1");
+	string* act12 = new string("PLACE_NEW_ARMIES_ON_BOARD 1 OR MOVE_OVER_LANND 1");
 	string* act13 = new string("PLACE_NEW_ARMIES_ON_BOARD 1 OR BUILD_A_CITY 1");
 
 	//Every possible good: Carrot, Crystal, Tree, Anvil, Rock
@@ -287,6 +287,10 @@ void Hand::exchange(Deck *deck, Player *player, int playerIndex, Map *map)
 	cin >> n;
 	cout << endl << "Card " << *(handVector[n]->id) << ", " << handVector[n]->getAction() << " is no longer in the hand space." << endl;
 
+	//Add card to the hand vector of the player
+	//player->playerHand->push_back(deck->card[n]);
+	player->pHand.push_back(handVector[n]);
+
 	//Action of the card
 	//First seperate action with quantity (ex: action = "build_city", quantity = 2)
 	string choiceAction = handVector[n]->getAction().substr(0, handVector[n]->getAction().find(" "));
@@ -296,14 +300,21 @@ void Hand::exchange(Deck *deck, Player *player, int playerIndex, Map *map)
 	bool ignore = player->ignore();
 	if (ignore == true)
 	{
-		player->actionMethod(choiceAction, playerIndex, quantity, *map);
+		//If its not a and/or card
+		if ((handVector[n]->getAction().find("OR") == string::npos && handVector[n]->getAction().find("AND") == string::npos))
+		{
+			player->actionMethod(choiceAction, playerIndex, quantity, *map);
+		}
+		else
+		{
+			player->andOrAction(playerIndex, handVector[n]->getAction(), *map);
+		}
 	}
 
 	else
 	{
 		cout << "\nAction ignored.\n";
 	}
-	//player->actionMethod(choiceAction, player, quantity, map);
 
 	handVector.erase(handVector.begin() + n); //Remove card at nth index (it moves the rest of cards to the front/left)
 	deck->draw(this); //Draw a new card from deck to put it in handspace
