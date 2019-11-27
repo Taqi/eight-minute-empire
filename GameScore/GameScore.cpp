@@ -325,7 +325,7 @@ void GameScore::computeCurrentGameScore(vector<Player*>* players, int player)
 	//Congratulate player for scoring a new point
 	if (previousGoodPoints < players->at(player)->getGoodPoint())
 	{
-		cout << "\nCongratulation " << *(players->at(player)->getName()) << ", you scored a new good point!\n";
+		cout << "\nCongratulation " << *(players->at(player)->getName()) << ", you scored new good point!\n";
 	}
 
 	cout << "\nTotal good (carrots, rocks, etc.) points for player " << *(players->at(player)->getName()) << ": " << players->at(player)->getGoodPoint() << endl;

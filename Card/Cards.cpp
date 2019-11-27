@@ -287,6 +287,7 @@ void Hand::exchange(Deck *deck, Player *player, int playerIndex, Map *map)
 	cin >> n;
 	cout << endl << "Card " << *(handVector[n]->id) << ", " << handVector[n]->getAction() << " is no longer in the hand space." << endl;
 
+	cout << "Player " << *(player->getName()) << " selects card: " << handVector[n]->getAction() << " and pays " << cost[n] << " coins." << endl;
 	//Add card to the hand vector of the player
 	//player->playerHand->push_back(deck->card[n]);
 	player->pHand.push_back(handVector[n]);

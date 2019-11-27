@@ -117,7 +117,7 @@ void Player::moveOverLand(int player, int moves, Map& map)
 		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
 		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;
 
-		cout << "Sucessfully moved 1 army from " << countrySource << " to " << countryDest << "." << endl;
+		cout << "Player " << player << " sucessfully moved 1 army from " << countrySource << " to " << countryDest << "." << endl;
 		moves--;
 	}
 
@@ -146,7 +146,7 @@ bool Player::buildCity(int player, int cityToAdd, Map& map)
 		(*cities)--;
 		map.playerArmyCountryArray[country].head->cityArmyPair[player].second++;
 		cityToAdd--;
-		cout << "Successfully added a city" << endl;
+		cout << "Player " << player << " successfully added a city" << endl;
 	}
 
 	return true;
@@ -170,7 +170,7 @@ void Player::destroyArmy(int armyToDestroy, Map& map)
 		map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first = map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first--;
 
 		armyToDestroy--;
-		cout << "Successfully destroyed an army" << endl;
+		cout << "Player " << " successfully destroyed an army" << endl;
 	}
 
 }
@@ -195,7 +195,7 @@ bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 		(*armies)--;
 
 		map.playerArmyCountryArray[country].head->cityArmyPair[player].first++;
-		cout << "Successfully added an army" <<endl;
+		cout << "Player " << player << " successfully added an army" <<endl;
 	}
 
 	return true;
@@ -219,7 +219,7 @@ void Player::moveArmies(int player, int moves, Map &map)
 		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
 		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;
 
-		cout << "Sucessfully moved 1 army from " << countrySource << " to " << countryDest << "." << endl;
+		cout << "Player " << player << " sucessfully moved 1 army from " << countrySource << " to " << countryDest << "." << endl;
 		moves--;
 	}
 }
