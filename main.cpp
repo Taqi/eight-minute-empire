@@ -11,10 +11,15 @@
 #include "GameState/GameState.h"
 #include "GameState/GameStateDriver.h"
 #include "StartUpPhase/StartUpPhaseDriver.h"
-
+#include "GameState/GameStateDriver.h"
+#include "Factory/Cardsfactory.h"
+#include "Factory/CardFactoryDriver.h"
 
 int main()
 {
+
+	//CardFactoryDriver
+	factoryDriver();
 
     // Part 1)
 	//Call gameStateDriver which creates a GameState object, and returns that GameState object
@@ -25,6 +30,7 @@ int main()
 	
 	//Get map
 	Map* map = state.map;
+	//auto map = Map::getInstance();
 
 	map->printMap(players);
 
@@ -43,6 +49,16 @@ int main()
 
 	//Compute final score
 	score(players);
+
+	delete players;
+	players = NULL;
+	delete map;
+	map = NULL;
+	delete deck;
+	deck = NULL;
+	delete hand;
+	hand = NULL;
+
     return 0;
 
 

@@ -79,10 +79,11 @@ Player::~Player()
         delete playerHand;
         playerHand = NULL;
     }
-    //if (bid) {
-    //    delete bid;
-    //    bid = NULL;
-    //}
+    if (bid) 
+	{
+        delete bid;
+        bid = NULL;
+    }
 }
 
 bool Player::payCoins(int cost)

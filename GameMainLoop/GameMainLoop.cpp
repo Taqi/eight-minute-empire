@@ -17,13 +17,13 @@ void Loop::mainLoopDriver(Map &map, Deck &deck, Hand &hand, vector<Player*>* pla
 
 	// Setting up the observers
 	Observable subject{};
-	//auto* phase = new PhaseObserver("phase");
+	auto* phase = new PhaseObserver();
 	auto* stats = new StatisticsObserver();
-	//subject.attach(phase);
+	subject.attach(phase);
 	subject.attach(stats);
 	
 	for (int i = 0; i < gameLength; i++)
-	//for (int i = 0; i < 2; i++) //TESTING
+	//for (int i = 0; i < 1; i++) //TESTING
 	{
 		cout << "\nTURN " << i << ". " << gameLength - i << " Turns remain." << endl;
 
@@ -33,9 +33,10 @@ void Loop::mainLoopDriver(Map &map, Deck &deck, Hand &hand, vector<Player*>* pla
 			map.printMap(players);
 			cout <<endl << *(players->at(j)->getName()) << " it is your turn.\n";
 			hand.exchange(&deck, (players->at(j)), j, &map);
-			subject.notify(map, players);	
+			subject.notify(map, players, j);	
 		}
 	}
 
 
 }
+

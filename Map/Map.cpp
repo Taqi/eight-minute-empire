@@ -302,13 +302,23 @@ void mapValidation(vector <Graph*> map, const int totalNumberGraph)
 //
 //}
 //SINGLETON
-//
+
 //Map* Map::getInstance()
 //{
 //	if (!map_instance)
 //		map_instance = new Map;
 //	return map_instance;
 //}
+
+Map::~Map()
+{
+	delete one;
+	one = NULL;
+	delete mapSize;
+	mapSize = NULL;
+	delete playerArmyCountryArray;
+	playerArmyCountryArray = NULL;
+}
 
 void Map::storeGraph(Graph *graph)
 {
@@ -696,4 +706,24 @@ void Map::displayPlayerStats(vector<Player*>* players)
 
 	}
 	
+}
+
+CreateNode::~CreateNode()
+{
+	delete playerName;
+	playerName = NULL;
+	delete numArmies;
+	numArmies = NULL;
+}
+
+Graph::~Graph()
+{
+	delete countryArray;
+	countryArray = NULL;
+}
+
+AdjList::~AdjList()
+{
+	delete head;
+	head = NULL;
 }

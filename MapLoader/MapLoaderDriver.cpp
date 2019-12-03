@@ -90,6 +90,7 @@ Map* MapLoaderDriver () {
 
 	//We created the map object (in Loader) with all the graph (continents in it), so now return it.
 	Map* m = my_map.getMapPointer();
+	//auto m = Map::getInstance();
 
 	return m;
 

@@ -11,7 +11,6 @@
 #include "../Player/Player.h"
 #include "../Map/Map.h"
 #include "../Map/MapDriver.h"
-#include <map>
 using namespace std;
 
 int start(Map& map, vector<Player*>* players)

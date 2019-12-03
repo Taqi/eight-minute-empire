@@ -7,6 +7,8 @@ class Player;
 struct CreateNode
 {
 	public:
+
+		~CreateNode();
 		int countryNumber; //int data //Will be the data contained on a node of the linked list
 		CreateNode *next; //Points to the next node
 		string* playerName = new string("-"); //This makes the country owned by a player
@@ -21,6 +23,7 @@ struct CreateNode
 struct AdjList
 {
 	public:
+		~AdjList();
 		CreateNode *head;  //pointer to head node of list
 };
 
@@ -30,6 +33,7 @@ struct AdjList
 struct Graph
 {
 	public:
+		~Graph();
 		int totalCountries; //total country in continent
 		AdjList *countryArray; //Create an array of adjacency list. Every node will be in this array (as the index), and each will have a linked list that points to their adjacent nodes. 
 
@@ -38,16 +42,17 @@ struct Graph
 class Map
 {
 	private:
-		//static Map* map_instance; SINGLETON
+		//static Map* map_instance; //SINGLETON
 		/* Private constructor to prevent instancing. */
-		//Map(); SINGLETON
+		//Map(); //SINGLETON
 
 	public:
 		//static Map* getInstance(); //Returns the map object //SINGLETON
 
+		~Map();
+
 		vector <Graph*> allGraph; //Contains every graph (continent in this array)
 
-		int* test;
 		void storeGraph(Graph *graph); //Function to store graph in alLGraph
 		void mapValidationG(const int totalNumberGraph); //Check if map is valid
 
@@ -73,10 +78,6 @@ class Map
 		bool checkPlayerOwnsCountry(vector<Player*>* players, int plyaer, int country);
 		void displayPlayerStats(vector<Player*>* players);
 
-
-		string* empty = new string("-");
-		int* emptyN = new int(0);
-		int* max = new int(0);
 };
 
 //Map* Map::map_instance = 0; /* Null, because instance will be initialized on demand. */ //SINGLETON

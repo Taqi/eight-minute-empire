@@ -11,16 +11,7 @@ using namespace std;
 
 class GameScore 
 {
-    int* numOfRegions;
-    int* numOfContinents;
-    int* numOfCoins;
-    int* numOfArmies;
-
     // The priority order: mostPoints ->  mostCoins -> mostArmies -> mostRegions
-    int* mostPoints;
-    int* mostCoins;
-    int* mostArmies;
-    int* mostRegions;
 
 public:
     GameScore();

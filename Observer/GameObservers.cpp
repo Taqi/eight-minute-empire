@@ -19,11 +19,11 @@ void Observable::detach(Observer* o) {
 	_observers->remove(o);
 }
 
-void Observable::notify(Map& map, vector<Player*>* players) 
+void Observable::notify(Map& map, vector<Player*>* players, int player) 
 {
 	list<Observer*>::iterator i = _observers->begin();
 	for (; i != _observers->end(); ++i)
-		(*i)->update(map, players);
+		(*i)->update(map, players, player);
 }
 
 Observer::Observer()
@@ -43,8 +43,19 @@ PhaseObserver::~PhaseObserver()
 {
 }
 
-void PhaseObserver::update(Map& map, vector<Player*>* players)
+void PhaseObserver::update(Map& map, vector<Player*>* players, int player)
 {
+	cout << "\nPlayer " << *(players->at(player)->getName()) << " finished his turn.\n";
+	
+	if (players->size() != (player +1))
+	{
+		cout << "Player " << *(players->at(player + 1)->getName()) << " will have the next turn.\n";
+	}
+
+	else 
+	{
+		cout << "Player " << *(players->at(0)->getName()) << " will have the next turn.\n";
+	}
 }
 
 StatisticsObserver::StatisticsObserver()
@@ -55,7 +66,7 @@ StatisticsObserver::~StatisticsObserver()
 {
 }
 
-void StatisticsObserver::update(Map& map, vector<Player*>* players)
+void StatisticsObserver::update(Map& map, vector<Player*>* players, int player)
 {
 	cout << "\nGame stats------------------------------" << endl;
 	map.updateCountryOwner(players);

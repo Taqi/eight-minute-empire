@@ -12,38 +12,6 @@
 
 
 using namespace std;
-//
-//GameState::GameState()
-//{
-//    // Map Generator
-//    bool validateMap = false;
-//
-//    // While loop will validate until the right map is provided
-//    while (!validateMap)
-//    {
-//        try
-//        {
-//            // Look for the file location
-//            string fileLocation;
-//            cout << "Please enter map file location: ";
-//            cin >> fileLocation;
-//
-//            // Map Loading
-//            Loader mapLoader("");
-//            // Using method from MapLoader
-//
-//            validateMap = true;
-//        }
-//        // Generate an error message for the exception
-//        catch(const char *msg)
-//        {
-//            cout << "Error: INVALID MAP FILE!";
-//            cout << msg << endl;
-//        }
-//    }
-//
-
-//}
 
 
 int GameState::gameTurns(int totalPlayers)
@@ -80,8 +48,6 @@ Hand* GameState::getHand()
 {
 	return hand;
 }
-
-
 
 int GameState::gameLength()
 {
@@ -120,13 +86,11 @@ void GameState::start()
 
 	//Load Map
 	Map *m = MapLoaderDriver(); //Load Map using MapLoader //MapLoaderDriver in MapLoaderDriver.cpp returns the map created there
+	//auto map = Map::getInstance();
 	map = MapDriver(); //Load map using MapDriver.cpp (using this one temporarily until Daphne fixes the map loader file)
 
-	map->printAllAdjacentCountries(); //Not needed here
-	//map->printMap(); //Not needed here 
+	map->printAllAdjacentCountries();
 
-
-	//PART 1
 	//An assigned deck with the right number of cards is created.
 	//Create deck object
 	deck = new Deck();
@@ -149,17 +113,14 @@ void GameState::start()
 	{
 		for (int j = 0; j < nPlayers; j++) //Index of vector cityArmyPair
 		{
-			//map->playerArmyCountryArray[i].head->cityArmyPair = new vector<pair<int, int>>(); //when cityArmyPair is a pointer
 
 			if (i == 0) //At country 0, each player has 3 armies and 1 city
 			{
-				//map->playerArmyCountryArray[i].head->cityArmyPair->push_back(make_pair(3, 1)); //when cityArmyPair is a pointer
 				map->playerArmyCountryArray[i].head->cityArmyPair.push_back(make_pair(3, 1));
 			}
 
 			else
 			{
-				//map->playerArmyCountryArray[i].head->cityArmyPair->push_back(make_pair(0, 0));
 				map->playerArmyCountryArray[i].head->cityArmyPair.push_back(make_pair(0, 0));
 			}
 		}
@@ -187,47 +148,6 @@ void GameState::start()
 	cout << endl << "Total number of players: " << nPlayers << endl;
 
 	cout << endl << "Each player has 0 cards on their hand! " << endl << endl;
-
-
-	//Test for PART 3 & 5 ASSIGNMENT 2			
-	//cout << "Current map: \n";
-	//map->printMap();			
-	//deck->draw(hand);
-	//GameState state = GameState();
-	//int gameLength = state.gameTurns(nPlayers); //Get total number of turns
-
-	//for (int i = 0; i < gameLength; i++)
-	//{
-	//	cout << "\nTURN " << i << ". " << gameLength - i << " Turns remain." << endl;
-
-	//	//Loop for each player 
-	//	for (int j = 0; j < nPlayers; j++)
-	//	{
-	//		cout << *(players->at(j)->getName()) << " it is your turn.\n";
-
-	//		hand->exchange(deck);
-	//	}
-	//}
-
-
-
-	//Test for PART 4 ASSIGNMENT 2
-	//map->printMap();
-	//Player *p = new Player("Taqi", 22);
-
-	//p->moveArmies(0, 1, *map);
-
-	//p->buildCity(0, 1, *map);
-
-	//p->placeNewArmies(0, 2, *map);
-
-	//p->destroyArmy(1, *map);
-
-	//p->ignore();
-
-	//p->andOrAction(0, "DESTROY_ARMY 1 AND PLACE_NEW_ARMIES_ON_BOARD 1", *map);
-
-	//p->andOrAction(0, "PLACE_NEW_ARMIES_ON_BOARD 1 OR MOVE_OVER_LAND 1", *map);
 
 }
 

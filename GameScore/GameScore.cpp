@@ -4,6 +4,7 @@ GameScore::GameScore() {}
 
 
 
+
 void GameScore::countTreePoint(int tree, Player* player)
 {
 	while (tree >= 2)

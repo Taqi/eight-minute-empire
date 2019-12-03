@@ -32,9 +32,6 @@ public:
 	// Setters
 	void setBid(int bid);
 
-
-	// Destructor
-	//~Bidding();
 };
 
 

@@ -15,7 +15,7 @@ class Observer
 		~Observer();
 
 		//Observer gets updated with new data
-		virtual void update(Map& map, vector<Player*>* players) = 0;
+		virtual void update(Map& map, vector<Player*>* players, int player) = 0;
 };
 
 
@@ -28,13 +28,12 @@ class Observable
 	public:
 		void attach(Observer* o);
 		void detach(Observer* o);
-		void notify(Map& map, vector<Player*>* players);
+		void notify(Map& map, vector<Player*>* players, int player);
 		Observable();
 		~Observable();
 
 };
 
-//Part 2Asg
 class PhaseObserver : public Observer
 {
 	public:
@@ -42,10 +41,10 @@ class PhaseObserver : public Observer
 		~PhaseObserver();
 
 	// Updates instance variables, displays phase
-	virtual void update(Map& map, vector<Player*>* players);
+	virtual void update(Map& map, vector<Player*>* players, int player);
 };
 
-//Part 3Asg
+
 class StatisticsObserver : public Observer
 {
 	public:
@@ -53,5 +52,5 @@ class StatisticsObserver : public Observer
 		~StatisticsObserver();
 
 		// Updates data, draws graph
-		virtual void update(Map& map, vector<Player*>* players);
+		virtual void update(Map& map, vector<Player*>* players, int player);
 };

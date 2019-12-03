@@ -255,6 +255,12 @@ void Deck::draw(Hand *hand)
 }
 
 
+Hand::~Hand()
+{
+	delete cost;
+	cost = NULL;
+}
+
 /*
 Prints hand space
 */
@@ -319,6 +325,13 @@ void Hand::exchange(Deck *deck, Player *player, int playerIndex, Map *map)
 
 	handVector.erase(handVector.begin() + n); //Remove card at nth index (it moves the rest of cards to the front/left)
 	deck->draw(this); //Draw a new card from deck to put it in handspace
+}
+Card::~Card()
+{
+	delete outHand;
+	delete outDeck;
+	outHand = NULL;
+	outDeck = NULL;
 }
 /* Return the good of the card
 */

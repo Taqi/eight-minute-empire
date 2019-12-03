@@ -11,6 +11,7 @@ class Map;
 class Card
 {
 	public:
+		~Card();
 		string *action; //MOVE_OVER_WATER, PLACE_NEW_ARMIES_ON_BOARD, MOVE_OVER_LAND, BUILD_A_CITY, DESTROY_ARMY
 		int *Ngood; //Number of 'good'
 		string* good; //Carrot, Crystal, Tree, Anvil, Rock
@@ -32,6 +33,7 @@ class Card
 class Hand
 {
 	public:
+		~Hand();
 		int *cost = new int[6]; //Cost of each card in the hand (0, 1, 1, 2, 2, 3)
 		void printHand(); //Will print cards currently in hand space
 		void exchange(Deck* deck, Player *player, int playerIndex, Map *map); //Method that allows user to buy a card from the hand space, and it calls the draw method to pick a new card from deck
