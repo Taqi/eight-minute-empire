@@ -50,14 +50,6 @@ int main()
 	//Compute final score
 	score(players);
 
-	delete players;
-	players = NULL;
-	delete map;
-	map = NULL;
-	delete deck;
-	deck = NULL;
-	delete hand;
-	hand = NULL;
 
     return 0;
 
