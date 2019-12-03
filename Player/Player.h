@@ -93,6 +93,11 @@ public:
 	void setGoodPoint(int points);
 	void setVictoryPoint(int points);
 
+	bool placeArmyValidation(Map& map, int player, int country); //Method that validates for the place new army action
+	bool buildCityValidation(Map& map, int player, int country); //Method that validates for the build city action
+	bool destroyArmyValidation(Map& map, int player, int country); //Method that validates for the destroy army action
+	bool moveArmiesFromValidation(Map& map, int country, int player); //Method that validates for moving an army from
+	bool moveArmiesToValidation(Map& map, int srs, int dest, int player); //Method that validates for moving an army to
 };
 
 #endif

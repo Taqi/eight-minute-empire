@@ -77,6 +77,7 @@ class Map
 		void updatePlayerContinent(vector<Player*>* players);
 		bool checkPlayerOwnsCountry(vector<Player*>* players, int plyaer, int country);
 		void displayPlayerStats(vector<Player*>* players);
+		int returnGraphNumber(int country); //Returns the graph in which the country is in
 
 };
 

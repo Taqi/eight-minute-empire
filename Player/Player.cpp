@@ -142,8 +142,13 @@ bool Player::buildCity(int player, int cityToAdd, Map& map)
 	while (cityToAdd > 0)
 	{
 		int country;
-		cout << *name <<", select a country (index) to place a city: ";
-		cin >> country;
+
+		do
+		{
+			cout << *name <<", select a country (index) to place a city: ";
+			cin >> country;
+		} while (buildCityValidation(map, player, country) == false);
+
 		(*cities)--;
 		map.playerArmyCountryArray[country].head->cityArmyPair[player].second++;
 		cityToAdd--;
@@ -153,6 +158,24 @@ bool Player::buildCity(int player, int cityToAdd, Map& map)
 	return true;
 }
 
+/*
+You may built a city sonly on a region where you have an army.
+*/
+bool Player::buildCityValidation(Map& map, int player, int country)
+{
+	if (map.playerArmyCountryArray[country].head->cityArmyPair[player].first != 0)
+	{
+		return true;
+	}
+	else
+	{
+		cout << "Invalid.\n";
+	}
+	return false;
+}
+
+
+
 //This method allows player to destroy other player's armies
 void Player::destroyArmy(int armyToDestroy, Map& map)
 {
@@ -160,13 +183,17 @@ void Player::destroyArmy(int armyToDestroy, Map& map)
 	while (armyToDestroy > 0)
 	{
 		int playerDestroyed;
+
 		cout << *name << ", select a player (ex: index 0) to destroy one of their armies: ";
 		cin >> playerDestroyed;
 
 
 		int country;
-		cout << endl << "\nSelect a country: ";
-		cin >> country;
+		do
+		{
+			cout << endl << "\nSelect a country: ";
+			cin >> country;
+		}while (destroyArmyValidation(map, playerDestroyed, country) == false);
 
 		map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first = map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first--;
 
@@ -175,6 +202,23 @@ void Player::destroyArmy(int armyToDestroy, Map& map)
 	}
 
 }
+
+/*
+You may built a city sonly on a region where you have an army.
+*/
+bool Player::destroyArmyValidation(Map& map, int player, int country)
+{
+	if (map.playerArmyCountryArray[country].head->cityArmyPair[player].first != 0)
+	{
+		return true;
+	}
+	else
+	{
+		cout << "Invalid.\n";
+	}
+	return false;
+}
+
 
 bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 {
@@ -190,8 +234,12 @@ bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 	for (int i = 0; i < armiesToAdd; i++)
 	{
 		int country;
-		cout << "\nSelect a region in which you like to place an army: ";
-		cin >> country;
+
+		do
+		{
+			cout << "\nSelect a region in which you like to place an army: ";
+			cin >> country;
+		} while (placeArmyValidation(map, player, country) == false);
 
 		(*armies)--;
 
@@ -199,9 +247,24 @@ bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 		cout << "Player " << player << " successfully added an army" <<endl;
 	}
 
-	return true;
-	
+	return true;	
 }
+/*
+You may place armies only on a region where you have a city.
+*/
+bool Player::placeArmyValidation(Map& map, int player, int country)
+{
+	if (map.playerArmyCountryArray[country].head->cityArmyPair[player].second != 0)
+	{
+		return true;
+	}
+	else
+	{ 
+		cout << "Invalid.\n";
+	}
+	return false;
+}
+
 
 void Player::moveArmies(int player, int moves, Map &map)
 {
@@ -210,12 +273,18 @@ void Player::moveArmies(int player, int moves, Map &map)
 	{
 
 		int countrySource;
-		cout << "\nPlease select a region in which to move an army from: ";
-		cin >> countrySource;
+		do
+		{
+			cout << "\nPlease select a region in which to move an army from: ";
+			cin >> countrySource;
+		} while (moveArmiesFromValidation(map, countrySource, player) == false);
 
 		int countryDest;
-		cout << "\nPlease select a region in which to move an army to ";
-		cin >> countryDest;
+		do
+		{
+			cout << "\nPlease select a region in which to move an army to ";
+			cin >> countryDest;
+		} while (moveArmiesToValidation(map, countrySource, countryDest, player) == false);
 
 		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
 		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;
@@ -223,6 +292,45 @@ void Player::moveArmies(int player, int moves, Map &map)
 		cout << "Player " << player << " sucessfully moved 1 army from " << countrySource << " to " << countryDest << "." << endl;
 		moves--;
 	}
+}
+
+//Player must have an army in that location
+bool Player::moveArmiesFromValidation(Map& map, int country, int player)
+{
+	if (map.playerArmyCountryArray[country].head->cityArmyPair[player].first != 0)
+	{
+		return true;
+	}
+	else
+	{
+		cout << "Invalid.\n";
+	}
+	return false;
+}
+
+//Check if the dest country is adjacent to the source country
+bool Player::moveArmiesToValidation(Map& map, int srs, int dest, int player)
+{
+	int graph = map.returnGraphNumber(srs);
+
+	CreateNode* current = map.allGraph[graph]->countryArray[srs].head;
+	while (current != NULL)
+	{
+		if (current->countryNumber == dest && srs != dest)
+		{
+			return true;
+		}
+
+		current = current->next;
+	}
+
+	//Reset node pointer
+	delete current;
+	current = NULL;
+	
+	cout << "Invalid.\n";
+	return false;
+
 }
 
 
@@ -248,10 +356,10 @@ bool Player::ignore()
 void Player::actionMethod(string choiceAction, int player, int quantity, Map &map)
 {
 	if (choiceAction == "MOVE_OVER_WATER") {
-		moveArmies(player, quantity, map);
+		moveOverLand(player, quantity, map); //Can move on water or land
 	}
 	else if (choiceAction == "MOVE_OVER_LANND") {
-		moveArmies(player, quantity, map);
+		moveArmies(player, quantity, map); //can move only on land
 	}
 	else if (choiceAction == "PLACE_NEW_ARMIES_ON_BOARD") {
 		placeNewArmies(player, quantity, map);

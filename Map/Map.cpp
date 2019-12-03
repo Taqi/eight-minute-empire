@@ -708,6 +708,25 @@ void Map::displayPlayerStats(vector<Player*>* players)
 	
 }
 
+int Map::returnGraphNumber(int country)
+{
+	if (country < allGraph[0]->totalCountries)
+	{
+		return 0;
+	}
+
+	else if (country < allGraph[1]->totalCountries)
+	{
+		return 1;
+	}
+
+	else
+	{
+		return 2;
+	}
+
+}
+
 CreateNode::~CreateNode()
 {
 	delete playerName;
