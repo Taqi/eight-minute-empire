@@ -104,16 +104,24 @@ bool Player::payCoins(int cost)
 //This method allows player to move " << moves << " armies across land/over sea.
 void Player::moveOverLand(int player, int moves, Map& map)
 {
+	map.printAllAdjacentCountries();
 	cout << "\n-Move Over Land CARD-\n";
+
 	while (moves > 0)
 	{
 		int countrySource;
-		cout << "\nPlease select a region in which to move an army from: ";
-		cin >> countrySource;
+		do
+		{
+			cout << "\nPlease select a region in which to move an army from: ";
+			cin >> countrySource;
+		} while (moveArmiesFromValidation(map, countrySource, player) == false);
 
 		int countryDest;
-		cout << "\nPlease select a region in which to move an army to ";
-		cin >> countryDest;
+		do
+		{
+			cout << "\nPlease select a region in which to move an army to ";
+			cin >> countryDest;
+		} while (moveArmiesToValidation(map, countrySource, countryDest, player) == false && moveOverWaterValidation(map, countrySource, countryDest, player) == false);
 
 		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
 		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;
@@ -122,6 +130,19 @@ void Player::moveOverLand(int player, int moves, Map& map)
 		moves--;
 	}
 
+}
+
+
+bool Player::moveOverWaterValidation(Map& map, int srs, int dest, int player)
+{
+	for (int i = 0; i < map.allGraph.size(); i++)
+	{
+		if ((dest == map.allGraph[i]->totalCountries && (srs + 1 == map.allGraph[i]->totalCountries)) || ((srs == map.allGraph[i]->totalCountries) && (dest == map.allGraph[i]->totalCountries-1)))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 //This method allows player to build city.
@@ -268,6 +289,8 @@ bool Player::placeArmyValidation(Map& map, int player, int country)
 
 void Player::moveArmies(int player, int moves, Map &map)
 {
+	map.printAllAdjacentCountries();
+
 	cout << "\n-MOVE ARMIES CARD-\n";
 	while (moves > 0)
 	{

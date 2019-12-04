@@ -98,6 +98,7 @@ public:
 	bool destroyArmyValidation(Map& map, int player, int country); //Method that validates for the destroy army action
 	bool moveArmiesFromValidation(Map& map, int country, int player); //Method that validates for moving an army from
 	bool moveArmiesToValidation(Map& map, int srs, int dest, int player); //Method that validates for moving an army to
+	bool moveOverWaterValidation(Map& map, int srs, int dest, int player); //Method that validates if army can move over water
 };
 
 #endif
