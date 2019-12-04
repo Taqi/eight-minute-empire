@@ -27,6 +27,8 @@ public:
 	vector <Gamecard*> deckVector; //Note: when I did   vector <Card> *deckVector; and 	(*deckVector).reserve(*totalCards); it gave an error. Asterix need to be inside "<>" it seems.
 
 	vector <Gamecard*> createDeck(); //Create deck and returns it
+
+	void displayDeck();
 };
 
 

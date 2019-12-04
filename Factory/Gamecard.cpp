@@ -247,6 +247,16 @@ vector<Gamecard*> GameDeck::createDeck()
 	return deckVector;
 }
 
+void GameDeck::displayDeck()
+{
+	for (int i = 0; i < deckVector.size(); i++)
+	{
+		cout << "\nCard info:\n";
+		cout << "Action: " << deckVector.at(i)->getAction() << endl;
+		cout << "Good: " << deckVector.at(i)->getNGood() << " " << deckVector.at(i)->getGood() << endl;
+	}
+}
+
 /* Return the good of the card
 */
 string Gamecard::getGood()

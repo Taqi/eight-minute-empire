@@ -106,24 +106,48 @@ bool Player::payCoins(int cost)
 //This method allows player to move " << moves << " armies across land/over sea.
 void Player::moveOverLand(int player, int moves, Map& map)
 {
+	bool invalid;
+
 	map.printAllAdjacentCountries();
-	cout << "\n-Move Over Land CARD-\n";
+	cout << "\n-Move Over Water CARD-\n";
 
 	while (moves > 0)
 	{
 		int countrySource;
 		do
 		{
+			invalid = false;
 			cout << "\nPlease select a region in which to move an army from: ";
 			cin >> countrySource;
-		} while (moveArmiesFromValidation(map, countrySource, player) == false);
+
+			if (cin.fail())
+			{
+				cout << "Invalid, not a correct input.\n";
+				cin.clear();
+				cin.ignore();
+				invalid = true;
+			}
+
+			
+
+		} while (invalid == true || moveArmiesFromValidation(map, countrySource, player) == false);
 
 		int countryDest;
 		do
 		{
+			invalid = false;
 			cout << "\nPlease select a region in which to move an army to ";
 			cin >> countryDest;
-		} while (moveArmiesToValidation(map, countrySource, countryDest, player) == false && moveOverWaterValidation(map, countrySource, countryDest, player) == false);
+
+			if (cin.fail())
+			{
+				cout << "Invalid, not a correct input.\n";
+				cin.clear();
+				cin.ignore();
+				invalid = true;
+			}
+
+		} while (invalid == true || moveArmiesToValidation(map, countrySource, countryDest, player) == false && moveOverWaterValidation(map, countrySource, countryDest, player) == false);
 
 		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
 		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;
@@ -150,6 +174,7 @@ bool Player::moveOverWaterValidation(Map& map, int srs, int dest, int player)
 //This method allows player to build city.
 bool Player::buildCity(int player, int cityToAdd, Map& map)
 {
+	bool invalid;
 	cout << "\n-BUILD CITY CARD-\n";
 
 	// check to see if player has available cities to place
@@ -168,9 +193,19 @@ bool Player::buildCity(int player, int cityToAdd, Map& map)
 
 		do
 		{
+			invalid = false;
 			cout << *name <<", select a country (index) to place a city: ";
 			cin >> country;
-		} while (buildCityValidation(map, player, country) == false);
+
+			if (cin.fail())
+			{
+				cout << "Invalid, not a correct input.\n";
+				cin.clear();
+				cin.ignore();
+				invalid = true;
+			}
+
+		} while (invalid == true || buildCityValidation(map, player, country) == false);
 
 		(*cities)--;
 		map.playerArmyCountryArray[country].head->cityArmyPair[player].second++;
@@ -202,6 +237,8 @@ bool Player::buildCityValidation(Map& map, int player, int country)
 //This method allows player to destroy other player's armies
 void Player::destroyArmy(int armyToDestroy, Map& map)
 {
+	bool invalid;
+
 	cout << "\n-DESTROY ARMY CARD-\n";
 	while (armyToDestroy > 0)
 	{
@@ -214,9 +251,19 @@ void Player::destroyArmy(int armyToDestroy, Map& map)
 		int country;
 		do
 		{
+			invalid = false;
 			cout << endl << "\nSelect a country: ";
 			cin >> country;
-		}while (destroyArmyValidation(map, playerDestroyed, country) == false);
+
+			if (cin.fail())
+			{
+				cout << "Invalid, not a correct input.\n";
+				cin.clear();
+				cin.ignore();
+				invalid = true;
+			}
+
+		}while (invalid == true || destroyArmyValidation(map, playerDestroyed, country) == false);
 
 		map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first = map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first--;
 
@@ -245,6 +292,8 @@ bool Player::destroyArmyValidation(Map& map, int player, int country)
 
 bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 {
+	bool invalid;
+
 	cout << "\n-PLACE NEW ARMIES CARD-\n";
 	// check to see if player has available armies to place
 	if (*armies == 0)
@@ -260,9 +309,19 @@ bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 
 		do
 		{
+			invalid = false;
 			cout << "\nSelect a region in which you like to place an army: ";
 			cin >> country;
-		} while (placeArmyValidation(map, player, country) == false);
+
+			if (cin.fail())
+			{
+				cout << "Invalid, not a correct input.\n";
+				cin.clear();
+				cin.ignore();
+				invalid = true;
+			}
+
+		} while (invalid == true || placeArmyValidation(map, player, country) == false);
 
 		(*armies)--;
 
@@ -291,6 +350,7 @@ bool Player::placeArmyValidation(Map& map, int player, int country)
 
 void Player::moveArmies(int player, int moves, Map &map)
 {
+	bool invalid;
 	map.printAllAdjacentCountries();
 
 	cout << "\n-MOVE ARMIES CARD-\n";
@@ -307,9 +367,19 @@ void Player::moveArmies(int player, int moves, Map &map)
 		int countryDest;
 		do
 		{
+			invalid = false;
 			cout << "\nPlease select a region in which to move an army to ";
 			cin >> countryDest;
-		} while (moveArmiesToValidation(map, countrySource, countryDest, player) == false);
+
+			if (cin.fail())
+			{
+				cout << "Invalid, not a correct input.\n";
+				cin.clear();
+				cin.ignore();
+				invalid = true;
+			}
+
+		} while (invalid == true || moveArmiesToValidation(map, countrySource, countryDest, player) == false);
 
 		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
 		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;

@@ -287,10 +287,24 @@ and pay the coin cost listed at the top of the board
 */
 void Hand::exchange(Deck *deck, Player *player, int playerIndex, Map *map)
 {
-	//Player selects a card in the hand space
-	cout <<endl << *(player->getName()) << ", Which card do you want to buy (index)? ";
+	//Player selects a card in the hand space		
 	int n;
-	cin >> n;
+
+	do
+	{
+		cout << endl << *(player->getName()) << ", Which card do you want to buy (index)? ";
+		cin >> n;
+
+		if (cin.fail())
+		{
+			cout << "Invalid, not an integer.\n";
+			cin.clear();
+			cin.ignore();
+			n = -1;
+		}
+		
+	} while (n != 0 && n != 1 && n != 2 && n != 3 && n != 4 && n != 5);
+
 	cout << endl << "Card " << *(handVector[n]->id) << ", " << handVector[n]->getAction() << " is no longer in the hand space." << endl;
 
 	cout << "Player " << *(player->getName()) << " selects card: " << handVector[n]->getAction() << " and pays " << cost[n] << " coins." << endl;
