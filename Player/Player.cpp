@@ -20,6 +20,7 @@ Player::Player (string name, int age)
     Player::age = new int(age);
     Player::bid = new Bidding();
     Player::getPlayerHand() == new vector<Card>();
+	//Player::playerStrategies = new HumanPlayer();
 }
 
 Player::Player(string name, int numbOfPlayers, int age)
@@ -30,6 +31,7 @@ Player::Player(string name, int numbOfPlayers, int age)
     Player::age = new int(age);
     Player::bid = new Bidding();
     Player::getPlayerHand() == new vector<Card>();
+	//Player::playerStrategies = new HumanPlayer();
 
     // Determine the amount of token/coins to players by number of players
     switch (numbOfPlayers)
@@ -581,5 +583,14 @@ void Player::setAge(int age){
 void Player::setName(string name) {
     *Player::name = name;
 }
+
+
+//PlayerStrategies* Player::getPlayerStrategies() const {
+//	return playerStrategies;
+//}
+//
+//void Player::setPlayerStrategies(PlayerStrategies* newPlayerStrategies) {
+//	this->playerStrategies = newPlayerStrategies;
+//}
 
 

@@ -1,6 +1,6 @@
 #include "ComputerStrategy.h"
 
-bool ComputerStrategy::buildCity(int player, int cityToAdd, Map& map)
+void ComputerStrategy::buildCity(int player, int cityToAdd, Map& map)
 {
 }
 

@@ -23,12 +23,12 @@ int Bidding::biddingPhase(vector<Player*> players, int numbOfPlayers)
 	// Each player makes a bid
 	for (int i = 0; i < numbOfPlayers; i++)
 	{//*(players[i]->getName())
-		cout << "How much would you like to bid " << players[i]->getName() << " ?" << endl;
+		cout << "How much would you like to bid " << *(players[i]->getName()) << " ?" << endl;
 		cin >> bid;
 		// Verify if a player could afford the bidding
 		while (bid < 0 || bid > *(players[i]->getCoins()))
 		{
-			cout << "INVALID BID! Enter an affordable bid between 0 and " << players[i]->getCoins() << ": ";
+			cout << "INVALID BID! Enter an affordable bid between 0 and " << *(players[i]->getCoins()) << ": ";
 			cin >> bid;
 		}
 		players[i]->getBidding()->setBid(bid);

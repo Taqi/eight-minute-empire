@@ -1,25 +1,48 @@
-#pragma once
+//
+// Created by james on 2019-11-25.
+//
 
+#ifndef COMP345A3_PLAYERSTRATEGIES_H
+#define COMP345A3_PLAYERSTRATEGIES_H
+
+#include "../GameState/GameState.h"
+#include <string>
+
+using namespace std;
+
+//Forward Declaration
+class Card;
+class GameState;
 class Player;
-class Map;
 
-class PlayerStrategies
-{
-
-
-public: 
-	Player* player;
-	int getStrategy();
-	
-
-	virtual void moveArmies(int player, int moves, Map& map) = 0; // Move armies according to the indicated number of armies - land movement only
-	virtual void moveOverLand(int player, int moves, Map& map) = 0; // Move between two regions(over water or Land) as if they were adjacent
-	virtual bool buildCity(int player, int cityToAdd, Map& map); // Place a city anywhere on the board where player has an army
-	virtual void destroyArmy(int armyToDestroy, Map& map) = 0; // Remove an army from the board belonging to any player
-	virtual bool placeNewArmies(int player, int armiesToAdd, Map& map); 
-	virtual bool ignore(); // Ignore the card and end the player turn
-	PlayerStrategies(Player* player);
+// Abstract Class
+class PlayerStrategies {
+public:
+    virtual string chooseAction(GameState &state, int turn, int currentTurn) = 0;
+    virtual string showCurrentStrat() = 0;
 };
 
+// Greedy computer - building cities and destroying opponent
+class GreedyComputer : public PlayerStrategies {
+public:
+    virtual string chooseAction(GameState &state, int turn, int currentTurn);
+    virtual string showCurrentStrat();
+};
 
+// Human player - actions are being made through user interactions
+class HumanPlayer : public PlayerStrategies{
+    virtual string chooseAction(GameState &state, int turn, int currentTurn);
+    virtual string showCurrentStrat();
+};
 
+// Moderate computer - actions are controlling the starting region
+class ModerateComputer : public PlayerStrategies {
+    virtual string chooseAction(GameState &state, int turn, int currentTurn);
+    virtual string showCurrentStrat();
+};
+
+// Ultility Functions
+bool checkChangeStrat();
+void changePlayerStrat(vector<Player*> players);
+
+#endif //COMP345A3_PLAYERSTRATEGIES_H

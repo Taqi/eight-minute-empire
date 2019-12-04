@@ -23,7 +23,7 @@ void Loop::mainLoopDriver(Map &map, Deck &deck, Hand &hand, vector<Player*>* pla
 	subject.attach(stats);
 	
 	for (int i = 0; i < gameLength; i++)
-	//for (int i = 0; i < 1; i++) //TESTING
+	//for (int i = 0; i < 3; i++) //TESTING
 	{
 		cout << "\nTURN " << i << ". " << gameLength - i << " Turns remain." << endl;
 

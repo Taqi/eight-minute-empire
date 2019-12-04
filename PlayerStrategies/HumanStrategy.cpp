@@ -1,6 +1,6 @@
 #include "HumanStrategy.h"
 #include "PlayerStrategies.h"
-#include "../../../OneDrive/Desktop/eight-minute-empire-master/Player/Player.h"
+#include "../Player/Player.h"
 #include <iostream>
 
 using namespace std;
@@ -16,7 +16,7 @@ void HumanStrategy::moveArmies(int Player, int moves, Map& map)
 	while (moves > 0)
 	{
 		cout << "You have armies in the following locations " << endl;
-		map.printMap();
+		//map.printMap();
 
 		int countrySource;
 		cout << "\nPlease select a region in which to move an army from: ";
@@ -41,7 +41,7 @@ void HumanStrategy::moveOverLand(int player, int moves, Map& map)
 	while (moves > 0)
 	{
 		cout << "You have armies in the following locations " << endl;
-		map.printMap();
+		//map.printMap();
 
 		int countrySource;
 		cout << "\nPlease select a region in which to move an army from: ";
@@ -58,12 +58,12 @@ void HumanStrategy::moveOverLand(int player, int moves, Map& map)
 		moves--;
 	}
 
-	map.printMap();
+	//map.printMap();
 }
 
-bool HumanStrategy::buildCity(int player, int cityToAdd, Map& map)
+void HumanStrategy::buildCity(int player, int cityToAdd, Map& map)
 {
-	return false;
+	//return false;
 }
 
 bool HumanStrategy::placeNewArmies(int player, int armiesToAdd, Map& map)

@@ -11,19 +11,20 @@ using namespace std;
 
 void StartUpPhaseDriver(Map& map, Deck& deck, Hand& hand, vector<Player*>* players)
 {
-	//Draw 6 cards
-	deck.draw(&hand);
+
 
 	//GameState state1 = GameState();
 
 	//cout << "Map is loaded - Game State is created - Welcome to the game!" << endl;
 
-	//int playerIndex1 = start(state1);
-	int playerIndex1 = 0; //? How do I get playerIndex? startmethod does not return anything
+	int playerIndex1 = start(map, players);
 
 	cout << endl << "First player with the following index: "
 		<< *(players->at(playerIndex1)->getName())
 		<< ", " << playerIndex1 << endl << endl;
+
+	//playerindex1 won the bid so goes first
+	swap(players->at(0), players->at(playerIndex1));
 
 	cout << "Details Info For Each Player:" << endl;
 	for (int i = 0; i < players->size(); i++)
@@ -40,4 +41,6 @@ void StartUpPhaseDriver(Map& map, Deck& deck, Hand& hand, vector<Player*>* playe
 
 	}
 
+	//Draw 6 cards
+	deck.draw(&hand);
 }

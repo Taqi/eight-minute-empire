@@ -19,6 +19,8 @@ class Map;
 
 class Card;
 
+class PlayerStrategies;
+
 class Player{
 
 
@@ -29,7 +31,6 @@ private:
     int* cities; // player's cities
     int* age; // player's age to for bidding facility
     string* name; // player's name
-    string* color; // color for each player
 
     vector<string*> resources; /*the resources that a given player has.*/
 
@@ -62,6 +63,7 @@ public:
     string* getName() const; // Return the name of the player
     vector<Card> *getPlayerHand() const; // Display the number of the player's card
     Bidding* getBidding() const; // Return the number of bidding
+	PlayerStrategies* getPlayerStrategies() const;
 
 
 
@@ -99,6 +101,8 @@ public:
 	bool moveArmiesFromValidation(Map& map, int country, int player); //Method that validates for moving an army from
 	bool moveArmiesToValidation(Map& map, int srs, int dest, int player); //Method that validates for moving an army to
 	bool moveOverWaterValidation(Map& map, int srs, int dest, int player); //Method that validates if army can move over water
+
+	void setPlayerStrategies(PlayerStrategies* newPlayerStrategies);
 };
 
 #endif
