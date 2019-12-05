@@ -104,9 +104,12 @@ void GameState::start()
 	// Players creation
 	players = new vector<Player*>();
 	int nPlayers;
-	cout << "How many people are playing in the game? ";
-	cin >> nPlayers;
-	cout << endl;
+	do
+	{
+		cout << "How many people are playing in the game? ";
+		cin >> nPlayers;
+		cout << endl;
+	} while (nPlayers > 5 || nPlayers <2);
 
 	//Initialize vector of pair (each player starts with 3 armies and 1 city  in the starting region (country 0), and nothing else where
 	for (int i = 0; i < *(map->mapSize); i++) //Index of array playerCountryArmyArray

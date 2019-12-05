@@ -32,6 +32,7 @@ void Loop::mainLoopDriver(Map &map, Deck &deck, Hand &hand, vector<Player*>* pla
 		{	
 			map.printMap(players);
 			cout <<endl << *(players->at(j)->getName()) << " it is your turn.\n";
+			//hand.exchange(&deck, (players->at(j)), j, Map::getInstance()); if I had singleton
 			hand.exchange(&deck, (players->at(j)), j, &map);
 			subject.notify(map, players, j);	
 		}

@@ -130,7 +130,7 @@ void Player::moveOverLand(int player, int moves, Map& map)
 
 			
 
-		} while (invalid == true || moveArmiesFromValidation(map, countrySource, player) == false);
+		} while (countrySource > 12 || invalid == true || moveArmiesFromValidation(map, countrySource, player) == false);
 
 		int countryDest;
 		do
@@ -147,7 +147,7 @@ void Player::moveOverLand(int player, int moves, Map& map)
 				invalid = true;
 			}
 
-		} while (invalid == true || moveArmiesToValidation(map, countrySource, countryDest, player) == false && moveOverWaterValidation(map, countrySource, countryDest, player) == false);
+		} while (countryDest > 12 || invalid == true || moveArmiesToValidation(map, countrySource, countryDest, player) == false && moveOverWaterValidation(map, countrySource, countryDest, player) == false);
 
 		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
 		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;
@@ -205,7 +205,7 @@ bool Player::buildCity(int player, int cityToAdd, Map& map)
 				invalid = true;
 			}
 
-		} while (invalid == true || buildCityValidation(map, player, country) == false);
+		} while (country > 12 || invalid == true || buildCityValidation(map, player, country) == false);
 
 		(*cities)--;
 		map.playerArmyCountryArray[country].head->cityArmyPair[player].second++;
@@ -263,7 +263,7 @@ void Player::destroyArmy(int armyToDestroy, Map& map)
 				invalid = true;
 			}
 
-		}while (invalid == true || destroyArmyValidation(map, playerDestroyed, country) == false);
+		}while (country > 12 || invalid == true || destroyArmyValidation(map, playerDestroyed, country) == false);
 
 		map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first = map.playerArmyCountryArray[country].head->cityArmyPair[playerDestroyed].first--;
 
@@ -321,7 +321,7 @@ bool Player::placeNewArmies(int player, int armiesToAdd, Map& map)
 				invalid = true;
 			}
 
-		} while (invalid == true || placeArmyValidation(map, player, country) == false);
+		} while (country > 12 || invalid == true || placeArmyValidation(map, player, country) == false);
 
 		(*armies)--;
 
@@ -362,7 +362,7 @@ void Player::moveArmies(int player, int moves, Map &map)
 		{
 			cout << "\nPlease select a region in which to move an army from: ";
 			cin >> countrySource;
-		} while (moveArmiesFromValidation(map, countrySource, player) == false);
+		} while (countrySource > 12 || moveArmiesFromValidation(map, countrySource, player) == false);
 
 		int countryDest;
 		do
@@ -379,7 +379,7 @@ void Player::moveArmies(int player, int moves, Map &map)
 				invalid = true;
 			}
 
-		} while (invalid == true || moveArmiesToValidation(map, countrySource, countryDest, player) == false);
+		} while (countryDest > 12 || invalid == true || moveArmiesToValidation(map, countrySource, countryDest, player) == false);
 
 		map.playerArmyCountryArray[countrySource].head->cityArmyPair[player].first--;
 		map.playerArmyCountryArray[countryDest].head->cityArmyPair[player].first++;

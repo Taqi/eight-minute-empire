@@ -45,11 +45,24 @@ class Map
 		//static Map* map_instance; //SINGLETON
 		/* Private constructor to prevent instancing. */
 		//Map(); //SINGLETON
+		/*
+		Note: Issue with sinleton
+		-First issue
+		I should have getinstance() in the parameter
+		ex: void exchange(Deck* deck, Player *player, int playerIndex, Map::getInstance())
+		instead of void exchange(Deck* deck, Player *player, int playerIndex, Map* map)
+
+		-Second issue:
+		When I have a forward declaration inside the h file, I need to include the file of that class on the cpp file.
+		ex: In Cards.h, I have a forward declaration for Player class (class Player;), and because of that I need
+		to have include Player.h inside the cpp file of Cards. So in Cards.cpp, I have include Player.h
+		Else we get a circular dependency.
+		*/
 
 	public:
 		//static Map* getInstance(); //Returns the map object //SINGLETON
 
-		~Map();
+		//~Map();
 
 		vector <Graph*> allGraph; //Contains every graph (continent in this array)
 

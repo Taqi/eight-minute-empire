@@ -18,8 +18,8 @@
 int main()
 {
 
-	//CardFactoryDriver
-	factoryDriver();
+	//CardFactoryDriver tests out the card factory
+	//factoryDriver();
 
     // Part 1)
 	//Call gameStateDriver which creates a GameState object, and returns that GameState object

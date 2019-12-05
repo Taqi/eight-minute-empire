@@ -2,6 +2,7 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
+#include "../Map/Map.h"
 #include "../Player/Player.h"
 using namespace std;
 

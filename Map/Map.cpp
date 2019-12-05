@@ -301,8 +301,8 @@ void mapValidation(vector <Graph*> map, const int totalNumberGraph)
 //{
 //
 //}
-//SINGLETON
-
+////SINGLETON
+//
 //Map* Map::getInstance()
 //{
 //	if (!map_instance)
@@ -310,15 +310,15 @@ void mapValidation(vector <Graph*> map, const int totalNumberGraph)
 //	return map_instance;
 //}
 
-Map::~Map()
-{
-	delete one;
-	one = NULL;
-	delete mapSize;
-	mapSize = NULL;
-	delete playerArmyCountryArray;
-	playerArmyCountryArray = NULL;
-}
+//Map::~Map()
+//{
+//	delete one;
+//	one = NULL;
+//	delete mapSize;
+//	mapSize = NULL;
+//	delete playerArmyCountryArray;
+//	playerArmyCountryArray = NULL;
+//}
 
 void Map::storeGraph(Graph *graph)
 {
